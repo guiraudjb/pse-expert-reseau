@@ -2,8 +2,12 @@
 
 Révision des fascicules de préparation PSE Expert Réseau (systèmes, réseaux, sécurité, SI de l'État).
 
-57 modules, consultables depuis l'application de révision
-https://guiraudjb.github.io/PSE25-27/ (ce dépôt en fournit les données via GitHub Pages).
+57 modules. **Module de formation autonome** : https://guiraudjb.github.io/pse-expert-reseau/
+(page `index.html` à la racine, `catalogue.json` limité à ce dépôt). Ses modules
+apparaissent aussi dans l'application commune https://guiraudjb.github.io/PSE25-27/.
+
+`index.html`, `sw.js` et les icônes sont une copie de la page commune
+(`PSE25-27/`) : les modifier là-bas puis lancer `scripts/sync-web.py`, jamais ici.
 
 ## Séries
 
