@@ -1,0 +1,1093 @@
+SYNTHÈSE GLOBALE DU PSE EXPERT RÉSEAU, L'ESSENTIEL DES CINQUANTE-SEPT MODULES.
+
+INTRODUCTION.
+
+      Cette fiche rassemble l'essentiel à retenir des cinquante-sept modules du parcours PSE Expert Réseau, répartis en six fascicules.
+
+      Chaque module y est résumé en quelques paragraphes qui reprennent ses notions, définitions et chiffres clés, pour une révision d'ensemble avant l'examen.
+
+      Le mégaquiz et les flashcards de ce module reprennent l'intégralité des questions et des cartes des cinquante-sept modules.
+
+I. FASCICULE F1, SYSTÈMES D'EXPLOITATION UNIX ET WINDOWS SERVER, LES FONDAMENTAUX.
+
+   A. Caractéristiques des systèmes d'exploitation.
+
+Un NOS est un logiciel qui contrôle les activités d'un réseau et fournit des services en mode pair à pair ou client serveur.
+
+      La sécurité repose sur l'authentification par possession, connaissance ou attribut, tandis que la surveillance de menaces et les listes de contrôle permettent de détecter et d'analyser les violations.
+
+      Un système réparti utilise des appels de procédure à distance via un démon RPC et peut employer des threads pour accroître l'efficacité du traitement.
+
+      Le système de fichiers réparti assure la transparence et la localisation des fichiers, en utilisant la mise en mémoire cache pour limiter le trafic réseau et la duplication pour améliorer la disponibilité.
+
+      Pour coordonner les événements sans horloge commune, on utilise des estampilles, et pour garantir l'atomicité des transactions, on applique un protocole de validation comme le 2PC.
+
+      L'exclusion mutuelle protège les sections critiques par des mécanismes centralisés, répartis ou par le passage de jeton dans une structure en anneau.
+
+      Les serveurs multiprocesseurs utilisent le SMP et le multithreading pour le parallélisme logique, avec un allocateur et un planificateur gérant le temps processeur.
+
+      Le partitionnement logique permet de diviser un serveur physique en plusieurs partitions avec des instances de système d'exploitation propres, soit de manière statique, soit de manière dynamique.
+
+      Un cluster de failover assure la haute disponibilité en permettant la bascule d'un service applicatif d'un nœud actif vers un nœud de backup en cas de défaillance.
+
+   B. Réseaux informatiques, histoire et modèles OSI-DoD.
+
+Un réseau informatique est un ensemble d'ordinateurs qui communiquent via des protocoles, lesquels sont des descriptions formelles de règles et de conventions. L'histoire des réseaux est marquée par l'ARPANET, premier réseau à commutation par paquets en mode datagramme, conçu par l'ARPA pour connecter des sites hétérogènes. Le groupe de travail NWG a instauré les premières applications comme Telnet et FTP, ainsi que le système des RFC qui constitue la mémoire technique ouverte du réseau.
+
+      Le modèle OSI est une architecture théorique de sept couches développée par l'ISO pour assurer l'interopérabilité sans favoriser de constructeur. Les couches basses assurent le transport tandis que les couches hautes traitent l'information, la couche présentation étant la première à ne pas participer au mécanisme de transfert. Les couches physiques, liaison, réseau, transport, session, présentation et application constituent cette hiérarchie complète.
+
+      Le modèle DOD, ou modèle TCP/IP, est un standard de fait composé de quatre couches issues de l'implémentation de protocoles. La couche application regroupe les fonctions de session, présentation et application, tandis que la couche transport utilise TCP pour un acheminement fiable ou UDP pour un transport sans connexion. La couche réseau gère le routage avec IP, ARP, RARP et ICMP, et la couche accès réseau regroupe les fonctions physiques et de liaison.
+
+      L'encapsulation consiste pour une couche à ajouter un en-tête aux données reçues de la couche supérieure, créant ainsi une communication horizontale entre couches de même niveau. Selon le modèle DOD, l'information prend successivement les noms de données, message, segment, datagramme, trame ou paquet. La désencapsulation est l'opération inverse consistant à retirer l'en-tête lors de la réception.
+
+      Les réseaux se distinguent par leur échelle, allant du PAN pour quelques équipements au LAN pour un bâtiment, puis au MAN pour une ville et au WAN pour une portée mondiale. Le service DNS, mis en place en mille neuf cent quatre-vingt-quatre, assure la résolution entre les noms de domaine et les adresses IP. L'attribution d'une adresse IP peut être réalisée par le protocole DHCP sous forme d'un bail de trois jours environ.
+
+      Dans la pratique du courrier électronique, le protocole SMTP utilise le port vingt-cinq, tandis que les protocoles POP et IMAP utilisent les ports cent dix et cent quarante-trois. La résolution DNS peut s'effectuer en UDP pour les requêtes ou en TCP pour les échanges entre serveurs. L'épuisement mondial des adresses IPv4 a été constaté en deux mille douze.
+
+   C. Systèmes Linux-Unix, histoire et familles.
+
+Le projet Unix est né de la volonté de Ken Thompson de faire fonctionner le jeu space travel sur un DEC PDP-7, aboutissant à la création d'UNICS puis d'Unix. La réécriture complète du système en langage C dès mille neuf cent soixante-treize par Dennis Ritchie et Brian Kernighan a permis d'assurer sa portabilité sur diverses machines.
+
+      Le développement de la version BSD par l'Université de Californie à Berkeley a bénéficié d'un financement de la DARPA pour le réseau TCP/IP, ce qui explique la compatibilité native des Unix avec ce protocole. Un schisme historique a ensuite séparé le monde Unix en deux écoles idéologiques, la souche System V d'AT&T et la souche BSD de Berkeley.
+
+      Pour assurer la portabilité entre les systèmes, plusieurs standards ont été publiés comme le SVID en mille neuf cent quatre-vingt-trois, la norme POSIX ou encore l'IEEE P1003 en mille neuf cent quatre-vingt-quatre. Malgré ces tentatives et le standard X/Open Portability Guide Issue trois, il n'existe pas de standard Unix unique effectif en pratique.
+
+      Le projet GNU a été lancé en mille neuf cent quatre-vingt-quatre par Richard Stallman pour créer un système libre utilisant le principe du copyleft via la licence GPL. Le noyau Linux, développé par Linus Torvalds à partir de mille neuf cent quatre-vingt-onze, a comblé l'absence de brique élémentaire pour former le système GNU/Linux.
+
+      Les Unix commerciaux comme AIX, HP-UX et Solaris sont largement influencés par la souche System V, tandis que FreeBSD, NetBSD et OpenBSD dérivent de la famille BSD. Solaris est considéré comme un Unix hybride car il est passé de la base 4.1BSD à System V Release quatre.
+
+      L'administration d'AIX utilise l'interface pseudo-graphique SMIT et la base de données orientée objet ODM, alors que HP-UX utilise l'interface SAM. Les distributions Linux utilisent des formats de paquets variés comme le tgz pour Slackware, le rpm et le srpm pour Red Hat, ou le deb pour Debian et Ubuntu.
+
+   D. Administration système Unix, introduction et missions.
+
+Le noyau est le cœur du système qui gère les ressources matérielles comme le processeur et la mémoire via des appels système. Il contient le gestionnaire de processus pour un partage équitable des ressources et le système de gestion de fichiers pour contrôler les droits d'accès.
+
+      L'utilisateur dispose d'un shell qui sert d'interpréteur de commandes pour communiquer avec le noyau. Le shell bash est le standard sous Linux et il est compatible avec le Bourne Shell nommé sh, mais l'inverse n'est pas toujours vrai.
+
+      L'administrateur ou root possède tous les droits pour installer, configurer et assurer la maintenance du système. Il doit gérer les comptes, les logiciels, le matériel et la sécurité par des sauvegardes régulières.
+
+      La connexion à distance peut se faire via Telnet, mais ce protocole est dangereux car l'identifiant et le mot de passe circulent en clair. Il faut impérativement utiliser SSH qui chiffre les données dans un tunnel sécurisé.
+
+      L'éditeur de texte VI est le standard universel et fonctionne en deux modes, l'édition pour les commandes et l'insertion pour le texte. La touche ESC permet de quitter le mode insertion pour revenir au mode édition.
+
+      Les fichiers de configuration essentiels se trouvent dans le répertoire /etc, comme /etc/hosts pour les noms de machines ou /etc/group pour les groupes d'utilisateurs. Le fichier /etc/shells liste les interpréteurs disponibles sur le système.
+
+      La commande man fournit la documentation électronique divisée en trois volumes pour l'utilisation, l'administration et la programmation. Pour la recherche de fichiers, la commande find est très puissante et peut exécuter des actions sur les résultats trouvés.
+
+      Le suivi de l'activité passe par le démon syslogd qui stocke les journaux dans le répertoire /var/log. Pour automatiser des tâches, on utilise le démon cron et sa table de planification appelée crontab.
+
+   E. Démarrage et arrêt d'un système Unix.
+
+Le bootstrapping est l'ensemble des processus de démarrage d'un système Unix ou Linux, allant du chargement du noyau en mémoire jusqu'à un état pleinement opérationnel. Le moniteur ou boot code est un programme stocké en mémoire non volatile qui vérifie le matériel et lance le processus init.
+
+      Le BIOS est le programme de boot initial d'un PC qui permet de choisir le périphérique de démarrage, y compris via le mécanisme réseau PXE. Le MBR contient les cinq cent douze premiers octets du périphérique de démarrage et indique depuis quelle partition lire le boot loader.
+
+      Le boot loader comme GRUB permet de sélectionner et de charger le noyau, dont le chemin est souvent /boot/vmlinuz sous Linux. GRUB deux est une version modulaire capable de reconnaître plus de systèmes de fichiers que la version historique.
+
+      Le noyau crée des processus spontanés comme le processus init qui possède toujours le PID un. Les messages du noyau sont consultables avec la commande dmesg.
+
+      Le mode single-user est utilisé pour la maintenance et ne charge pas les connexions réseau. L'administrateur peut utiliser la commande fsck pour réparer un système de fichiers endommagé ou la commande mount pour monter les partitions définies dans le fichier /etc/fstab.
+
+      Le processus init gère les niveaux d'exécution, définissant au moins sept états du système. Les scripts de démarrage sont conservés dans le répertoire /etc/init.d et sont appelés par init via des liens symboliques commençant par S pour Start ou K pour Kill.
+
+      Systemd est un administrateur de services pour Linux qui remplace le démon init de System V en utilisant les cgroups pour suivre les processus. La commande systemctl permet d'interroger l'état de tous les services.
+
+      Sous Solaris, le mécanisme SMF utilise des fichiers XML appelés manifests pour décrire les services et leurs dépendances. Les commandes svcs et svcadm permettent de vérifier et de changer le statut des services identifiés par un FMRI.
+
+      La commande shutdown est la méthode la plus sûre pour arrêter un système car elle prévient les utilisateurs connectés. Les commandes halt et reboot permettent respectivement d'éteindre la machine proprement ou de la redémarrer après l'extinction.
+
+   F. Systèmes de fichiers et disques Unix, RAID et entrelacement.
+
+Sous Unix et Linux, le principe du tout-fichier signifie que tout est traité comme un fichier, incluant les processus et les périphériques. Chaque fichier est décrit par une inode qui stocke ses attributs comme l'emplacement physique, l'UID, le GID et les droits, mais ne contient jamais son nom.
+
+      L'adressage des blocs de données utilise des pointeurs directs pour les dix premiers blocs, puis des blocs d'indirection simple, double et triple pour permettre la gestion de très gros fichiers. Un répertoire est un fichier binaire qui fait la correspondance entre un nom de fichier et son numéro d'inode.
+
+      Les fichiers spéciaux permettent d'accéder aux périphériques via les modes caractère ou bloc, en utilisant un numéro majeur pour le pilote et un numéro mineur pour l'appareil. Les liens durs partagent la même inode et ne fonctionnent que sur une même partition, tandis que les liens symboliques sont des pointeurs pouvant traverser les partitions.
+
+      Les systèmes de fichiers modernes comme EXT4 utilisent des extents pour enregistrer des plages de blocs consécutifs, ce qui réduit la fragmentation. EXT4 utilise l'allocation différée qui peut garder les données jusqu'à une minute, augmentant le risque de perte en cas de plantage par rapport aux cinq secondes de EXT3.
+
+      Le système ZFS est un système de fichiers cent vingt-huit bits capable d'auto-réparation et de gestion du RAID au niveau du système de fichiers. Btrfs utilise des snapshots par copie d'arborescence et des sommes de contrôle sur les données et les méta-données pour assurer la cohérence.
+
+      Le partitionnement crée des zones isolées sur le disque après le formatage de bas niveau, et les informations sont stockées dans le disk label. Les gestionnaires de volumes logiques permettent de combiner des volumes physiques en un groupe de volumes pour créer des volumes logiques plus flexibles.
+
+      L'entrelacement répartit les entrées-sorties sur plusieurs disques en parallèle pour augmenter les performances. Le RAID zéro offre une grande vitesse mais aucune tolérance aux pannes, alors que le RAID un duplique les données pour assurer la sécurité.
+
+      Le RAID cinq répartit la parité sur l'ensemble des disques pour optimiser l'espace et la lecture, tandis que le RAID six utilise deux fonctions de parité pour supporter la panne de deux disques simultanément. Les combinaisons les plus utilisées sont les modes RAID dix, trente et cinquante.
+
+      Le RAID un-zéro est préférable au RAID zéro-un car il offre une meilleure tolérance aux pannes. Pour les performances et le coût, le RAID cinq est souvent choisi car il offre quatre-vingts à quatre-vingt-dix pour cent du volume alloué, contre cinquante pour cent pour le RAID un.
+
+   G. Commandes Linux-Unix essentielles.
+
+L'interpréteur de commandes ou shell dialogue avec la machine et peut être le Bourne shell, le ksh ou le bash sous GNU Linux.
+
+      Le mode console permet un contrôle sans interface graphique tandis que le mode terminal est une émulation de console utilisée sur un poste de bureau.
+
+      On accède souvent à sept consoles virtuelles par le raccourci Contrôle-Alt-F suivi d'un numéro.
+
+      Une commande peut être interne au shell comme cd ou externe si elle est située dans le PATH comme less.
+
+      Les variables d'environnement comme SHELL, PATH ou PWD sont consultables avec echo ou printenv.
+
+      La redirection avec le chevron sortant écrase le fichier mais le double chevron sortant ajoute la sortie à la fin du fichier.
+
+      Le pipe fournit la sortie d'une commande à l'entrée de la suivante et le code retour zéro signifie un succès.
+
+      L'historique des commandes est conservé dans le fichier caché point bash_history du répertoire personnel désigné par le tilde.
+
+      La commande man documente les commandes sur neuf ou dix sections et la commande find permet de chercher des fichiers selon divers critères.
+
+      Les journaux se trouvent dans le répertoire /var/log et la commande tail avec l'option tiret f permet un suivi en temps réel.
+
+      La planification via cron utilise une syntaxe à cinq champs pour définir les minutes, l'heure, le jour du mois, le mois et le jour de la semaine.
+
+      La commande ps affiche les processus comme le super-processus init de PID un.
+
+      Les commandes de gestion de fichiers incluent ls pour lister, cp pour copier, mv pour déplacer et rm pour supprimer.
+
+      Le montage des systèmes de fichiers s'effectue via mount et les informations de démarrage sont dans le fichier /etc/fstab.
+
+      La commande fsck répare les systèmes de fichiers corrompus mais ne doit jamais être lancée sur une partition montée.
+
+      La gestion par volumes logiques LVM utilise les commandes pv pour les volumes physiques, vg pour les groupes de volumes et lv pour les volumes logiques.
+
+   H. Windows Server 2008, découverte, installation, démarrage.
+
+Windows Server deux mille huit propose plusieurs éditions comme Standard, Enterprise, Datacenter, Web ou Itanium, avec une installation minimale appelée Server Core qui utilise uniquement l'invite de commande.
+
+      L'architecture repose sur le mode utilisateur pour les applications et le mode noyau pour l'accès au matériel, ce dernier incluant la couche d'abstraction du matériel et les pilotes WDM.
+
+      L'installation utilise le format d'image WIM et nécessite une activation sous soixante jours, extensible trois fois avec la commande slmgr tiret rearm.
+
+      Le système de fichiers NTFS est privilégié pour sa sécurité et sa gestion des grands volumes, tandis que le FAT32 est limité à des partitions de trente-deux giga-octets et des fichiers de quatre giga-octets.
+
+      Chaque accès au serveur nécessite une licence d'accès client, appelée CAL, choisie de manière irréversible en mode par utilisateur ou par périphérique.
+
+      Le démarrage utilise le magasin de données de configuration BCD géré par l'utilitaire bcdedit, remplaçant l'ancien fichier Boot.ini.
+
+      La séquence de démarrage passe par le MBR, charge le gestionnaire bootmgr.exe, puis winload.exe qui transfère le contrôle au noyau ntoskrnl.exe situé dans system32.
+
+      En cas de problème, la touche F8 permet d'accéder aux options avancées comme le mode sans échec ou l'inscription des événements dans le fichier ntbtlog.txt.
+
+      Pour les erreurs critiques, la dernière configuration valide connue permet de revenir à un état stable, tandis que la restauration de l'ordinateur Windows utilise une sauvegarde pour récupérer l'intégralité du serveur.
+
+   I. Windows Server 2008, gestion de la mémoire.
+
+La mémoire virtuelle donne l'illusion d'une capacité mémoire supérieure à la mémoire physique en utilisant le disque comme mémoire auxiliaire. Les programmes sont segmentés en pages de quatre mille quatre-vingt-seize octets dont la situation physique est déterminée par le gestionnaire de mémoire via la translation dynamique d'adresses.
+
+      L'architecture x64 permet d'exécuter des applications trente-deux bits dans l'environnement WoW64 avec un impact négligeable sur les performances. Pour qu'une application trente-deux bits accède à quatre giga-octets de mémoire, elle doit posséder l'indicateur LARGEADDRESSAWARE, car le commutateur trois giga-octets n'est pas supporté en version soixante-quatre bits.
+
+      Le gestionnaire de pages assure le transfert des pages entre le disque et la mémoire et traite les défauts de page. Windows utilise une stratégie de remplacement locale de type premier entré premier sorti pour désigner la page à extraire de la mémoire.
+
+      La base de données des pages physiques suit l'état de chaque case via six états, à savoir valide, à zéro, libre, en attente, modifié ou mauvais. Le niveau de sécurité C2 impose que les threads en mode utilisateur ne reçoivent que des pages initialisées à zéro pour empêcher la lecture de données de threads précédents.
+
+      Un processus est une instance d'application contenant au moins un thread, lequel possède sa propre pile et sa zone d'adressage privée TLS. L'ordonnanceur utilise des priorités préemptives parmi trente-deux niveaux, de zéro au plus faible à trente et un au plus fort, et applique la technique du tourniquet pour les threads de même priorité.
+
+      Le style de partition MBR est limité à quatre partitions principales et des volumes de quatre téra-octets, tandis que le style GPT supporte cent vingt-huit partitions et des volumes jusqu'à dix-huit exaoctets. Les ordinateurs Itanium nécessitent impérativement un disque GPT avec une partition EFI pour le démarrage.
+
+      Les disques dynamiques permettent de créer des volumes à tolérance de pannes comme le miroir ou le RAID-cinq, mais ils ne sont pas supportés sur les supports amovibles ou les portables. La conversion d'un disque MBR en GPT ou inversement ne peut se faire que si le disque est totalement vide.
+
+      Le système de fichiers gère les données par clusters, qui sont des unités composées d'un ou plusieurs secteurs de cinq cent douze octets. Un cluster de grande taille améliore les performances d'accès mais augmente le gaspillage d'espace disque.
+
+      La commande mountvol permet de démonter un volume avec l'option de purge avant une conversion en disque dynamique. Pour cloner une partition système EFI, il est nécessaire d'utiliser la commande bootcfg.
+
+   J. Windows Server 2008, systèmes de fichiers NTFS et autorisations.
+
+Le secteur de démarrage MBR situé au cylindre zéro contient la table des partitions et le code d'amorçage, ce qui en fait une cible privilégiée des virus. Le système FAT16 est limité à des partitions de deux giga-octets avec des clusters de trente-deux kilo-octets, tandis que le FAT32 permet des partitions allant jusqu'à deux téra-octets grâce à des entrées de trente-deux bits.
+
+      Le système NTFS est le format natif de Windows Server deux mille huit et permet des fichiers et des partitions allant jusqu'à seize exaoctets. Sa structure repose sur la Master File Table qui contient des metafichiers comme mft, mftmir, logfile, volume, attrdef, bitmap, boot, badclus, quota et upcase. Les petits fichiers peuvent être enregistrés sous forme d'attributs résidents directement dans la MFT, alors que les fichiers plus volumineux utilisent des attributs non résidents stockés dans des extensions.
+
+      Le contrôle d'accès repose sur la comparaison entre le jeton d'accès d'un sujet et les entrées de contrôle d'accès d'un objet. La DACL spécifie les utilisateurs autorisés et la SACL contient les informations d'audit pour suivre les réussites ou les échecs. Si aucune entrée de la liste de contrôle d'accès ne prend de décision explicite, l'accès est systématiquement refusé.
+
+      Les autorisations explicites sont prioritaires sur les autorisations héritées, y compris les refus hérités. Pour un dossier partagé, les autorisations finales résultent de l'application des règles les plus restrictives entre les autorisations de partage et les autorisations NTFS. L'outil des autorisations effectives ne fournit qu'une évaluation approximative et doit être exécuté localement avec un compte du même domaine.
+
+      Le chiffrement EFS utilise une paire de clés publique et privée pour protéger les fichiers sur les volumes NTFS, et l'utilitaire en ligne de commande CIPHER permet de gérer ce processus. La compression NTFS est transparente mais incompatible avec le chiffrement, alors que les dossiers compressés zippés sont compatibles avec les lecteurs FAT et ne diminuent pas les performances.
+
+      La gestion des quotas permet de limiter l'espace d'un volume ou d'un dossier, et la commande dirquota peut être utilisée dans un script pour augmenter automatiquement une limite atteinte. Les espaces de noms DFS offrent une représentation virtuelle des dossiers partagés via un chemin UNC, et leur administration s'effectue avec la commande DfsUtil ou des scripts appelant WMI.
+
+   K. Windows Server 2008, mécanismes de sécurité.
+
+La sécurité de Windows Server deux mille huit repose sur le noyau NT six point zéro et des technologies comme PatchGuard pour bloquer les rootkits ou KMCS pour exiger une signature du code du noyau. Le SRM dans l'exécutif Ntoskrnl.exe gère les jetons d'accès et les contrôles d'accès, tandis que le processus LSASS gère la stratégie de sécurité locale via la base de données SECURITY et la base SAM stockées dans le Registre.
+
+      L'authentification est assurée par des packages dans le processus de stratégie d'authentification, puis par Winlogon et LogonUI qui utilise des credential providers comme authui.dll. Le protocole Kerberos V cinq est le principal pour les domaines, alors que le mode mixte utilisant NTLM est le paramètre par défaut de la famille Windows Server deux mille huit.
+
+      Chaque compte est identifié par un SID unique, dont le RID cinq cents désigne l'administrateur local, et possède un login de deux cent cinquante-six caractères maximum. Les mots de passe sont limités à quatorze caractères dans la base SAM et à cent vingt-sept caractères pour les comptes de domaine Active Directory.
+
+      Le contrôle d'accès utilise des descripteurs de sécurité contenant une DACL pour les permissions et une SACL pour l'audit. Une ACE peut être positive pour accorder un accès ou négative pour le refuser, et le propriétaire d'un objet peut toujours modifier sa propre DACL.
+
+      Le contrôle d'accès et l'audit s'effectuent uniquement lors de l'ouverture de l'objet par une référence. Une fois l'objet ouvert, les permissions restent valables même si les droits de l'utilisateur changent durant l'utilisation de la ressource.
+
+      Les autorisations comme la lecture ou la modification sont souvent héritées des conteneurs si elles sont marquées pour l'héritage. L'audit des événements est géré par le MOM et les résultats sont consultés dans l'Observateur d'événements selon une politique définie par l'administrateur.
+
+   L. Windows Server 2008, sessions et périphériques.
+
+Winlogon gère l'ouverture et la fermeture de session interactive en créant un processus pour chaque utilisateur connecté et en interceptant la combinaison de touches Ctrl Alt Suppr qui constitue la SAS par défaut. Ce composant critique crée deux bureaux, l'un pour les applications et l'autre réservé à Winlogon, et utilise le processus LogonUI pour vérifier les identifiants via les credential providers.
+
+      Lsass valide les connexions en utilisant les packages d'authentification situés dans le Registre sous HKLM barre SYSTEM barre CurrentControlSet barre Control barre Lsa. Une fois l'utilisateur authentifié, Lsass crée un jeton d'accès contenant les privilèges et les autorisations issus de la base des politiques locales, puis le duplique pour Winlogon.
+
+      Le système d'E/S assure une couche d'abstraction entre les applications et le matériel grâce au gestionnaire d'E/S qui crée et supprime les paquets IRP représentant les requêtes. La HAL isole les pilotes des spécificités du processeur et sert de pilote de bus pour les périphériques non contrôlés par d'autres pilotes.
+
+      Le gestionnaire Plug and Play détecte les composants par énumération et installe les pilotes en utilisant les fichiers INF et les signatures numériques des fichiers CAT. Il privilégie les matériels figurant dans la liste HCL, sinon l'administrateur doit régler les conflits d'adresse et d'IRQ.
+
+      La norme ACPI définit six niveaux électriques pour le système, de S0 pour la consommation maximale à S5 pour l'extinction complète. Pour le passage en état S4, le gestionnaire d'alimentation enregistre le contenu compressé de la mémoire dans le fichier Hiberfil.sys à la racine du volume système, lequel est rechargé par NTLDR au démarrage.
+
+      Les périphériques disposent de quatre états allant de D0 à D3, les états D1 et D2 étant laissés à la charge des pilotes. Le gestionnaire PnP vérifie la politique de signature des pilotes avec trois options, à savoir Ignorer, Avertir ou Interdire.
+
+      Le Gestionnaire de périphériques est accessible via la commande mmc devmgmt.msc et permet de gérer l'activation, l'installation ou l'affichage des périphériques cachés. Un point d'exclamation indique un problème de ressource ou de pilote, tandis qu'une icône barrée d'une croix rouge signifie qu'un périphérique est désactivé.
+
+      Pour l'impression, les priorités s'étendent de un, la valeur la plus faible, à quatre-vingt-dix-neuf, la plus forte. Le pool d'impression permet de regrouper des imprimantes identiques en une seule imprimante logique, et l'usage du protocole IPP permet de consulter les imprimantes partagées via une adresse http barre barre nom_de_serveur barre printers.
+
+II. FASCICULE F2, RÉSEAUX LOCAUX, ADRESSAGE IP ET ADMINISTRATION LINUX ET WINDOWS.
+
+   A. Transmission de l'information, signal, supports, équipements.
+
+La communication consiste à partager une information sous forme de bits, laquelle est transcrite en signal physique pour être transportée par un support filaire, hertzien ou optique.
+
+      Le théorème de Shannon impose que la fréquence d'échantillonnage soit au moins le double de la fréquence de Nyquist pour éviter le sous-échantillonnage, tandis que le critère de Nyquist limite la rapidité de modulation à deux fois la bande passante.
+
+      Le débit binaire est le produit de la valence par la rapidité de modulation en bauds, et le circuit de données relie l'équipement terminal de traitement des données à l'équipement de terminaison du circuit de données et au support.
+
+      La transmission peut être synchrone avec une horloge intégrée ou asynchrone avec des intervalles variables, et les sens de transmission varient entre le simplex, le half-duplex et le full-duplex.
+
+      Le bruit thermique, le bruit de quantification et le bruit blanc gaussien altèrent le signal, alors que la paradiaphonie dans les paires torsadées est réduite par la torsade et une mesure élevée en décibels.
+
+      La transmission en bande de base utilise le codage Manchester pour la synchronisation, tandis que la transmission sur onde porteuse utilise la modulation d'amplitude, de fréquence ou de phase.
+
+      Le multiplexage peut être fréquentiel avec la hiérarchie PDH ou synchrone avec la hiérarchie SDH, permettant de partager un support entre plusieurs signaux.
+
+      Les supports incluent la paire torsadée régie par la norme ISO onze mille huit cent un, le câble coaxial à cinquante ou soixante-quinze ohms, et la fibre optique monomode ou multimode.
+
+      Les équipements de couche un comme le répéteur régénèrent le signal, alors que le pont et le commutateur filtrent les trames en couche deux, et le routeur assure le routage des datagrammes en couche trois.
+
+   B. Réseaux locaux, Ethernet et VLAN.
+
+Un réseau local regroupe des stations de calcul pour échanger des informations et partage des ressources, avec une topologie physique souvent en étoile et une topologie logique le plus souvent en bus.
+
+      La couche liaison se divise en deux sous-couches, la MAC pour le contrôle de l'accès au support et l'adressage par adresse MAC de quarante-huit bits, et la LLC pour établir un lien logique.
+
+      L'adresse MAC est un identifiant matériel unique composé de vingt-deux bits pour le constructeur et vingt-quatre bits pour le numéro de série, tandis que l'adresse de diffusion est FF:FF:FF:FF:FF:FF.
+
+      La trame Ethernet V2 utilise un champ Ethertype pour le démultiplexage, alors que la trame 802.3 utilise un champ Longueur des données et nécessite un padding pouvant atteindre quarante-six octets pour atteindre soixante-quatre octets minimum.
+
+      En mode partagé, la méthode d'accès CSMA/CD est probabiliste et gère les collisions par une séquence de jamming de trente-deux bits à un et un algorithme de Binary Exponential Backoff limité à seize tentatives.
+
+      Le mode commuté, ou FDSE, supprime les collisions et le CSMA/CD en reliant chaque station en point à point à un commutateur qui utilise une table d'autoapprentissage pour transmettre les trames uniquement au destinataire.
+
+      Le VLAN permet de segmenter logiquement les domaines de collision et de diffusion, en utilisant soit des ports statiques, soit des adresses MAC ou des adresses IP pour définir les groupes.
+
+      La norme IEEE 802.1Q est le standard de marquage de trames qui ajoute une balise de quatre octets et permet d'adresser quatre mille quatre-vingt-quatorze VLAN.
+
+      Le routage inter-VLAN nécessite un routeur pour permettre la communication entre deux réseaux virtuels différents via un trunk utilisant des sous-interfaces étiquetées.
+
+   C. Réseaux sans fil et CPL.
+
+Le courant porteur en ligne transporte des informations sur le réseau électrique existant en ajoutant un signal de haute fréquence entre un virgule six et trente mégahertz. La modulation multi-porteuses OFDM divise le signal en de nombreuses porteuses orthogonales pour limiter les interférences, tandis que la méthode d'accès CSMA/CA assure la gestion des transmissions.
+
+      Les standards de la HomePlug Alliance incluent le HomePlug un virgule zéro un à quatorze mégabits par seconde, le HomePlug un virgule un Turbo à quatre-vingt-cinq mégabits par seconde et le HomePlug AV à deux cents mégabits par seconde. Le mode centralisé est utilisé par le HomePlug AV, alors que le mode pair à pair est propre aux versions un virgule zéro et un virgule un, et le mode maître esclaves est employé par DS2 et SPiDCOM.
+
+      Le branchement s'effectue par couplage capacitif ou par couplage inductif qui réduit l'atténuation de dix à quinze décibels. Pour la sécurité, les versions récentes comme l'UPA DS2 et le HomePlug AV utilisent le cryptage AES cent vingt huit bits.
+
+      Les réseaux sans fil sont classés par zone de couverture, du WPAN comme le Bluetooth au WMAN comme le WiMax. En France, l'ARCEP définit les canaux et les puissances, et seule la bande des deux virgante quatre gigahertz est totalement libérée pour un usage privé.
+
+      Le WiMax IEEE huit cent deux virgante seize permet des liaisons sur environ cinquante kilomètres sans ligne de vue avec un débit théorique de soixante-dix mégabits par seconde par cellule. Le Bluetooth, défini par l'IEEE huit cent deux virgante un virgante un, permet la communication de huit appareils dans un piconet sur la fréquence deux virgante quatre gigahertz.
+
+      La norme Wi-Fi IEEE huit cent deux virgante un utilise la méthode CSMA/CA pour éviter les collisions, car la détection est impossible en radio. Le mécanisme optionnel VCS utilise les signaux RTS et CTS pour réserver le support et résoudre le problème de la station cachée.
+
+      Les architectures Wi-Fi incluent l'IBSS en mode ad-hoc, le BSS où les stations sont rattachées à un point d'accès, et l'ESS qui regroupe plusieurs BSS partageant le même SSID. Le SSID identifie le réseau avec au plus trente-deux caractères, tandis que le BSSID correspond à l'adresse MAC de l'équipement.
+
+      Les débits Wi-Fi sont théoriques et les canaux exploitables en entreprise sont généralement les numéros un, six et onze. La sécurité repose sur le protocole WPA version deux défini dans la norme huit cent deux virgante un i, qui est incompatible avec les anciens matériels utilisant le WEP ou le WPA.
+
+      La norme huit cent deux virgante trois af permet le Power over Ethernet pour alimenter des équipements comme des caméras IP via un commutateur de niveau deux. Pour la qualité de service, le standard huit cent deux virgante un e propose les algorithmes EDCF et HCF.
+
+   D. Le protocole IP.
+
+Le protocole IP est un service non connecté qui achemine des datagrammes de manière indépendante sans garantir la fiabilité ou le contrôle de flux. La pile TCP/IP, dont le document de référence est le RFC onze vingt deux, recouvre les couches trois à sept du modèle OSI.
+
+      Une adresse IPv4 possède une longueur fixe de trente deux bits, soit quatre octets, et se compose d'un identifiant réseau nommé Net-ID et d'un identifiant d'hôte nommé Host-ID. La classe A utilise huit bits pour le réseau avec un premier octet de un à cent vingt sept, la classe B utilise seize bits avec un premier octet de cent vingt huit à cent quatre-vingt onze, et la classe C utilise vingt quatre bits avec un premier octet de cent quatre-vingt douze à deux cent vingt trois.
+
+      Le mécanisme de fragmentation intervient quand un datagramme dépasse la MTU d'un réseau, comme la valeur de mille cinq cents octets pour Ethernet. Le réassemblage est réalisé uniquement par le destinataire final grâce au champ d'identification de seize bits et au champ Fragment Offset qui indique le décalage en blocs de huit octets.
+
+      L'en-tête IP contient le champ Version sur quatre bits et le champ LET sur quatre bits qui code la longueur de l'en-tête en mots de trente deux bits, avec une valeur minimale de cinq. Le champ TTL sur huit bits limite la durée de vie du paquet en étant décrémenté à chaque routeur, tandis que le Checksum d'en-tête sur seize bits doit être recalculé à chaque modification de l'en-tête.
+
+      Le protocole ARP permet de convertir une adresse logique de trente deux bits en adresse physique de quarante huit bits par diffusion. Le protocole RARP est utilisé par les stations sans disque pour acquérir leur adresse logique auprès d'un serveur d'adresses dès la mise sous tension.
+
+      Le protocole ICMP signale des erreurs comme la destination injoignable, le dépassement de temps, le problème de paramètre ou la saturation d'un élément du réseau. La commande ping utilise ICMP pour tester la connectivité en envoyant un echo request pour recevoir un echo reply.
+
+   E. Plan d'adressage IPv4, subnetting, VLSM, CIDR.
+
+L'adressage privé défini par la RFC dix-neuf-dix-huit utilise les plages dix point zéro point zéro point zéro, cent soixante-douze point seize point zéro point zéro à cent soixante-douze point trente et un point zéro point zéro et cent quatre-vingt-douze point cent soixante-huit point zéro point zéro à cent quatre-vingt-douze point deux cent cinquante-cinq point zéro point zéro.
+
+      Ces adresses ne sont pas routées sur Internet et nécessitent le mécanisme NAT pour communiquer entre réseaux privés car l'unicité mondiale n'est pas garantie.
+
+      L'adresse de réseau s'obtient par un ET logique entre l'adresse de l'hôte et le masque, tandis que l'adresse de diffusion dirigée, toujours une adresse de destination, possède tous ses bits de l'identifiant hôte à un.
+
+      L'adresse zéro point zéro point zéro point zéro ne peut être utilisée que comme adresse source pour requérir une adresse via DHCP ou pour désigner la passerelle par défaut dans les tables de routage.
+
+      Le subnetting divise le champ identifiant hôte en un identifiant de sous-réseau et un identifiant hôte, ce qui permet de créer des sous-réseaux dont le pas est égal à deux cent cinquante-six moins la valeur décimale du dernier octet du masque.
+
+      Le protocole RIP version un ne supporte pas le VLSM ni le sous-réseau zéro, contrairement à RIP version deux et OSPF qui véhiculent les masques et permettent une gestion plus flexible.
+
+      Le VLSM applique le sous-adressage de manière récursive pour une distribution efficace en interne, tandis que le CIDR est utilisé par les fournisseurs d'accès pour le sur-adressage et le regroupement de routes.
+
+      L'allocation dynamique par le protocole DHCP repose sur UDP avec la valeur de protocole dix-sept et suit un cycle de quatre messages comprenant le DHCP Discover, le DHCP Offer, le DHCP Request et le DHCPACK.
+
+      L'IPv6 utilise des adresses de cent vingt-huit bits et remplace la diffusion par le multicast et l'anycast, avec un en-tête de quarante octets incluant obligatoirement le composant IPsec.
+
+   F. Linux-Unix, gestion des utilisateurs.
+
+Le fichier passwd contient sept champs séparés par des deux-points, incluant le login, le mot de passe crypté, l'UID, le GID par défaut, les informations GECOS, le répertoire personnel et le shell de connexion.
+
+      L'UID identifie l'utilisateur pour le système et le logiciel, l'UID zéro étant réservé à root, tandis que le pseudo-utilisateur nobody possède une grande valeur d'UID pour sécuriser les accès NFS.
+
+      Le fichier shadow, ou /etc/security/passwd sur AIX, contient neuf champs et est lisible uniquement par le superutilisateur pour protéger les mots de passe cryptés.
+
+      Les algorithmes de chiffrement comme MD5 produisent des empreintes de trente-quatre caractères, alors que l'algorithme crypt basé sur le DES produit treize caractères.
+
+      Le GID est un entier de trente-deux bits utilisé pour partager l'accès aux fichiers, et l'application du bit setgid de valeur zéro deux mille peut forcer l'appartenance des nouveaux fichiers au groupe du répertoire parent.
+
+      La gestion des comptes peut être centralisée via LDAP, un protocole de type client-serveur à structure hiérarchique, ou via Active Directory qui utilise LDAP et Kerberos.
+
+      Le mécanisme SSO permet une authentification unique pour plusieurs applications, tandis que PAM centralise les modules d'authentification pour simplifier la gestion des politiques de sécurité.
+
+      Pour sécuriser un système, il faut utiliser sudo au lieu de multiplier les comptes à l'UID zéro et fixer un umask raisonnable comme zéro soixante-dix-sept, zéro vingt-sept ou zéro vingt-deux.
+
+   G. Linux-Unix, gestion des processus.
+
+Un programme est un objet statique constitué d'une suite d'instructions, tandis qu'un processus est un objet dynamique formé par le programme en exécution et son contexte. Le changement de contexte est une opération matérielle rapide qui sauvegarde le contexte d'un processus pour rétablir celui du suivant après chaque quantum. L'ordonnancement attribue le processeur aux processus selon des critères d'efficacité, de rendement, de temps d'exécution, d'interactivité et d'équité.
+
+      La hiérarchie des processus est un arbre dont l'unique ancêtre est le processus init qui crée les processus interactifs et les démons. La création d'un processus s'effectue par l'appel système fork qui duplique le processus parent en utilisant le mécanisme de copy on write, puis par l'appel exec qui recouvre le processus par un nouvel exécutable tout en conservant le même PID. Un processus qui se termine via exit sans que son père ne récupère son code de sortie avec wait devient un processus zombie.
+
+      Les threads sont des sous-processus plus légers, environ soixante pour cent plus rapides à créer qu'un processus, qui partagent la majorité des ressources avec le processus parent. Ils nécessitent un code thread safe pour éviter les race conditions dues à l'ordonnancement aléatoire ou les deadlocks liés à des problèmes de synchronisation. Les processus peuvent être lancés en mode synchrone, où le père attend la fin du fils, ou en mode asynchrone, aussi appelé tâche de fond.
+
+      Chaque processus gère des descripteurs de fichiers où zéro correspond à l'entrée standard, un à la sortie standard et deux à la sortie d'erreur. La redirection permet de détourner ces flux, par exemple avec le chevron simple pour écraser un fichier ou le double chevron pour ajouter des données à la fin. L'utilisation de /dev/null permet d'ignorer efficacement une sortie en redirigeant le flux vers ce périphérique spécial.
+
+      La surveillance s'effectue avec la commande ps, en utilisant ps -aux sur les systèmes BSD ou ps -edf sur les systèmes AT et T. Les signaux permettent de communiquer des événements aux processus, comme SIGINT via Ctrl-C, SIGKILL pour tuer un processus ou SIGTERM pour une terminaison propre. La commande kill permet d'envoyer ces signaux à n'importe quel processus appartenant au même propriétaire.
+
+      La planification peut être différée avec la commande at ou réalisée à intervalles réguliers via la crontab. Pour la gestion des logiciels, Debian utilise le gestionnaire de paquets APT qui recherche les programmes dans des dépôts. Sous HP-UX, la gestion repose sur les filesets, les Products et les Bundles, ces derniers étant des collections que seul HP peut créer.
+
+   H. Linux-Unix, sauvegarde et restauration.
+
+La sauvegarde consiste à recopier des fichiers sur un support compatible pour assurer leur restauration, tandis que l'archivage sert à la conservation longue durée pour des raisons légales ou administratives.
+
+      On distingue la sauvegarde locale de production pour une reprise rapide sur site et la sauvegarde externalisée de recours qui est transportée sur un site éloigné après un sinistre majeur.
+
+      Une sauvegarde complète copie tous les fichiers inclus sans tenir compte des sauvegardes antérieures, alors que la différentielle ne sauvegarde que les changements depuis la dernière complète.
+
+      La sauvegarde incrémentale enregistre les modifications depuis la dernière sauvegarde quelle qu'elle soit et utilise des niveaux de zéro à neuf, le niveau zéro étant une sauvegarde intégrale.
+
+      La technologie LTO est leader sur le marché avec des capacités allant de cent gigaoctets pour le LTO-un jusqu'à six virgule quatre téraoctets pour le LTO-sept.
+
+      Le LTO-quatre intègre le chiffrement matériel AES deux cent cinquante six bits et la fonctionnalité WORM pour l'archivage légal est disponible dès le LTO-trois.
+
+      L'utilitaire tar archive les fichiers sur toutes les plateformes, tandis que cpio lit les noms de fichiers par l'entrée standard et gère le multi-volume.
+
+      La commande dd permet le transfert de données brutes et la commande mt assure la manipulation des bandes magnétiques comme l'avance ou le rembobinage.
+
+      Sous HP-UX, les commandes fbackup et frecover gèrent les systèmes de fichiers et l'environnement Ignite-UX propose des outils de restauration amorçables.
+
+      Les utilitaires Solaris ufsdump et ufsrestore sont des outils avancés, tout comme dump et restore qui consultent la structure interne du système de fichiers.
+
+      L'application AMANDA fonctionne en mode client-serveur pour centraliser l'administration de nombreux clients en utilisant tar ou dump.
+
+      Le programme rsync accélère les transferts en ne transférant que les fichiers modifiés et permet de supprimer sur la destination les fichiers absents de la source.
+
+   I. Linux-Unix, configuration réseau et services.
+
+L'ICANN contrôle l'attribution des adresses, des noms de domaine et des numéros de port, tandis que l'ISOC représente les utilisateurs et l'IETF supervise les travaux techniques résumés dans les RFC.
+
+      La suite TCP/IP utilise les protocoles IP, ICMP, ARP, UDP et TCP, organisés en une pile qui n'utilise réellement que trois couches.
+
+      L'IPv4 utilise des adresses de quatre octets et permet la fragmentation des paquets par les routeurs, alors que l'IPv6 utilise seize octets et impose à l'hôte expéditeur de gérer la fragmentation.
+
+      L'adresse MAC de six octets identifie le matériel et l'adresse IP est globalement unique, tandis que le nom d'hôte est un raccourci mappé par le fichier hosts, LDAP ou le DNS.
+
+      Le subnetting et le CIDR permettent de diviser les réseaux, un masque slash vingt-six laissant soixante-deux hôtes réels, et le NAT ou le PAT permettent de traduire les adresses privées de la RFC dix-neuf cent dix-huit.
+
+      Le routage est géré par des tables consultables avec netstat, des routes statiques saisies avec la commande route ou par des démons pour le routage dynamique.
+
+      Le DNS est un annuaire réparti utilisant des fichiers de zone contenant des champs SOA, NS, MX et A, et les utilitaires dig ou nslookup permettent d'interroger ce service.
+
+      Le protocole DHCP alloue les adresses via les étapes DHCPDISCOVER, DHCPOFFER, DHCPREQUEST et DHCPACK, mais il est vulnérable au déni de service par épuisement d'adresses.
+
+      Les services de messagerie reposent sur le MUA, le MTA et le MDA, utilisant le protocole SMTP pour l'envoi et les protocoles POP ou IMAP pour la consultation.
+
+   J. Linux-Unix, périphériques et impression.
+
+Le protocole TELNET nécessite l'activation du service dans inetd.conf mais fait circuler les mots de passe en clair, ce qui rend SSH préférable pour la sécurité. Le protocole RLOGIN permet de se dispenser de mot de passe via le fichier hosts.equiv ou le fichier .rhosts de l'utilisateur d'arrivée, mais cette règle ne s'applique jamais à l'utilisateur root.
+
+      Le protocole NFS permet l'exportation d'un espace disque par un serveur et son montage par un client. Cette fonction est assurée par le démon nfs, les fichiers etc/fstab et etc/exports, ainsi que les commandes mount et umount.
+
+      Sous UNIX, les périphériques sont des fichiers spéciaux de type caractère ou de type bloc. Le mode caractère transfère les données directement à chaque appel système pour les terminaux ou les claviers, tandis que le mode bloc utilise des zones tampon pour transférer des données par blocs de quatre ou huit kilo-octets.
+
+      Un fichier de périphérique est identifié par un numéro majeur qui désigne le pilote et un numéro mineur qui désigne le périphérique ou sa partition. Les fichiers courants incluent dev/null pour supprimer un affichage, dev/zero pour générer des caractères ASCII zéro, et dev/sda pour le premier disque SCSI.
+
+      Le type de terminal est défini par la variable d'environnement TERM et s'appuie sur la librairie terminfo ou le fichier termcap. La hiérarchie terminfo, située généralement dans usr/lib, contient les définitions compilées comme pour le terminal vt100 dans le répertoire usr/lib/terminfo/v.
+
+      Le système d'impression CUPS avec son démon cupsd est le plus utilisé sous Linux, devant les systèmes Berkeley ou LPRng. Pour les imprimantes utilisant leur propre langage au lieu du PostScript, un filtre comme APS Filter ou Magic Filter est nécessaire pour transformer les données.
+
+      Le système d'impression repose sur le spoulage où l'ordonnanceur lpsched gère l'acheminement des demandes selon un modèle FIFO ou des priorités. Les commandes lpmove permettent de rerouter une demande vers une autre imprimante et cancel sert à éliminer les données superflues.
+
+      Une destination d'impression peut être une imprimante isolée ou une classe regroupant plusieurs imprimantes. La spécification de la destination suit un ordre de priorité strict avec l'option moins d, la variable d'environnement LPDEST, puis la destination par défaut.
+
+   K. Linux-Unix, commandes processus et réseau.
+
+La commande ps liste les processus à un instant donné avec des options variant selon le système, comme ps -aux pour BSD ou ps -edf pour AT&T. La commande top améliore cet affichage en continu, tandis que l'outil interactif htop permet de superviser l'usage par cœur, de trier par consommation ou de changer la priorité d'un processus.
+
+      La commande kill envoie des signaux aux processus, notamment le numéro un SIGHUP pour la relecture de la configuration, le numéro neuf SIGKILL pour une destruction brutale ou le numéro quinze SIGTERM. La planification s'effectue avec at pour un lancement différé ou avec la crontab dont la table comporte six champs, de la minute au jour de la semaine.
+
+      L'archivage avec tar est préférable avec gzip, utilisant l'option c pour créer, t pour lister, x pour extraire et f pour désigner le fichier. Pour les sauvegardes incrémentales, on utilise touch pour un fichier témoin et find avec l'option -newer. Le programme rsync est plus riche que rcp, utilisant ssh par défaut et proposant l'option --del pour supprimer les fichiers absents de la source.
+
+      Le paquet iproute2 remplace l'ancien net-tools en transformant ifconfig en ip addr, arp en ip neigh, route en ip route et netstat en ss. La commande arp manipule les correspondances entre adresses MAC et adresses IP en couche un du modèle DoD.
+
+      La commande ping vérifie la connectivité en envoyant quatre requêtes par défaut, avec huit octets réservés pour l'en-tête ICMP. La résolution de nom de ping utilise le fichier /etc/hosts et non le DNS. Pour suivre le chemin d'un paquet, traceroute augmente le TTL, tandis que tcptraceroute utilise des paquets TCP SYN sur le port quatre-vingts pour contourner les pare-feu.
+
+      La commande netstat ou son remplaçant ss fournissent des statistiques sur les connexions TCP et UDP en s'appuyant sur le fichier /etc/services. L'outil tcpdump nécessite les droits root pour passer l'interface en mode promiscuous, ce qui permet d'accepter tous les paquets.
+
+      Wireshark est un analyseur de protocole complet utilisant un filtre de capture défini au démarrage et un filtre d'affichage plus complexe modifiable pendant la capture. Sa version en ligne de commande est tshark, qui permet de capturer, relire ou diviser des fichiers de capture avec editcap et mergecap.
+
+   L. Windows Server 2008, gestion du réseau.
+
+L'accès à distance permet aux clients de se connecter à des ressources comme s'ils étaient sur le réseau local, tandis que le protocole SSTP encapsule les données sur le canal SSL de HTTPS via le port quatre cent quarante-trois pour traverser les pare-feu.
+
+      Active Directory utilise le moteur de stockage ESE, aussi appelé JET Blue, pour gérer sa base de données Ntds.dit qui est pilotée par le processus LSASS.
+
+      La répartition de charge réseau crée un cluster d'au plus trente-deux hôtes avec une seule adresse IP virtuelle, mais l'application doit gérer elle-même son état partagé car la technologie ne le distribue pas automatiquement.
+
+      Le système de fichiers distribué DFS utilise le service Dfssvc.exe et le pilote Dfs.sys côté serveur, tandis que la réplication DFSR s'appuie sur le journal NTFS et la compression différentielle à distance RDC pour ne copier que les différences.
+
+      Powershell est un interpréteur qui manipule des objets .NET et propose plus de cent applets de commande, complétant des utilitaires comme IPCONFIG, NETSTAT, PING, TRACERT qui répète chaque requête trois fois avec un TTL croissant, ou encore NETDIAG pour des tests complets.
+
+      La résolution de nom NetBIOS peut se faire par diffusion sur les petits réseaux, par le fichier statique LMHOSTS situé dans System32/Drivers/etc, ou par le service WINS qui gère l'inscription et la résolution des noms.
+
+      Sous Windows, la résolution de nom privilégie le DNS, puis le NetBIOS en cas d'échec, sachant qu'un nom de plus de seize caractères ou contenant un point est traité comme un nom DNS par TCPIP.SYS.
+
+      Dans le service WINS, une inscription est valable six jours par défaut et le client soumet un renouvellement à mi-chemin de cet intervalle.
+
+      Les diffusions NetBIOS ne traversent pas les routeurs, contrairement au protocole NetBIOS lui-même qui peut être routé sur les ports cent trente-sept et cent trente-neuf.
+
+   M. Windows Server 2008, DHCP et DNS.
+
+Le protocole DHCP attribue dynamiquement des adresses IP et des configurations TCP/IP via un cycle en quatre étapes comprenant la découverte, l'offre, la requête et l'accusé de réception. Le serveur DHCP doit posséder une adresse IP fixe, écouter sur le port UDP soixante-huit et être autorisé dans Active Directory pour distribuer des adresses.
+
+      Une étendue DHCP définit une plage d'adresses pour un sous-réseau, tandis que les réservations basées sur l'adresse MAC garantissent une adresse fixe pour des équipements comme les contrôleurs de domaine ou les serveurs DNS. Pour assurer la haute disponibilité, le clustering est préférable au fractionnement d'étendues car il gère deux serveurs comme un seul système virtuel.
+
+      L'intégration DHCP-DNS permet au serveur DHCP d'inscrire les enregistrements A et PTR des clients en utilisant l'option Client FQDN numéro quatre-vingt-un. En IPv6, le protocole DHCPv6 est utilisé pour une configuration avec état selon les drapeaux M et O, bien que les hôtes puissent utiliser la configuration automatique sans état.
+
+      Le DNS est une base de données hiérarchique indispensable à Active Directory, utilisant des noms de domaine et des FQDN qui se terminent par un point. Un enregistrement de ressource comporte un nom, un TTL en secondes, un type sur seize bits, une classe et un champ de données.
+
+      Les principaux types d'enregistrements sont le type A pour l'IPv4 sur trente-deux bits, le type AAAA pour l'IPv6 sur cent vingt-huit bits, le CNAME pour les alias, le MX pour le courrier avec une priorité de zéro à soixante-cinq mille cinq cent trente-cinq, et le SOA pour l'autorité de la zone. La résolution peut être itérative sur Internet ou récursive sur les réseaux locaux, cette dernière étant la plus sûre.
+
+      Dans un environnement Windows Server deux mille huit, les zones intégrées à Active Directory permettent une réplication multi-maître sans serveur primaire unique. Les mises à jour dynamiques sont générées par le service client DHCP, et les enregistrements SRV utilisés par Active Directory emploient toujours une priorité de zéro et un poids de cent.
+
+      Pour le diagnostic et l'administration, les outils essentiels sont l'utilitaire en ligne de commande dnscmd et l'outil de diagnostic NSLOOKUP. Les serveurs DNS nécessitent une adresse IP fixe et des ressources matérielles minimales comme un processeur de quatre cents mégahertz et cinq cent douze mégaoctets de mémoire vive par processeur.
+
+   N. Windows Server 2008, services web IIS.
+
+L'architecture IIS sept point zéro est découpée en plus de quarante modules intégrés dans une procédure de traitement, ce qui améliore les performances et réduit la surface d'attaque par rapport à l'architecture en un seul bloc d'IIS six point zéro.
+
+      Le pilote HTTP point sys fonctionne en mode noyau pour écouter les requêtes HTTP et HTTPS, offrant la mise en cache, la mise en file d'attente et le filtrage de sécurité.
+
+      Le service WAS gère la configuration du pool d'applications et les processus de travail en lisant le fichier ApplicationHost point config au démarrage, et il peut fonctionner sans le service WWW si aucune fonctionnalité HTTP n'est requise.
+
+      Les extensions ISAPI sont du code compilé qui s'exécute plus rapidement que les fichiers ASP ou les appels de composants COM plus.
+
+      L'administration de IIS s'effectue via la commande inetmgr pour ouvrir le Gestionnaire des services Internet, qui permet la délégation de fonctionnalités aux utilisateurs non administrateurs.
+
+      L'authentification de base transmet les mots de passe encodés en Base64 non chiffrés et nécessite une connexion sûre comme le chiffrement SSL pour être utilisée en sécurité.
+
+      L'authentification intégrée Windows est une méthode sûre pour l'intranet qui utilise Kerberos cinq si Active Directory est installé, mais elle ne fonctionne pas avec les proxy HTTP.
+
+      L'autorisation d'URL dans la nouvelle architecture IIS traite les règles de grand-parent à parent puis à enfant, contrairement au modèle ASP point NET.
+
+      Le protocole WebDAV permet de manipuler des supports de stockage comme un système de fichiers via HTTP, garantissant que plusieurs personnes peuvent lire un fichier mais qu'une seule peut le modifier à la fois.
+
+      La sauvegarde des paramètres de la métabase ne couvre ni les fichiers de contenu ni le Registre, ce qui la rend inutilisable après une réinstallation ou sur un autre ordinateur.
+
+      Le cryptage SSL utilise une clé de session dont la puissance est généralement de quarante bits, mais peut atteindre cent vingt-huit bits avec l'extension SGC et le High Encryption Pack.
+
+   O. Windows Server 2008, système de fichiers et pannes.
+
+Le système NTFS offre une sécurité et une efficacité supérieures grâce au contrôle par liste d'accès, à la compression, aux quotas et au cryptage.
+
+      L'utilitaire convert.exe permet de convertir des partitions FAT ou FAT32 vers NTFS, mais l'opération inverse est impossible car la partition doit être effacée et recréée.
+
+      La structure NTFS repose sur la MFT qui contient les descripteurs de fichiers de un à quatre kilo-octets et qui grandit sans jamais se réduire.
+
+      Les données sont stockées dans des clusters dont la taille varie de cinq cent douze octets à soixante-quatre kilo-octets et qui sont numérotés sur soixante-quatre bits.
+
+      La fiabilité est assurée par un fichier journal utilisant le traitement transactionnel pour garantir que toutes les opérations sont effectuées ou qu'aucune ne l'est.
+
+      La protection des ressources WRP remplace la WFP pour protéger les fichiers comme les extensions .DLL ou .EXE et les clés de Registre.
+
+      Les disques dynamiques permettent de créer des volumes multiples ou des agrégats par bande sans parité pouvant inclure jusqu'à trente-deux disques.
+
+      Le RAID un assure la redondance par miroir sur deux disques maximum avec une perte de cinquante pour cent de l'espace disponible.
+
+      Le RAID cinq utilise la parité sur trois à trente-deux disques pour permettre la reconstruction des données et n'occupe que vingt pour cent de l'espace.
+
+   P. Windows Server 2008, base de registre.
+
+La base de registre est une base de données unique et hiérarchique qui centralise les informations de configuration de Windows NT en remplaçant les fichiers .ini, .sys et .com.
+
+      Le registre est dynamique mais les données d'applications ne sont lues qu'au démarrage de celles-ci, ce qui impose un redémarrage de l'application pour prendre en compte un changement de paramétrage.
+
+      Il existe six clés racines principales commençant par le descripteur HKEY_, incluant HKEY_CURRENT_USER pour l'utilisateur connecté, HKEY_USERS pour les profils, HKEY_CLASSES_ROOT pour les extensions de fichiers, HKEY_LOCAL_MACHINE pour la configuration du système, HKEY_CURRENT_CONFIG pour le profil matériel et HKEY_PERFORMANCE_DATA pour les compteurs de performance.
+
+      Les informations sont stockées dans des fichiers appelés ruches, dont les chemins sont gérés par le gestionnaire de configuration sous HKLM/SYSTEM/CurrentControlSet/Control/Hivelist, à l'exception des ruches volatiles comme HKLM/HARDWARE qui sont recréées en mémoire à chaque démarrage.
+
+      Windows Server deux mille huit introduit le registre transactionnel via le Kernel Transaction Manager et les trois API RegCreateKeyTransacted, RegOpenKeyTransacted et RegDeleteKeyTransacted pour garantir la robustesse des opérations.
+
+      Le modèle de filtrage permet à des pilotes comme les antivirus d'utiliser des fonctions de rappel avec une profondeur spécifique pour ordonner les interventions, par exemple pour que le déchiffrement précède l'analyse.
+
+      Pour optimiser les performances, le gestionnaire de configuration utilise une table de cache pour les blocs de contrôle de clés fréquents, une table différée pour les clés récemment fermées et ne conserve qu'un seul exemplaire de chaque descripteur de sécurité unique par ruche.
+
+      La modification du registre peut s'effectuer via l'outil graphique Regedit.exe ou par les outils en ligne de commande Reg.exe pour la gestion des clés et Regini.exe pour l'importation de fichiers texte.
+
+   Q. Windows Server 2008, administration et optimisation.
+
+Le Gestionnaire de serveur est l'outil local principal qui centralise la configuration, la gestion des rôles, des fonctionnalités et du stockage. Un rôle regroupe des tâches d'administration et peut fonctionner de manière autonome, tandis que les fonctionnalités sont des éléments complémentaires, au nombre de trente-cinq sous Windows Server deux mille huit et quarante et une sous R2, sans aucune installation par défaut.
+
+      La console MMC héberge des composants enfichables pour l'administration, avec des fichiers d'extension msc. Le mode Auteur permet une gestion sans restriction, alors que le mode Utilisateur propose trois niveaux de restriction, dont l'accès limité avec fenêtre unique. Pour la gestion à distance, les composants RSAT sont natifs sous R2, tandis que l'administration à distance permet deux connexions simultanées via le protocole RDP amélioré.
+
+      Les outils en ligne de commande incluent ServerManagerCmd pour les rôles, ocsetup et pkgmgr qui sont les seuls moyens d'installer des rôles sous un Server Core, et netsh pour la configuration réseau. Powershell permet la création de scripts, tandis que WinRS exécute des commandes sur un ordinateur distant où WinRM est activé, et WMIC interroge les objets WMI par alias.
+
+      La sauvegarde est assurée par une fonctionnalité remplaçant Ntbackup.exe, disponible via la console MMC, l'outil Wbadmin ou PowerShell. L'environnement de récupération WinRE permet de restaurer le système, les volumes ou les données. Pour le système de fichiers, il est recommandé de formater en NTFS dès l'installation car la commande convert unité /fs:ntfs ne réapplique pas automatiquement les ACL.
+
+      La sécurité du système repose sur des mots de passe d'au moins douze caractères selon l'ANSSI et sur l'utilisation de BitLocker pour le chiffrement des volumes via un module TPM. Le système EFS chiffre les fichiers sur des partitions NTFS version cinq, mais un fichier compressé ne peut pas être crypté et le partage d'un dossier crypté est impossible. L'IPSec protège les paquets IP de bout en bout, avec un agent de stratégie tournant dans lsass.exe.
+
+      Les partages réseau peuvent être cachés en ajoutant un signe dollar au nom ou en modifiant la valeur Hidden à un dans la clé LanmanServer/Parameters. Les autorisations de partage incluent le Contrôle total, Modifier et Lire, et tout nouveau partage est par défaut en Contrôle total pour le groupe Tout le monde. Les clichés instantanés de dossiers partagés, activables via vssadmin, ne remplacent pas les sauvegardes régulières.
+
+      L'Observateur d'événements gère des journaux comme Applications ou Sécurité avec une taille maximale par défaut de cinq cent douze kilo-octets. Pour l'analyse de performance, le moniteur de ressources est lancé par perfmon /res et l'analyseur de performances aide à identifier les goulets d'étranglement. Le protocole SNMP permet la gestion de nœuds via des bases MIB, et WMI offre une interface orientée objet pour gérer les ressources.
+
+      Les services Terminal Server permettent l'accès à distance à des programmes ou au bureau, avec RemoteApp TS pour une intégration fluide dans la barre des tâches. La Passerelle des services Terminal Server sécurise le trafic RDP via HTTPS sur le port quatre cent quarante-trois au lieu du port trois mille trois cent quatre-vingt-neuf. Le Session Broker TS assure l'équilibrage de la charge en redirigeant les utilisateurs vers le serveur hébergeant leur session.
+
+III. FASCICULE F3, INFRASTRUCTURES, ROUTAGE ET PROTOCOLES DE L'INTERNET.
+
+   A. Infrastructures réseau, Internet, Intranet, Extranet, VPN, proxy.
+
+Internet est un réseau de réseaux international utilisant des protocoles normalisés comme le TCP/IP pour permettre une communication transparente entre des machines de types divers. Son infrastructure matérielle repose sur des backbones composés de fibres optiques, de satellites ou de câbles intercontinentaux, tandis que ses services incluent le web, le courrier électronique, le transfert de fichiers FTP ou la voix sur IP.
+
+      L'intranet est un système d'information interne à une organisation utilisant les standards du web comme le HTML et le HTTP, mais il reste invisible de l'extérieur. Son architecture à trois niveaux sépare les clients navigateurs, les serveurs d'application qui interprètent des scripts comme le PHP ou le Java, et les serveurs de bases de données.
+
+      L'extranet constitue une ouverture sécurisée de l'intranet vers des partenaires externes comme les clients ou les fournisseurs pour partager des catalogues ou des commandes. Il peut inclure des places de marché électroniques en relation BtoB, contrairement au commerce électronique BtoC qui s'adresse au consommateur.
+
+      Le DNS est un annuaire hiérarchique et distribué mis en place en mille neuf cent quatre-vingt quatre pour traduire les noms d'URL en adresses IP. Il remplace l'ancien fichier hosts qui était un simple fichier texte alimenté manuellement entre mille neuf cent soixante-dix et mille neuf cent quatre-vingt quatre.
+
+      Le VPN crée un tunnel privé sur une infrastructure publique pour relier des sites distants avec des objectifs de sécurité et de confidentialité. Ce tunnel peut être implémenté au niveau réseau, au niveau transport ou au niveau application.
+
+      Le proxy agit comme un intermédiaire qui réalise une rupture de flux entre le client et le serveur, rendant les clients invisibles car ils sont vus avec la seule adresse IP du proxy. Il permet également d'économiser de la bande passante grâce à la mise en cache des données et de contrôler les accès via des listes de contrôle d'accès.
+
+      Le firewall est l'équipement de filtrage qui peut être de type stateless en contrôlant chaque paquet indépendamment, ou stateful en utilisant la stateful inspection pour suivre l'état des connexions. Il existe aussi des pare-feux applicatifs opérant sur la couche sept du modèle OSI et des pare-feux authentifiants qui lient l'activité à un utilisateur spécifique.
+
+      La normalisation est essentielle pour la communication entre constructeurs différents et se divise en deux catégories. Les normes de jure sont établies par des organismes officiels comme l'ISO qui regroupe des entités telles que l'AFNOR en France ou l'ANSI aux États-Unis, tandis que les normes de facto sont des standards de fait élaborés par des consortiums sans valeur internationale.
+
+   B. Routage IP, techniques, NAT, sécurité des routeurs.
+
+Le routeur est un élément actif du niveau trois du modèle OSI qui achemine les datagrammes en consultant sa table de routage pour identifier l'adresse du routeur suivant. Le routage peut être direct sur le réseau physique ou indirect vers un autre routeur, tandis que les routes sont soit statiques et définies manuellement, soit dynamiques et mises à jour par des protocoles.
+
+      Les systèmes autonomes sont des ensembles de réseaux sous une même autorité administrative identifiés par un numéro ASN de trente-deux bits. Le protocole BGPv4 est le principal protocole de routage externe utilisé entre les systèmes autonomes, tandis que les protocoles internes comme RIP ou OSPF sont des IGP.
+
+      Le protocole RIP utilise un algorithme de vecteur de distance limité à seize sauts maximum et peut présenter un temps de convergence long. À l'inverse, l'OSPF utilise l'algorithme de Dijkstra pour calculer les routes de plus court chemin via l'état de liens, ce qui permet une gestion efficace des grands réseaux.
+
+      Le mécanisme NAT permet de faire correspondre des adresses privées locales internes avec des adresses globales internes pour connecter des machines à Internet. La traduction statique associe une adresse globale unique à une adresse locale, alors que la traduction dynamique utilise un pool d'adresses, et le mode PAT permet d'associer environ quatre mille adresses locales à une seule adresse globale en traduisant aussi les ports.
+
+      La configuration d'un routeur peut se faire par port console en liaison RS232 ou par téléchargement via le protocole TFTP qui est non sûr car il repose sur UDP sans mot de passe. Les commandes copy running-config tftp et copy tftp running-config permettent de sauvegarder ou de charger la configuration du routeur.
+
+      La sécurité repose sur la confidentialité, l'authenticité et la protection contre le rejeu, des services renforcés par la norme IPsec. L'extension AH assure l'authenticité sans chiffrement, tandis que l'extension ESP assure la confidentialité par le chiffrement des données et peut aussi fournir l'authenticité.
+
+      Le protocole IKE permet de négocier les algorithmes utilisés avec IPsec. Le mode transport protège uniquement le contenu du datagramme sans modifier l'en-tête pour les équipements terminaux, alors que le mode tunnel encapsule tout le datagramme dans un nouveau paquet pour protéger tous les champs.
+
+   C. MPLS et ATM.
+
+Le protocole MPLS utilise des labels de trente-deux bits insérés entre les en-têtes de couche deux et de couche trois pour combiner la commutation rapide et le routage souple.
+
+      Le routeur de bordure d'entrée LER associe une référence et une interface de sortie au datagramme, tandis que le routeur de commutation LSR consulte sa table LIB pour remplacer l'ancienne référence par une nouvelle.
+
+      Le chemin de commutation LSP est non bidirectionnel et le chemin est fixé dès l'entrée dans le réseau pour garantir un gain de temps important à chaque nœud.
+
+      L'établissement des chemins peut se faire par routage IP avec des protocoles OSPF ou BGP modifiés, ou par signalisation avec réservation de ressources via RSVP modifié ou CR-LDP.
+
+      La technologie ATM utilise des cellules de taille fixe de cinquante-trois octets, comprenant cinq octets d'en-tête et quarante-huit octets d'information.
+
+      Les classes de service ATM incluent le débit constant CBR pour l'émulation de circuit, le débit variable VBR pour les images MPEG, le débit disponible ABR et le débit non spécifié UBR.
+
+      L'usager déclare un contrat de trafic avec un intervalle inter-arrivées T et une tolérance de gigue t, régulés par l'algorithme GCRA pour écarter les cellules non conformes.
+
+      L'intervalle T se calcule par la formule T égale quatre cent vingt-quatre divisé par le débit crête PCR, avec seize mille trois cent quatre-vingt-quatre valeurs discrètes normalisées.
+
+      Le contrôle de flux ABR est préventif et impose la contrainte que le débit minimal MCR soit inférieur au débit explicite ER, lui-même inférieur au débit crête PCR.
+
+   D. Protocoles de transport, TCP et UDP.
+
+La couche transport assure l'acheminement des informations de processus à processus grâce à un numéro de port codé sur seize bits.
+
+      Le protocole TCP assure un transport sûr, orienté connexion, ordonné et bidirectionnel, palliant ainsi le service best-effort de la couche IP.
+
+      L'en-tête TCP contient notamment un numéro de séquence sur trente-deux bits qui numérote les octets pour éviter les doublons, et un accusé de réception cumulatif sur trente-deux bits.
+
+      La connexion s'établit par une négociation ternaire en trois messages utilisant les drapeaux SYN et ACK, tandis que la rupture de connexion nécessite quatre segments avec les drapeaux FIN et ACK.
+
+      Le contrôle de flux adapte l'émission à la vitesse du récepteur via le champ fenêtre, alors que le contrôle de congestion adapte le débit à la capacité du réseau.
+
+      Un socket est l'identifiant unique d'une extrémité constitué du couple de l'adresse IP et du numéro de port, les ports inférieurs à mille vingt-quatre étant réservés.
+
+      Le protocole UDP est non fiable et non connecté, ce qui le rend idéal pour le streaming ou la voix sur IP malgré le risque de perte ou de désordre des datagrammes.
+
+      L'en-tête UDP comporte quatre champs de deux octets, avec une longueur de segment comprise entre huit octets et soixante-quatre kilo-octets.
+
+      Si un segment UDP arrive sur un port destinataire non utilisé, il est détruit et un message ICMP port inaccessible est envoyé.
+
+   E. Protocoles applicatifs, DNS, HTTP, FTP, SNMP, DHCP.
+
+Le protocole SNMP est un système d'administration asynchrone encapsulé dans UDP qui utilise des requêtes GET pour interroger, SET pour modifier et TRAP pour notifier un événement. Les informations sont structurées par la SMI et stockées dans une MIB, tandis que la version trois apporte l'authentification et le cryptage absents des versions une et deux.
+
+      Le protocole DHCP distribue des adresses IP et des masques de sous-réseau via un serveur possédant une adresse fixe. Un relais DHCP est indispensable pour traverser les routeurs car les requêtes de broadcast ne passent pas les liens, et l'adresse est allouée pour une durée appelée bail.
+
+      Le protocole HTTP utilise le port quatre-vingts sur TCP et sa variante sécurisée HTTPS utilise le port quatre cent quarante-trois sur SSL ou TLS. Les codes retour se classent en deux cent pour la réussite, trois cent pour la redirection, quatre cent pour les erreurs client comme le quatre cent trois ou le quatre cent quatre, et cinq cent pour les erreurs serveur.
+
+      Le protocole FTP permet le téléchargement et le téléchargement vers un serveur en utilisant deux connexions TCP parallèles. Le port vingt et un est utilisé pour le contrôle et le port vingt pour les données, ce qui constitue une signalisation hors bande, tandis que la version simplifiée TFTP utilise UDP.
+
+      Le DNS est un annuaire distribué utilisant le port cinquante-trois sur UDP pour traduire des noms en adresses IP ou inversement via le domaine in-addr.arpa. Les enregistrements de ressources incluent le type A pour l'IPv4, AAAA pour l'IPv6, CNAME pour un alias, MX pour la messagerie, PTR pour la résolution inverse, NS pour la délégation et SOA pour définir une zone.
+
+      Les requêtes DNS peuvent être récursives, où le serveur effectue les recherches pour le client, ou itératives, où le serveur renvoie l'adresse du prochain contact. La répartition de charge est possible en enregistrant plusieurs serveurs identiques sous un même nom pour que le client utilise la première adresse d'une liste aléatoire.
+
+      Les protocoles RTP et RTCP ajoutent des marqueurs temporels et des numéros de séquence sur UDP pour le temps réel, mais ne traitent pas la congestion. Pour résoudre ce problème, le protocole RSVP permet de réserver dynamiquement de la bande passante dans les routeurs.
+
+      Les protocoles de terminal distant comme TELNET sur le port vingt-trois ou RLOGIN sur le port cinq cent treize sont non sécurisés car ils font passer les identifiants en clair. Le protocole SSH sur le port vingt-deux est conçu pour les remplacer en chiffrant tous les flux grâce à un échange de clés.
+
+   F. IPv6, adressage, en-tête et transition.
+
+Une adresse IPv6 de cent vingt-huit bits est composée de huit groupes de seize bits en hexadécimal séparés par des deux-points, avec une seule utilisation possible de la compression par deux-points doubles. Les adresses unicast identifient une interface unique, tandis que les adresses multicast désignent un groupe d'interfaces, remplaçant ainsi la diffusion broadcast qui n'existe plus en IPv6.
+
+      L'adresse unicast globale se structure en trois parties avec un préfixe global sur quarante-huit bits, un identifiant de sous-réseau sur seize bits et un identifiant d'interface sur soixante-quatre bits. Les adresses de lien local utilisent le préfixe FE80::/64 et les adresses de site local utilisent le préfixe FC00::/7.
+
+      L'en-tête IPv6 fait quarante octets et contient un champ version de valeur six ainsi qu'un identificateur de flux de vingt bits pour le traitement particulier des paquets. Contrairement à IPv4, l'en-tête ne contient pas de checksum et la fragmentation n'est effectuée que par la source après la découverte du Path MTU.
+
+      Le protocole ICMPv6 de numéro cinquante-huit remplace IGMP et ARP en gérant les groupes multicast et la résolution d'adresse. Il est crucial de ne jamais filtrer les messages de type deux indiquant un datagramme trop grand pour permettre l'ajustement de la taille des envois par l'émetteur.
+
+      Le protocole de découverte de voisins utilise des messages de sollicitation de voisin envoyés à une adresse multicast sollicité et des messages d'annonce de voisin pour la résolution d'adresse. Il permet aussi la découverte de préfixe, la détection d'inaccessibilité et la redirection par les routeurs.
+
+      L'auto-configuration permet à un nœud d'obtenir ses paramètres en créant d'abord une adresse de lien local, puis en vérifiant son unicité via la détection d'adresse dupliquée. L'auto-configuration sans état utilise l'option information sur le préfixe dans l'annonce de routeur, alors que l'auto-configuration avec état redirige le nœud vers un serveur DHCPv6.
+
+      Les mécanismes de transition incluent la double pile protocolaire où les nœuds possèdent des adresses IPv4 et IPv6, le tunnel IPv6 sur IPv4 qui encapsule les paquets, et la traduction NAT-PT qui convertit les en-têtes à la frontière des réseaux. Le serveur DNS doit supporter les enregistrements AAAA pour permettre la communication entre les différentes versions du protocole.
+
+IV. FASCICULE F4, DÉMARCHE DE PROJET, ADMINISTRATION RÉSEAU ET SÉCURITÉ DES SYSTÈMES D'INFORMATION.
+
+   A. La démarche de projet.
+
+Un projet informatique est un ensemble d'activités coordonnées et dirigées pour fournir un produit unique répondant à des exigences spécifiées, selon la norme ISO neuf mille quatre-cinq. Sa réussite consiste à obtenir un produit répondant à tous les besoins exprimés de l'utilisateur, mais seulement ses besoins, tout en respectant les contraintes de coût, de délai et de qualité.
+
+      La démarche de construction logicielle repose sur les buts, le processus et cycle de vie, les méthodes, ainsi que le formalisme et les outils. Le schéma directeur informatique fixe les grandes orientations de la politique d'informatisation pour une durée généralement de cinq ans.
+
+      La maîtrise d'ouvrage est le client propriétaire du système d'information qui prend les décisions stratégiques et opérationnelles. Elle s'organise en comité directeur pour le pilotage stratégique, en comité de suivi pour le pilotage opérationnel et en comité des utilisateurs pour l'expression des besoins et la réception.
+
+      La maîtrise d'œuvre est le fournisseur responsable de la réalisation du produit conformément aux conditions négociées. Elle peut adopter une organisation verticale, la plus répandue, ou une organisation matricielle qui réunit des techniciens de divers services sous la responsabilité du chef de projet.
+
+      Le pilotage utilise le diagramme de Gantt pour visualiser l'enchaînement des tâches, sachant qu'un retard sur une tâche critique entraîne un retard du projet. Selon une étude du Gartner Group, seuls seize pour cent des projets respectent les budgets et les délais.
+
+      Le cycle de développement en V lie les phases de réalisation aux phases de tests, incluant la recette, les tests de validation, les tests d'intégration et les tests unitaires. Ce modèle est sujet à l'effet tunnel, qui est l'absence de visibilité de la maîtrise d'ouvrage sur l'avancement des travaux.
+
+      Les méthodes agiles privilégient la collaboration avec les clients et l'adaptation au changement, conformément au manifeste agile de deux mille un. La méthode SCRUM utilise des stories hiérarchisées par le Product Owner et des sprints d'environ quatre semaines dont le périmètre est figé jusqu'au sprint suivant.
+
+   B. Administration réseau, principes et supervision.
+
+L'administration de réseau repose sur cinq axes définis par l'ISO qui sont la gestion des anomalies, de la configuration, des performances, de la sécurité et de la comptabilité.
+
+      La supervision doit être globale et éviter deux écueils majeurs que sont l'absence d'informations ou le trop-plein d'informations qui nuit à la compréhension.
+
+      L'expert doit superviser le réseau pour les communications, le système pour les ressources comme la mémoire ou le processeur, et l'applicatif pour vérifier le fonctionnement réel des services.
+
+      Le protocole ICMP de couche trois permet de signaler des incidents de transmission, comme le type trois destinataire inaccessible qui possède seize codes.
+
+      Le protocole SNMP est le standard de fait pour l'administration des réseaux IP, utilisant le port UDP cent soixante et un côté agent pour les requêtes et le port UDP cent soixante-deux côté manager pour les TRAP.
+
+      La structure de gestion repose sur le SMI qui définit les règles et la MIB qui est une base de données d'objets identifiés par un OID unique.
+
+      Les versions de SNMP évoluent de la version un avec sa communauté passant en clair vers la version trois qui est le standard actuel combinant sécurité par usagers et opérations de la version deux p.
+
+      Les outils de base comme MRTG ou RRDTOOL permettent de générer des graphiques de charge, RRDTOOL étant utilisé par la majorité des logiciels open source grâce à sa technique de stockage Round Robin.
+
+      Dans l'écosystème Nagios, les plugins renvoient un code retour de zéro pour OK, un pour WARNING, deux pour CRITICAL et trois pour UNKNOWN.
+
+      La supervision distribuée utilise NRPE en mode polling où l'agent reçoit une demande de Nagios, ou NSCA en mode trapping où la machine supervisée envoie elle-même le résultat.
+
+   C. Administration réseau, SNMP, MIB et cas pratiques.
+
+L'administration réseau repose sur le modèle manager-agent où une station d'administration dialogue avec des agents s'exécutant sur les équipements via des protocoles comme SNMP ou CMIP.
+
+      L'ISO structure l'administration en cinq domaines comprenant la gestion des fautes, des configurations, des performances, la gestion comptable et la gestion de la sécurité.
+
+      La base d'informations structurée appelée MIB utilise une représentation arborescente virtuelle où chaque nœud contient des entiers, des chaînes de caractères, des identificateurs d'objet ou des objets null.
+
+      Un nœud de la MIB est désigné par un descripteur mnémonique ou par un identifiant d'objet OID, le zéro final indiquant une occurrence au niveau considéré.
+
+      Les objets standard de la MIB assurent la compatibilité descendante car toute mise à jour crée une nouvelle branche au même point que la branche devenue obsolète.
+
+      Le protocole SNMP fonctionne en mode polling où le manager interroge l'agent sur le port UDP cent soixante et un ou en mode trap où l'agent envoie une alerte sur le port UDP cent soixante deux.
+
+      La version SNMP deux ne possède pas de chiffrement et transmet la communauté en clair, tandis que la version trois apporte l'authentification par utilisateur via le modèle USM avec les fonctions de hachage MD5 et SHA et le chiffrement DES.
+
+      À la DGFiP, la solution SINAPS version cinq est une application PHP compatible Nagios utilisant une base de données MySQL pour traiter les remontées d'alerte.
+
+      Pour la prise en main à distance et le transfert de données, les outils privilégiés sont VNC et la suite OpenSSH qui remplace telnet, rcp et FTP par ssh, scp et sftp.
+
+   D. Sécurité des SI, méthodologie EBIOS.
+
+La sécurité des systèmes d'information repose sur cinq objectifs fondamentaux qui sont l'intégrité, la confidentialité, la disponibilité, la non-répudiation et l'imputation, auxquels s'ajoute l'authentification.
+
+      Le risque de sécurité se définit par la réunion conjointe d'une source de menace, d'une menace, d'une vulnérabilité et d'un impact.
+
+      La méthode EBIOS, créée en mille neuf cent quatre-vingt-quinze par l'ANSSI, est une démarche itérative organisée en cinq modules pour gérer les risques de manière structurée.
+
+      Le premier module consiste en l'étude du contexte pour identifier les biens essentiels, dont on apprécie les besoins de sécurité, et les biens supports, qui portent les vulnérabilités.
+
+      Le deuxième module porte sur l'étude des événements redoutés au niveau fonctionnel, tandis que le troisième module traite des scénarios de menaces au niveau technique.
+
+      Le quatrième module permet l'étude des risques par la confrontation des événements redoutés et des scénarios de menaces, afin de choisir entre quatre options de traitement : éviter, réduire, prendre ou transférer.
+
+      Le cinquième module formalise les mesures de sécurité et s'appuie sur le principe de défense en profondeur qui exige au moins trois lignes de défense : préventive, protectrice et récupératrice.
+
+      L'homologation de sécurité est l'engagement formel par lequel une autorité atteste que le système est protégé et apte à entrer en service avec des risques résiduels acceptés, généralement pour une durée de trois à cinq ans.
+
+   E. Menaces et attaques réseau.
+
+L'ingénierie sociale exploite les failles humaines via le modèle MICE qui utilise l'argent, l'idéologie, la compromission ou l'ego.
+
+      Les menaces passives comme le sniffing ou la stéganographie se contentent d'observer, tandis que les menaces actives comme les virus, les vers ou les chevaux de Troie modifient le système.
+
+      Le phishing est une technique d'hameçonnage massive utilisée depuis deux mille trois, alors que le scam ou fraude quatre cent dix neuf vise l'extorsion de fonds.
+
+      Le déni de service peut être local par épuisement de ressources ou distribué via un botnet, comme l'attaque de Michael Calce en deux mille qui a coûté un virgule sept milliard de dollars.
+
+      Le SYN flood est une attaque visible avec la commande netstat moins an et peut être contré par le mécanisme de SYN cookie.
+
+      Le buffer overflow représente environ deux tiers des vulnérabilités et peut être limité par l'usage de fonctions bornées ou l'insertion d'un canary.
+
+      Les attaques web incluent le Cross Site Scripting pour voler des cookies et l'injection SQL qui exploite les formulaires sans vérification.
+
+      L'outil nmap est la référence pour le scan de ports et la détection de l'empreinte du système d'exploitation.
+
+      Un rootkit dissimule un accès en remplaçant des commandes comme ps ou ls et nécessite des outils comme Tripwire pour le contrôle d'intégrité.
+
+   F. Chiffrement, PKI et protocoles de sécurité.
+
+La cryptographie assure la confidentialité, l'intégrité, l'authentification et la non-répudiation des informations. La cryptographie symétrique utilise une même clé secrète pour chiffrer et déchiffrer, ce qui la rend rapide mais pose le problème du partage de la clé et interdit la signature. La cryptographie asymétrique, issue des travaux de Diffie et Hellman en mille neuf cent soixante-seize, utilise une bi-clé composée d'une clé publique diffusée et d'une clé privée confidentielle.
+
+      Les algorithmes asymétriques reposent sur des problèmes mathématiques difficiles comme la factorisation de grands nombres premiers ou le calcul du logarithme discret. Le RSA utilise la factorisation, tandis que le protocole Diffie-Hellman permet l'échange de clés et le DSA est utilisé pour la signature. En pratique, l'asymétrique est lent et sert principalement à échanger une clé symétrique qui assurera ensuite le chiffrement des données volumineuses.
+
+      Une fonction de hachage transforme une suite de bits en un condensat de taille fixée de manière déterministe. Elle doit présenter une résistance à la préimage et aux collisions pour être sûre. MD5 est définitivement cassé et SHA-1 est retiré du référentiel de sécurité, alors que la famille SHA-2 et la famille SHA-3, publiée dès deux mille douze, restent utilisables.
+
+      La signature électronique est obtenue en chiffrant l'empreinte d'un message avec la clé privée de l'émetteur. Elle garantit l'identification, l'intégrité et la non-répudiation, car la vérification se fait avec la clé publique correspondante. Le certificat numérique, régi par la norme X509 et les RFC deux mille quatre cent cinquante-neuf, lie une clé publique à une identité grâce à la signature d'une autorité de certification.
+
+      L'infrastructure de gestion de clés, ou PKI, organise le cycle de vie des certificats via des acteurs spécialisés. L'autorité d'enregistrement contrôle l'identité des demandeurs, tandis que l'autorité de certification signe les certificats et l'opérateur de certification gère leur distribution. Les certificats révoqués sont listés dans des CRL au format X509 version deux et publiés via des annuaires LDAP.
+
+      Le premier enrôlement d'un utilisateur repose sur des procédés physiques et organisationnels non cryptographiques. L'affectation transforme une donnée brute en clé cryptographique en l'associant à un usage. Le recouvrement de clé est une opération difficile car elle est souvent contraire aux objectifs de sécurité, et le séquestre de clé permet de conserver une clé auprès d'un tiers pour un usage ultérieur.
+
+      Le protocole SSH remplace les accès distants non sécurisés comme telnet en utilisant un chiffrement symétrique pour la communication après un échange de clés. Le tunneling permet de créer un chemin privé à travers une infrastructure publique, comme le fait le logiciel stunnel avec SSL. La bibliothèque SSL sécurise les connexions TCP, notamment pour le protocole HTTPS.
+
+      Le protocole IPsec assure la sécurité au niveau réseau et protège contre le spoofing IP et le sniffing. Il utilise les protocoles AH pour l'authentification et ESP pour l'authentification et le chiffrement. IPsec fonctionne en mode transport, en mode tunnel ou en mode intermédiaire, et nécessite l'établissement d'une Security Association via le protocole IKE.
+
+      Un VPN crée un tunnel chiffré sur une infrastructure publique en s'appuyant sur des protocoles comme IPsec, SSL ou OpenVPN. La sécurité globale repose sur la combinaison de l'asymétrique pour l'établissement des secrets et du symétrique pour la protection des flux de données.
+
+   G. Équipements de sécurité, firewall et honeypot.
+
+Le pare-feu est un équipement ou un logiciel qui contrôle les accès entrants et sortants d'un réseau par service et par adresse IP.
+
+      La politique de sécurité peut consister à tout autoriser puis interdire progressivement, ou à tout interdire puis ouvrir sélectivement.
+
+      Le filtre de paquets trie les flux selon les adresses IP, les ports source et destination et le contenu sans notion de contexte.
+
+      La passerelle de circuits relaie les connexions TCP en connectant l'appelant à un port de la passerelle qui communique ensuite avec la destination.
+
+      La passerelle d'applications utilise un programme spécifique par application pour sectionner les flux, tandis que le pare-feu stateful multilayer combine les trois approches avec un suivi d'état.
+
+      Les pare-feu récents proposent des fonctions comme la translation d'adresses, les tunnels IPsec, PPTP et L2TP, ainsi que la détection et la prévention d'intrusion IDS et IPS.
+
+      On peut utiliser iptables sous Linux ou Packet Filter sous BSD pour bâtir un serveur pare-feu simple.
+
+      Le pot de miel est une machine volontairement peu sécurisée destinée à distraire un attaquant et à découvrir de nouvelles techniques.
+
+      Les pots de miel à faible interaction comme honeyd, honeytrap, nepenthes ou Specter émulent des services, alors que les pots de miel à forte interaction comme ROO HoneyWall offrent de véritables accès.
+
+      Un réseau de pots de miel est appelé un honeynet, comme l'illustrent le projet Honeynet et le réseau européen NoAH, European Network of Affined Honeypots.
+
+   H. Bonnes pratiques de sécurité opérationnelle.
+
+En cas d'intrusion, il faut déconnecter la machine du réseau sans l'éteindre ni la redémarrer pour préserver les processus en cours, puis prévenir la hiérarchie de vive voix et contacter le CERT, comme le CERTA pour les administrations françaises. Une copie physique de bas niveau du disque doit être réalisée avec la commande dd sous Unix pour inclure les secteurs non occupés, sans jamais stocker l'image sur le disque étudié afin de garantir la valeur probatoire. La seule manière de sécuriser un système compromis est de le réinstaller complètement à partir d'une source saine, de corriger toutes les vulnérabilités avec des outils comme Nessus et de changer tous les mots de passe.
+
+      La force d'un mot de passe dépend de sa longueur et de la diversité des caractères, mais il doit rester mémorisable via des méthodes phonétiques ou des premières lettres. L'ANSSI recommande d'utiliser des mots de passe distincts par système, non liés à l'identité, de modifier les mots de passe par défaut au plus tôt et de les renouveler tous les quatre-vingt-dix jours pour les données sensibles. Les attaques par force brute, par dictionnaire ou par compromis temps-mémoire, comme contre le hash LM de Windows, peuvent être optimisées par des chaînes de Markov.
+
+      Les attaques par déni de service distribué utilisent des botnets pour saturer la bande passante ou épuiser des ressources. Les attaques par réflexion et par amplification exploitent des protocoles comme le DNS, le NTP, le SNMP ou le SSDP pour envoyer des réponses volumineuses vers la victime. Pour se protéger, on peut utiliser un CDN avec adressage anycast, une redirection DNS ou un déroutement par annonces BGP, tout en évitant le blackholing de l'opérateur qui rend le déni de service effectif.
+
+      La journalisation est un outil de détection et d'analyse qui nécessite un horodatage de tous les événements et une synchronisation des horloges sur des sources externes fiables. Les journaux doivent être exportés en temps réel via le protocole TCP vers un serveur centralisé sur une partition dédiée, avec une politique de rotation et de compression formalisée. Les fournisseurs d'accès à Internet et les hébergeurs ont l'obligation de conserver leurs journaux de connexion pendant au moins un an.
+
+      Pour sécuriser un système Linux, il faut réduire la surface d'attaque en supprimant les logiciels et services inutiles, tant au niveau utilisateur que du noyau. Le partitionnement rationnel permet d'isoler les répertoires critiques avec des options de montage comme ro, nodev, noexec et nosuid. Le cloisonnement applicatif doit privilégier des solutions comme lxc, vservers ou openvz plutôt que le chroot, et le contrôle d'accès peut être assuré par Tomoyo, AppArmor ou grsecurity.
+
+      Sous Windows, la politique AppLocker est préférable aux SRP car elle permet de cibler des utilisateurs précis pour autoriser ou refuser des exécutables, des scripts ou des bibliothèques. Les règles d'AppLocker doivent être fondées de préférence sur la signature électronique de l'éditeur et nécessitent le démarrage automatique du service AppIdSvc. Enfin, il est impératif de désactiver le processus NTVDM si aucune application seize bits n'est utilisée afin de limiter les risques.
+
+   I. Les 40 règles d'hygiène sécurité des SI.
+
+Le guide d'hygiène de la sécurité de l'ANSSI actualisé en deux mille dix-sept organise les principes de protection en neuf domaines fondamentaux.
+
+      La sécurité repose sur l'identification des données sensibles et la création d'une cartographie du réseau représentant les zones IP, le plan d'adressage et les équipements de sécurité.
+
+      L'accès aux ressources doit être nominatif et respecter le principe du moindre privilège, tandis que l'authentification forte combine deux facteurs parmi la connaissance, la possession ou l'inhérence.
+
+      Le réseau doit être segmenté en zones par des VLAN et un cloisonnement par pare-feu pour éviter qu'un attaquant ne progresse latéralement sur un réseau à plat.
+
+      L'administration doit être isolée sur un réseau dédié et les postes d'administration ne doivent en aucun cas avoir accès à Internet.
+
+      Les terminaux nomades doivent être banalisés, munis d'un filtre de confidentialité et protégés par un chiffrement complet du disque et un VPN IPsec non débrayable.
+
+      La politique de mise à jour impose l'application des correctifs de sécurité dans le mois suivant leur publication, en utilisant des outils comme WSUS pour Microsoft.
+
+      La journalisation des événements critiques doit être conservée au moins un an et synchronisée par le protocole NTP pour permettre la corrélation des données.
+
+      En cas d'incident, il faut déconnecter la machine du réseau tout en la maintenant sous tension pour préserver les preuves avant de prévenir le référent en sécurité.
+
+V. FASCICULE F5, STOCKAGE, ACCÈS DISTANTS, QUALITÉ DE SERVICE ET CLOUD.
+
+   A. Stockage en réseau et virtualisation.
+
+Le stockage en réseau se décline en trois architectures principales dont le DAS pour l'attachement direct d'un seul serveur, le NAS pour le partage de répertoires via un serveur dédié appelé Filer, et le SAN pour un réseau de stockage mutualisé.
+
+      Le SAN utilise des topologies en point à point, en boucle appelée Arbitrated Loop ou en fabric avec des commutateurs reliés par des liaisons inter-commutateurs nommées ISL.
+
+      Pour garantir la haute disponibilité et éliminer tout point de défaillance unique, il faut créer deux fabrics et équiper les serveurs et les baies de deux cartes HBA.
+
+      La protection des données repose sur le RAID dont le niveau zéro est rapide mais sans sécurité, le niveau un est un miroir, et le niveau cinq utilise une parité répartie sur au moins trois disques.
+
+      Le choix des supports est crucial avec les disques SATA de haute capacité pour le développement, les disques SAS pour la production et les SSD pour la très haute performance.
+
+      L'optimisation de l'espace est assurée par la dé-duplication qui élimine les blocs redondants et le thin provisioning qui permet le surbooking de la volumétrie.
+
+      Le protocole Fibre Channel est structuré avec la couche physique FC-PH regroupant les couches FC-zéro, FC-un et FC-deux, et permet l'encapsulation de protocoles de niveau supérieur comme SCSI ou IP au-dessus de la couche FC-quatre.
+
+      La gestion des fichiers s'appuie sur les protocoles SMB ou CIFS pour Windows, NFS pour Unix et Linux, et NCP pour Novell.
+
+      La sécurité des infrastructures doit respecter la norme PFC pour les alimentations et la norme ANSI TIA 942 qui définit quatre niveaux de disponibilité pour les centres de données.
+
+   B. Généralités sur les accès distants.
+
+L'accès distant par le réseau téléphonique commuté utilise un serveur d'accès nommé NAS qui sert d'interface entre l'entreprise et l'utilisateur nomade. Le protocole PPP assure la communication entre la machine de l'utilisateur et le NAS en encapsulant le protocole IP. Pour l'authentification, il faut privilégier le protocole CHAP qui transmet le mot de passe sous forme hachée, contrairement au protocole PAP qui le transmet en clair.
+
+      L'accès via Internet est désigné par le terme VPN-RAS et nécessite une sécurisation forte car le milieu est hostile. Les menaces incluent l'ARP spoofing au niveau MAC, le DNS spoofing au niveau DNS et les attaques de l'homme du milieu par usurpation d'identité. Le serveur VPN termine les tunnels et peut utiliser un module de chiffrement matériel pour éviter de saturer son processeur.
+
+      Le tunnel IPsec est établi entre l'utilisateur et le serveur VPN grâce au protocole ISAKMP qui négocie les paramètres de l'Association de Sécurité. Cette négociation définit les algorithmes de chiffrement comme le Triple DES ou l'AES, les algorithmes d'intégrité comme MD5 ou SHA-1, ainsi que la durée de vie des clés. Le trafic est ensuite transporté au format ESP pour garantir le chiffrement et l'intégrité de chaque paquet.
+
+      Une authentification forte repose sur une double authentification combinant l'authentification mutuelle ISAKMP par certificats et l'authentification de l'utilisateur par un identifiant et un mot de passe. L'authentification mutuelle utilise des certificats signés par une autorité de certification locale pour protéger la négociation de bas niveau.
+
+      Le protocole RADIUS assure l'authentification, l'autorisation et la traçabilité des connexions en s'appuyant éventuellement sur des bases LDAP ou SQL. Le NAS et le serveur VPN agissent comme des clients RADIUS qui communiquent avec un serveur d'authentification centralisé, parfois via un proxy RADIUS. Pour garantir la disponibilité, un serveur RADIUS secondaire est configuré pour prendre le relais du primaire en cas d'indisponibilité.
+
+      La sécurité des équipements de terminaison repose sur des mises à jour régulières du système d'exploitation comme l'IOS de Cisco pour contrer les attaques par déni de service. La sécurité physique impose un local protégé, un courant stabilisé offrant trois heures d'autonomie et la désactivation des ports USB et du lecteur CDROM pour empêcher l'utilisation de Live CD comme Knoppix.
+
+   C. Qualité de service réseau (QoS).
+
+La qualité de service est l'effet global produit par les caractéristiques d'un service qui détermine la satisfaction de l'usager.
+
+      La recommandation E.800 de l'UIT-T distingue la qualité de service attendue, perçue par l'utilisateur, de la qualité de fonctionnement, qui est l'aptitude d'un réseau à assurer les fonctions de communication du point de vue du fournisseur.
+
+      Quatre critères génériques mesurables sont la disponibilité, la fiabilité, le délai et la capacité.
+
+      Chaque critère peut être défini par une valeur de conception, une valeur courante à surveiller ou une valeur seuil pour le déclenchement d'alarmes.
+
+      Le délai est le temps de réponse de bout en bout et sa variation est appelée la gigue.
+
+      En mode connecté, la disponibilité se mesure par le taux de rejet ou taux d'accessibilité au service.
+
+      Sur Internet, le service est par défaut de type best-effort sans garantie, ce qui nécessite la discrimination des services par classes.
+
+      La gestion des files d'attente dans les routeurs utilise des algorithmes comme FIFO, Priority queuing, Class-based queuing ou Weighted Fair Queuing.
+
+      Le protocole RSVP permet la réservation de ressources où le destinataire est responsable de la réservation en réponse à la demande de l'émetteur.
+
+      Pour l'interconnexion, le NAT réalise une translation une pour une tandis que le PAT associe un couple adresse IP officielle et numéro de port dynamique.
+
+      L'attribution des adresses officielles est assurée par le NIC qui dépend de l'ISOC.
+
+      La sécurité repose sur la segmentation par des routeurs filtrant les adresses IP et les ports d'applications comme Telnet, HTTP, POP, SMTP ou LDAP.
+
+   D. Accès distants, gestion de la mobilité.
+
+La mobilité permet à un collaborateur de reconstituer son environnement personnel virtuel en tous lieux pour accroître l'agilité de l'entreprise.
+
+      Les axes de la mobilité professionnelle incluent la supply chain, la sales force, la field force et les fonctions managériales.
+
+      Le choix du terminal dépend des usages entre le smartphone, l'assistant personnel ou l'ultra portable utilisant des systèmes comme Symbian OS, Windows Mobile ou Palm OS.
+
+      La connectivité repose sur les réseaux WPAN par Bluetooth, WLAN par les normes 802.11 ou HiperLAN2, et WWAN via les technologies GSM, GPRS, Edge, UMTS ou HSDPA.
+
+      L'évolution technologique permet de passer de l'UMTS à un débit de quatorze virgule quatre mégabits par seconde avec le HSDPA grâce à la modulation 16QAM.
+
+      La mobilité peut être réduite avec un accès déconnecté ou complète avec un accès aux applications métier en temps réel.
+
+      La sécurité du transport des flux utilise les technologies VPN SSL ou VPN IPsec avec une authentification forte par certificat.
+
+      La zone démilitarisée assure la sécurité via un bastion IPS, un pare-feu applicatif, un reverse proxy et une rupture protocolaire associée au NAT.
+
+      La gestion technique inclut le Device Management par triangulation GSM ou GPS et l'intégration des matériels dans une unité d'organisation dédiée dans l'annuaire Active Directory.
+
+   E. Architectures Internet, Intranet, Extranet et essor du web.
+
+Internet est un système physique et un ensemble de normes sans propriétaire permettant à des réseaux de communiquer, tandis que l'intranet est un réseau privé utilisant les mêmes protocoles pour un usage exclusif au sein d'un organisme. L'extranet étend l'intranet aux partenaires via un réseau privé virtuel ou des liaisons louées, et il est situé dans une zone démilitarisée pour assurer la sécurité.
+
+      L'infrastructure de l'Internet repose sur des points de concentration comme les MAE détenus par Worldcom, les NAP de la National Science Foundation et les PPP gérés par les fournisseurs d'accès. Les fournisseurs d'accès, ou ISP, connectent leurs routeurs à ces points moyennant redevance pour former l'ensemble de l'Internet.
+
+      Une architecture intranet à trois niveaux organise le système entre un client navigateur, un serveur web couplé à un serveur d'application et un serveur de base de données. Le client léger est un terminal doté d'un navigateur qui se contente d'interpréter l'affichage des pages web.
+
+      Le Web repose sur l'hypertexte avec trois concepts fondamentaux que sont la localisation par URL, le protocole HTTP et le langage HTML. L'URL est une adresse universelle composée du protocole, du nom DNS et du nom du document, et elle utilise par défaut le port quatre-vingts.
+
+      Le protocole HTTP a évolué de la version zéro point neuf sans état vers la version un point un qui impose l'en-tête Host et permet la connexion persistante. Les méthodes GET et HEAD sont considérées comme sûres et idempotentes, alors que POST n'est ni l'une ni l'autre.
+
+      La gestion des caches en HTTP un point un utilise la directive Cache-Control avec des options comme public, private, no-cache ou no-store. La validation d'une copie peut s'effectuer par un identifiant unique appelé ETag avec la condition If-None-Match.
+
+      Le protocole SPDY introduit en deux mille neuf permet le multiplexage et la compression des en-têtes, servant de base au développement de HTTP deux point zéro. Les feuilles de style CSS séparent la structuration du texte des propriétés typographiques en utilisant la mise en cascade et l'héritage.
+
+      La répartition de charge maintient toutes les machines actives pour traiter les requêtes, tandis que la tolérance de panne utilise un équipement actif et un équipement passif dimensionnés à cent pour cent de la charge. Des protocoles comme CARP, VRRP ou HSRP permettent une bascule rapide entre les équipements réseau.
+
+   F. Cloud computing.
+
+Le cloud computing désigne le déport vers Internet de données, d'applications et de services auparavant situés sur les ordinateurs des entreprises ou des particuliers.
+
+      Le cadre du National Institute of Standards and Technology définit le cloud par la simplicité d'un service à la demande, l'extrême flexibilité, l'accès léger, la virtualisation des ressources et le paiement à l'usage.
+
+      On distingue trois modèles de services comprenant le SaaS pour la fourniture de logiciels en ligne destinés aux métiers, l'IaaS pour l'infrastructure de calcul et de stockage, et le PaaS pour la plateforme de développement d'applications.
+
+      Les modes de déploiement incluent le cloud public mutualisé, le cloud interne limité à la virtualisation des ressources internes, le cloud privé ou hybride géré à distance par un fournisseur, et le cloud communautaire partagé entre organisations d'un même secteur.
+
+      Le passage au cloud réduit les dépenses d'investissement de capital, appelées CAPEX, au profit de l'augmentation des dépenses de fonctionnement ou d'exploitation, nommées OPEX.
+
+      Le Safe Harbor Agreement qui devait protéger les données européennes chez des fournisseurs américains est devenu inopérant à cause du Patriot Act.
+
+      La mise en œuvre du cloud est un projet d'entreprise qui nécessite une analyse de risques pour éviter la perte de gouvernance, la dépendance technologique ou la non-conformité réglementaire.
+
+      Le contrat de prestation doit impérativement formaliser la réversibilité et la portabilité des données ainsi que la localisation des serveurs et les modalités de transfert.
+
+      Le rôle des services informatiques évolue en renforçant les compétences en veille, architecture, urbanisation, pilotage de contrat et assistance à maîtrise d'ouvrage, au détriment du développement et de la gestion d'infrastructure.
+
+VI. FASCICULE F6, SYSTÈME D'INFORMATION DE L'ÉTAT, DROIT DE L'INFORMATIQUE ET MARCHÉS PUBLICS.
+
+   A. SI de l'État, contexte interministériel, RIE et référentiels.
+
+Le système d'information de l'État représente une dépense annuelle de deux milliards d'euros hors personnel pour deux millions d'agents équipés.
+
+      La gouvernance a évolué de la MTIC vers l'ATICA en deux mille un, puis de l'ADAE en deux mille trois vers la DGME en deux mille cinq, avant la création de la DISIC en deux mille onze.
+
+      Le SGMAP créé en deux mille douze a été réorganisé en deux mille quinze avec la naissance de la DINSIC par la fusion de la DISIC, d'Etalab et du pôle Innovation.
+
+      Le RIE est un réseau sécurisé décidé en deux mille onze qui assure la continuité de l'action gouvernementale en cas de dysfonctionnement grave d'Internet en s'appuyant sur l'infrastructure RENATER.
+
+      Le service à compétence nationale du RIE est organisé en six pôles dont le NOC pour la supervision vingt-quatre heures sur vingt-quatre et le SOC pour la sécurité.
+
+      L'article sept du décret créant la DISIC impose l'information pour tout projet dépassant cinq millions d'euros et l'avis pour ceux dépassant neuf millions d'euros.
+
+      Le RGI définit les normes d'interopérabilité, le RGS rédigé par l'ANSSI et la DGME fixe les règles de sécurité, et le RGAA assure l'accessibilité selon les standards WCAG deux point zéro.
+
+      Le RGAA impose le niveau d'accessibilité double A et repose sur quatre principes fondamentaux que sont la perceptibilité, l'utilisabilité, la compréhensibilité et la robustesse.
+
+      La stratégie de plateforme de l'État intègre l'identité numérique France Connect qui utilise des fournisseurs comme impot.gouv.fr, La Poste et l'assurance maladie.
+
+   B. SI des ministères économiques et financiers.
+
+La loi organique relative aux lois de finances de deux mille un instaure la fongibilité asymétrique qui permet d'utiliser les crédits de personnel pour financer d'autres dépenses mais interdit l'inverse. Chaque direction dispose d'un programme budgétaire propre couvrant ses ressources humaines et ses systèmes d'information sans programme support pour les fonctions support. Le projet annuel de performances est voté au dernier trimestre dans la loi de finances pour définir les plafonds de l'année à venir, tandis que le rapport annuel de performances est voté à la fin du premier semestre dans la loi de règlement pour présenter le bilan de l'exercice écoulé.
+
+      La délégation aux systèmes d'information auprès du secrétaire général assure l'impulsion, la coordination et la mutualisation sans avoir d'autorité hiérarchique sur les directions. Elle est soutenue par le comité stratégique des systèmes d'information créé en deux mille treize qui constitue la clé de voûte de la gouvernance ministérielle. Pour la gestion des coûts, elle utilise le modèle ressources, activités, services qui s'articule autour de trois axes d'imputation et de trois niveaux de maille.
+
+      Les grands programmes de transformation des années deux mille incluent COPERNIC pour le fiscal, HELIOS pour la comptabilité des collectivités et CHORUS pour le système budgétaire et comptable de l'État. CHORUS est un progiciel fondé sur SAP dont le déploiement s'est achevé début deux mille douze sous l'égide de l'AIFE. Le programme SIRHIUS, fondé sur HR Access, assure la convergence des systèmes d'information des ressources humaines et est devenu l'application maître de gestion pour plusieurs directions en novembre deux mille quatorze.
+
+      La dématérialisation est un enjeu majeur illustré par le téléservice DELTA de la douane qui a réduit le délai d'immobilisation des marchandises de treize minutes en deux mille quatre à quatre minutes en deux mille quatorze. L'ouverture des données publiques est portée par le portail data.gouv.fr ouvert en décembre deux mille onze avec l'INSEE comme premier contributeur de la plateforme Etalab. Le dispositif dites-le-nous une fois vise à simplifier la vie des usagers en ne demandant qu'une seule fois une information.
+
+      Le cadre de planification est passé du schéma directeur pluriannuel à l'exercice du palier de maturité un puis aux contrats de progrès et au plan d'investissement prévu par le décret du premier août deux mille quatorze. La gestion des ressources humaines s'appuie sur une cartographie des macro-compétences inspirée du référentiel CIGREF de deux mille onze. Les trois principales compétences des titulaires sont les études et développement, l'exploitation et la production, ainsi que l'assistance aux utilisateurs, chacune représentant vingt-neuf pour cent des effectifs.
+
+      Les dépenses des systèmes d'information ont baissé de quarante-deux pour cent en moyenne depuis deux mille huit. En deux mille quatorze, les infrastructures représentaient trente-sept pour cent de la dépense, les applicatifs métier trente-deux pour cent et la bureautique vingt pour cent. Les structures informatiques varient selon les directions avec cinq mille agents pour la DGFiP, six cent trente pour l'INSEE, cinq cents pour la DGDDI et soixante-dix pour la DGCCRF.
+
+   C. Urbanisation des SI et référentiel d'interopérabilité RGI.
+
+L'urbanisme informatique est une méthode de construction et d'aménagement des systèmes d'information visant à obtenir un système modulaire et évolutif.
+
+      L'urbanisation repose sur une hiérarchie de concepts allant du domaine et du sous-domaine vers les zones, les quartiers et les blocs fonctionnels.
+
+      Les trois zones fondamentales d'un domaine sont la zone acquisition pour recueillir l'information, la zone opérationnelle pour le traitement et la zone émission pour la restitution.
+
+      Un bloc fonctionnel doit respecter quatre règles d'urbanisation, à savoir l'appartenance à un seul quartier, l'autonomie, l'asynchronisme des événements et la donnée mono-propriétaire.
+
+      La démarche d'urbanisation comprend quatre phases, à savoir la cartographie de l'existant, l'urbanisation et le diagnostic, le plan d'urbanisme cible et la trajectoire de migration.
+
+      Le RGI est un ensemble de règles ayant force d'obligation pour les administrations, contrairement au CCI qui n'était composé que de recommandations.
+
+      L'interopérabilité concerne les échanges A2A entre autorités administratives, A2B avec une entreprise et A2C avec un citoyen.
+
+      Le volet technique du RGI utilise quatre niveaux de préconisation, à savoir Obligatoire, Recommandé, Déconseillé et Interdit.
+
+      Pour les images fixes non photographiques, le format PNG est recommandé tandis que le format GIF est déconseillé, et l'utilisation des protocoles TCP ou UDP est obligatoire pour transporter les flux de données.
+
+   D. L'administration électronique.
+
+L'administration électronique se structure en trois phases allant de l'information statique aux formulaires téléchargeables puis aux téléprocédures. Le programme PAGSI de mille neuf cent quatre-vingt-dix-sept a lancé la généralisation des sites publics, suivi par le programme RE/SO deux mille sept qui agit sur l'offre, la demande et l'intervention directe de l'État.
+
+      La gouvernance a évolué de la MTIC à l'ATICA en deux mille un, puis à l'ADAE en deux mille trois, avant que cette dernière soit intégrée à la DGME en deux mille cinq. La DGME coordonne la modernisation via trois services incluant la délégation à la modernisation de la gestion publique et la délégation aux usagers qui promeut la charte Marianne.
+
+      Le programme ADELE de deux mille quatre comprend cent quarante mesures réparties entre un plan stratégique et un plan d'action pour la période deux mille quatre-deux mille sept. Parmi les services phares figurent le numéro unique trois mille neuf cent trente-neuf, le portail mon.service-public.fr lancé en octobre deux mille et la carte nationale d'identité électronique.
+
+      La dématérialisation du Journal Officiel a permis de réduire l'usage de six virgule deux tonnes de papier par jour et un virgule quatre million d'euros d'affranchissement annuel en deux mille trois. Pour les achats publics, le système d'acquisition dynamique est un processus électronique pour les usages courants, tandis que l'enchère électronique est interdite pour les marchés de fournitures et de services inférieurs à cent trente-trois mille euros hors taxes.
+
+      Le schéma directeur de l'administration électronique organise les travaux de deux mille six-deux mille dix en quarante-sept initiatives réparties en socle commun, domaines sectoriels et nouveaux services. Chaque initiative est dirigée par un chef de file et supervisée par le comité des secrétaires généraux qui désigne ce responsable et approuve le passage en phase de pilotage.
+
+      Le cadre normatif repose sur le RGI qui est obligatoire selon l'ordonnance du huit décembre deux mille cinq, le RGS pour la sécurité, le RGAA pour l'accessibilité et le R2GA pour les archives. La charte internet de l'État définit l'ergonomie des interfaces et le SILL propose des solutions de logiciels libres pour favoriser l'interopérabilité.
+
+      L'interconnexion de fichiers est un traitement soumis à l'avis de la CNIL et l'usage du numéro d'inscription au répertoire national d'identification des personnes physiques est strictement encadré. Le cahier des charges de la CNIL pour les téléservices impose l'identification, l'authentification par confrontation, la signature électronique, le chiffrement des données sensibles et le respect du droit d'accès.
+
+   E. Aspects juridiques de l'informatique.
+
+La CNIL est une autorité administrative indépendante instituée par la loi du six janvier mille neuf cent soixante-dix-huit suite au projet SAFARI.
+
+      Elle garantit les droits des citoyens sur les données à caractère personnel par quatre missions de protection, d'accompagnement, de contrôle et d'anticipation.
+
+      Le régime de droit commun est la déclaration, tandis que l'autorisation est requise pour les traitements présentant des risques selon l'article vingt-cinq.
+
+      Les données sensibles comme les opinions politiques ou la santé sont en principe interdites de traitement sauf dérogations spécifiques.
+
+      L'arrêt Nikon de deux mille un reconnaît au salarié le droit au respect de sa vie privée et au secret des correspondances sur le lieu de travail.
+
+      Le droit d'auteur protège les œuvres de l'esprit dès la création et comprend des droits moraux perpétuels et des droits patrimoniaux limités à soixante-dix ans après le décès.
+
+      La loi DADVSI de deux mille six reconnaît aux agents publics la qualité d'auteur et légalise les mesures techniques de protection.
+
+      La signature électronique présumée fiable est définie par le décret du trente mars deux mille un et nécessite un certificat électronique qualifié.
+
+      La loi du vingt et un juin deux mille quatre limite la responsabilité de l'hébergeur à la connaissance effective d'une information illicite sans obligation générale de surveillance.
+
+   F. Les marchés publics.
+
+La commande publique repose sur trois principes fondamentaux que sont la liberté d'accès, l'égalité de traitement des candidats et la transparence des procédures.
+
+      La publicité est le moyen de faire connaître un marché, tandis que la publication est la diffusion d'un avis via des organismes officiels comme le BOAMP.
+
+      Le service des achats de l'État remplace l'Agence centrale des achats depuis le décret du dix-neuf mars deux mille neuf et la commission des marchés publics de l'État contrôle les marchés informatiques au-dessus de six millions d'euros hors taxes de façon facultative.
+
+      Les documents contractuels incluent les cahiers des clauses administratives générales, comme le CCAG-FCS pour les fournitures courantes ou le CCAG-PI pour les prestations intellectuelles, ainsi que les cahiers des clauses particulières.
+
+      Le marché de gré à gré concerne les montants inférieurs à vingt-cinq mille euros hors taxes, la procédure adaptée s'applique entre vingt-cinq mille et cent trente-quatre mille euros hors taxes, et l'appel d'offres est obligatoire au-dessus de cent trente-quatre mille euros hors taxes.
+
+      Le choix du titulaire se fait selon la règle du mieux-disant par l'offre économiquement la plus avantageuse, en utilisant des critères de capacité pour les candidats et des critères de choix pondérés pour les offres.
+
+      Pour les fournitures et services, la vérification comprend la mise en ordre de marche, la vérification d'aptitude, puis la vérification de service régulier pendant un mois avec un seuil d'indisponibilité de deux pour cent.
+
+      La sous-traitance nécessite l'acceptation de chaque sous-traitant par le pouvoir adjudicateur et permet le paiement direct si le contrat est égal ou supérieur à six cents euros toutes taxes comprises.
+
+      La dématérialisation est obligatoire pour les marchés supérieurs à quatre-vingt-dix mille euros depuis le premier janvier deux mille dix et le pouvoir adjudicateur ne peut plus refuser les documents par voie électronique depuis le premier janvier deux mille douze.
+
+   G. ToIP et convergence téléphonie-informatique.
+
+La téléphonie traditionnelle sur le réseau téléphonique commuté public impose une latence inférieure à trois cents millisecondes pour une interaction acceptable et inférieure à cent cinquante millisecondes pour une bonne qualité. Le codec G711 sert de référent avec un score de quatre virgule deux sur l'échelle de mesure de la qualité MOS qui va de deux pour une voix robotisée à cinq pour la haute qualité du RNIS.
+
+      La voix sur IP est un concept large incluant la vidéo et la gestion des autocommutateurs IPBX, visant la convergence des réseaux pour réduire les coûts. Le transport par paquets génère un effet de gigue que les protocoles RTP et RTCP compensent pour les données isochrones, bien que ces derniers soient souvent transportés par UDP sans influencer la qualité de service du réseau.
+
+      La norme H.323 de l'Union internationale des télécommunications utilise deux connexions TCP pour la signalisation avant de passer la voix en UDP via RTP. Elle repose sur des éléments comme le garde-barrière pour la localisation des adresses, la passerelle pour l'interconnexion et l'unité de gestion des conférences appelée MCU.
+
+      Le protocole SIP défini par l'IETF remplace aujourd'hui H.323 en étant plus souple et modulaire pour la signalisation et la messagerie instantanée. Il utilise des messages SDP pour négocier les médias et permet la mobilité personnelle où un utilisateur garde la même identité sur différents terminaux.
+
+      Le protocole UDP est privilégié pour le temps réel avec un en-tête de huit octets, car il est plus rapide que TCP malgré son caractère non fiable. Pour sécuriser les connexions vers des ports non privilégiés, un filtrage IP dynamique est nécessaire, tandis qu'IPv6 utilise l'étiquette de flux pour préserver l'intégrité des flux vidéo.
+
+      Le couplage téléphonie-informatique relie l'autocommutateur au serveur de couplage, qui est la clé de voûte du système pour centraliser les commandes. Les applications de type third party gèrent plusieurs postes pour les centres d'appels, utilisant des interfaces de programmation comme TAPI, TSAPI ou CSTA.
+
+      Un centre d'appel au sens fort réunit le pôle téléphonique, le pôle informatique et le serveur vocal interactif pour diriger les appels. Les modes d'émission incluent le mode prédictif où l'appel est transféré à l'agent après le décroché, et le mode preview après une prévisualisation par le téléacteur.

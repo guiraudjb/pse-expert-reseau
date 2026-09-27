@@ -1,0 +1,63 @@
+TITRE : Expert Réseau Riddim
+
+[Intro]
+Écoute le rythme du système qui s'éveille
+Cinquante-sept modules pour une expertise sans pareille
+
+[Couplet 1]
+Du noyau Unix au Windows Server bien ancré
+Le NOS contrôle tout pour ne rien laisser dérailler
+Authentification par possession ou par connaissance
+La sécurité protège chaque ressource en toute conscience
+Le modèle OSI déploie ses sept couches de savoir
+Tandis que le DOD fait le transport et le devoir
+De l'ARPANET aux RFC, l'histoire est gravée
+Dans les protocoles que le réseau vient déployer
+
+[Refrain]
+Systèmes, réseaux et protocoles en harmonie
+Cloud et sécurité, l'État numérique est ainsi
+Expert Réseau, maîtrise le flux et la donnée
+Sur le rythme reggae, la connaissance est gagnée
+
+[Couplet 2]
+Le partitionnement divise le serveur physique
+Le cluster de failover assure une haute disponibilité sans artifice
+L'adresse IPv4 sur trente-deux bits est limitée
+Mais l'IPv6 sur cent vingt-huit bits vient la compléter
+Le DNS résout les noms dès mille neuf cent quatre-vingt-quatre
+Le DHCP distribue les baux pour ne pas être à la traîne ou en retard
+Le routage IP gère les datagrammes avec précision
+Et le NAT protège les réseaux de la grande expansion
+
+[Refrain]
+Systèmes, réseaux et protocoles en harmonie
+Cloud et sécurité, l'État numérique est ainsi
+Expert Réseau, maîtrise le flux et la donnée
+Sur le rythme reggae, la connaissance est gagnée
+
+[Couplet 3]
+Sous Linux le shell bash commande le processeur
+Le processus init est le premier, le grand superviseur
+Le système de fichiers utilise des inodes pour les droits
+Et le RAID cinq répartit la parité pour garder la foi
+Windows Server utilise la MFT pour le NTFS
+La gestion de la mémoire évite les erreurs et les stress
+De l'administration via SSH au service IIS
+Chaque module est une brique pour un expert de génie
+
+[Pont]
+Du LAN au WAN, la portée est mondiale
+La fibre et le Wi-Fi rendent la comm' digitale
+De la couche physique à l'application finale
+L'expertise est totale, la maîtrise est royale
+
+[Refrain final]
+Systèmes, réseaux et protocoles en harmonie
+Cloud et sécurité, l'État numérique est ainsi
+Expert Réseau, maîtrise le flux et la donnée
+Sur le rythme reggae, la connaissance est gagnée
+
+[Outro]
+Cinquante-sept modules, le parcours est accompli
+Expert Réseau, le savoir est désormais acquis
