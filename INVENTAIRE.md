@@ -1,6 +1,6 @@
 # Inventaire des modules et des médias — pse-expert-reseau
 
-Généré le 02/10/2026 à 07:07 par `scripts/inventaire_medias.py` (59 modules). ✅ présent, ❌ absent ; pour QCM, flashcards et TP, nombre d'éléments (0 = absent).
+Généré le 02/10/2026 à 14:20 par `scripts/inventaire_medias.py` (59 modules). ✅ présent, ❌ absent ; pour QCM, flashcards et TP, nombre d'éléments (0 = absent).
 
 ## Synthèse
 
@@ -16,7 +16,7 @@ Généré le 02/10/2026 à 07:07 par `scripts/inventaire_medias.py` (59 modules)
 | Paroles | 59 | 0 | 100 % |
 | Chanson | 59 | 0 | 100 % |
 | Podcast local | 2 | 57 | 3 % |
-| Podcast NotebookLM | 57 | 2 | 96 % |
+| Podcast NotebookLM | 58 | 1 | 98 % |
 | Micro-chronique | 1 | 58 | 1 % |
 | Narration fiche | 59 | 0 | 100 % |
 | Audio QCM/flash | 59 | 0 | 100 % |
@@ -25,14 +25,14 @@ Généré le 02/10/2026 à 07:07 par `scripts/inventaire_medias.py` (59 modules)
 
 | Série | Modules | Fiche | QCM | Flash | TP | Icône | Infographie locale | Infographie NotebookLM | Paroles | Chanson | Podcast local | Podcast NotebookLM | Micro-chronique | Narration fiche | Audio QCM/flash |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 00 À la une | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | 1 |
+| 00 À la une | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 | 09 Fascicules PSE Expert Réseau | 58 | 58 | 58 | 58 | 5 | 58 | 1 | 57 | 58 | 58 | 1 | 57 | 0 | 58 | 58 |
 
 ## Détail par module
 
 | Module | Fiche | QCM | Flash | TP | Icône | Infographie locale | Infographie NotebookLM | Paroles | Chanson | Podcast local | Podcast NotebookLM | Micro-chronique | Narration fiche | Audio QCM/flash |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 00-10 ANSSI - Rapport d'incident sur les cyberattaques ayant touché la DGFiP (2026) | ✅ | 28 | 22 | 9 | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
+| 00-10 ANSSI - Rapport d'incident sur les cyberattaques ayant touché la DGFiP (2026) | ✅ | 28 | 22 | 9 | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 09-10 PSE-ER F1-1 Caractéristiques des systèmes d'exploitation | ✅ | 18 | 30 | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ |
 | 09-20 PSE-ER F1-2 Réseaux informatiques - histoire et modèles OSI-DoD | ✅ | 20 | 32 | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ |
 | 09-30 PSE-ER F1-3 Systèmes Linux-Unix - histoire et familles | ✅ | 20 | 30 | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ✅ |
