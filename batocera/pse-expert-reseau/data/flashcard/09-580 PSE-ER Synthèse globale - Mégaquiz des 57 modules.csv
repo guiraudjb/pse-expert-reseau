@@ -1446,7 +1446,7 @@
 "Que garantit l'action de signer électroniquement un message ?","L'identification et l'authentification de l'auteur, l'intégrité du message et la non-répudiation"
 "Qu'est-ce qu'un certificat électronique ?","Un document électronique qui lie une clé publique à l'identité de son propriétaire (personne, application ou site) et à un usage donné ; c'est une carte d'identité numérique"
 "Qui garantit un certificat et comment ?","Un tiers de confiance, l'autorité de certification, qui signe le certificat avec sa clé privée"
-"Quelle norme définit le format des certificats et des listes de révocation ?","La norme X.509 (ITU-T, RFC 2459) ; les CRL suivent le format X.509 v2 CRL"
+"Quelle norme définit le format des certificats et des listes de révocation ?","La norme X.509 (ITU-T, RFC 5280, ex-RFC 2459) ; les CRL suivent le format X.509 v2 CRL"
 "Qu'est-ce qu'une CRL ?","Une Certificate Revocation List : une structure de données signée regroupant les certificats révoqués avant leur date d'expiration"
 "Quel protocole d'annuaire sert à publier les certificats et clés publiques ?","LDAP (Lightweight Directory Access Protocol, RFC 2251)"
 "Qu'est-ce qu'une IGC (PKI) ?","Une Infrastructure de Gestion de Clés : l'ensemble des matériels, logiciels, personnes, règles et procédures nécessaires pour créer, gérer, stocker, distribuer et révoquer des certificats à clé publique"

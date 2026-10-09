@@ -358,7 +358,7 @@ POINTS D'ATTENTION.
 
       Les lectures purement militaire ou purement communicationnelle de l'histoire des réseaux sont réductrices et mono-causales.
 
-      L'épuisement des adresses IPv4 est constaté au niveau mondial en deux mille douze.
+      L'IANA a distribué ses derniers blocs d'adresses IPv4 en février deux mille onze ; en Europe, le RIPE a atteint son dernier bloc en deux mille douze.
 
 
 EXEMPLES CITES.
@@ -377,4 +377,4 @@ EXEMPLES CITES.
 
       Ports usuels vingt-cinq pour SMTP, cent dix pour POP et cent quarante-trois pour IMAP.
 
-      Dates repères : deux cent treize hôtes ARPANET en mille neuf cent quatre-vingt-un, cinq cent soixante-deux machines en mille neuf cent quatre-vingt-trois, mille vingt-quatre en mille neuf cent quatre-vingt-quatre avec mise en place du DNS, apparition du World Wide Web en mille neuf cent quatre-vingt-dix, plus d'un million de machines en mille neuf cent quatre-vingt-douze, création de l'AFNIC en mille neuf cent quatre-vingt-seize, épuisement des adresses IPv4 en deux mille douze, trois virgule vingt-cinq milliards d'internautes en deux mille quinze.
+      Dates repères : deux cent treize hôtes ARPANET en mille neuf cent quatre-vingt-un, cinq cent soixante-deux machines en mille neuf cent quatre-vingt-trois, mille vingt-quatre en mille neuf cent quatre-vingt-quatre avec mise en place du DNS, apparition du World Wide Web en mille neuf cent quatre-vingt-dix, plus d'un million de machines en mille neuf cent quatre-vingt-douze, création de l'AFNIC en mille neuf cent quatre-vingt-seize, épuisement du stock central d'adresses IPv4 de l'IANA en deux mille onze, trois virgule vingt-cinq milliards d'internautes en deux mille quinze.

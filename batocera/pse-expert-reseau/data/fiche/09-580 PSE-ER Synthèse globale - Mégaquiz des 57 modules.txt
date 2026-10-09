@@ -42,7 +42,7 @@ Un réseau informatique est un ensemble d'ordinateurs qui communiquent via des p
 
       Les réseaux se distinguent par leur échelle, allant du PAN pour quelques équipements au LAN pour un bâtiment, puis au MAN pour une ville et au WAN pour une portée mondiale. Le service DNS, mis en place en mille neuf cent quatre-vingt-quatre, assure la résolution entre les noms de domaine et les adresses IP. L'attribution d'une adresse IP peut être réalisée par le protocole DHCP sous forme d'un bail de trois jours environ.
 
-      Dans la pratique du courrier électronique, le protocole SMTP utilise le port vingt-cinq, tandis que les protocoles POP et IMAP utilisent les ports cent dix et cent quarante-trois. La résolution DNS peut s'effectuer en UDP pour les requêtes ou en TCP pour les échanges entre serveurs. L'épuisement mondial des adresses IPv4 a été constaté en deux mille douze.
+      Dans la pratique du courrier électronique, le protocole SMTP utilise le port vingt-cinq, tandis que les protocoles POP et IMAP utilisent les ports cent dix et cent quarante-trois. La résolution DNS peut s'effectuer en UDP pour les requêtes ou en TCP pour les échanges entre serveurs. L'IANA a distribué ses derniers blocs d'adresses IPv4 en février deux mille onze, et le RIPE, registre européen, a atteint son dernier bloc en deux mille douze.
 
    C. Systèmes Linux-Unix, histoire et familles.
 
@@ -286,17 +286,17 @@ Le courant porteur en ligne transporte des informations sur le réseau électriq
 
       Le branchement s'effectue par couplage capacitif ou par couplage inductif qui réduit l'atténuation de dix à quinze décibels. Pour la sécurité, les versions récentes comme l'UPA DS2 et le HomePlug AV utilisent le cryptage AES cent vingt huit bits.
 
-      Les réseaux sans fil sont classés par zone de couverture, du WPAN comme le Bluetooth au WMAN comme le WiMax. En France, l'ARCEP définit les canaux et les puissances, et seule la bande des deux virgante quatre gigahertz est totalement libérée pour un usage privé.
+      Les réseaux sans fil sont classés par zone de couverture, du WPAN comme le Bluetooth au WMAN comme le WiMax. En France, l'ARCEP définit les canaux et les puissances, et seule la bande des deux virgule quatre gigahertz est totalement libérée pour un usage privé.
 
-      Le WiMax IEEE huit cent deux virgante seize permet des liaisons sur environ cinquante kilomètres sans ligne de vue avec un débit théorique de soixante-dix mégabits par seconde par cellule. Le Bluetooth, défini par l'IEEE huit cent deux virgante un virgante un, permet la communication de huit appareils dans un piconet sur la fréquence deux virgante quatre gigahertz.
+      Le WiMax IEEE huit cent deux point seize permet des liaisons sur environ cinquante kilomètres sans ligne de vue avec un débit théorique de soixante-dix mégabits par seconde par cellule. Le Bluetooth, défini par l'IEEE huit cent deux point quinze point un, permet la communication de huit appareils dans un piconet sur la fréquence deux virgule quatre gigahertz.
 
-      La norme Wi-Fi IEEE huit cent deux virgante un utilise la méthode CSMA/CA pour éviter les collisions, car la détection est impossible en radio. Le mécanisme optionnel VCS utilise les signaux RTS et CTS pour réserver le support et résoudre le problème de la station cachée.
+      La norme Wi-Fi IEEE huit cent deux point onze utilise la méthode CSMA/CA pour éviter les collisions, car la détection est impossible en radio. Le mécanisme optionnel VCS utilise les signaux RTS et CTS pour réserver le support et résoudre le problème de la station cachée.
 
       Les architectures Wi-Fi incluent l'IBSS en mode ad-hoc, le BSS où les stations sont rattachées à un point d'accès, et l'ESS qui regroupe plusieurs BSS partageant le même SSID. Le SSID identifie le réseau avec au plus trente-deux caractères, tandis que le BSSID correspond à l'adresse MAC de l'équipement.
 
-      Les débits Wi-Fi sont théoriques et les canaux exploitables en entreprise sont généralement les numéros un, six et onze. La sécurité repose sur le protocole WPA version deux défini dans la norme huit cent deux virgante un i, qui est incompatible avec les anciens matériels utilisant le WEP ou le WPA.
+      Les débits Wi-Fi sont théoriques et les canaux exploitables en entreprise sont généralement les numéros un, six et onze. La sécurité repose sur le protocole WPA version deux défini dans la norme huit cent deux point onze i, qui est incompatible avec les anciens matériels utilisant le WEP ou le WPA.
 
-      La norme huit cent deux virgante trois af permet le Power over Ethernet pour alimenter des équipements comme des caméras IP via un commutateur de niveau deux. Pour la qualité de service, le standard huit cent deux virgante un e propose les algorithmes EDCF et HCF.
+      La norme huit cent deux point trois af permet le Power over Ethernet pour alimenter des équipements comme des caméras IP via un commutateur de niveau deux. Pour la qualité de service, le standard huit cent deux point onze e propose les algorithmes EDCF et HCF.
 
    D. Le protocole IP.
 
@@ -776,7 +776,7 @@ La cryptographie assure la confidentialité, l'intégrité, l'authentification e
 
       Une fonction de hachage transforme une suite de bits en un condensat de taille fixée de manière déterministe. Elle doit présenter une résistance à la préimage et aux collisions pour être sûre. MD5 est définitivement cassé et SHA-1 est retiré du référentiel de sécurité, alors que la famille SHA-2 et la famille SHA-3, publiée dès deux mille douze, restent utilisables.
 
-      La signature électronique est obtenue en chiffrant l'empreinte d'un message avec la clé privée de l'émetteur. Elle garantit l'identification, l'intégrité et la non-répudiation, car la vérification se fait avec la clé publique correspondante. Le certificat numérique, régi par la norme X509 et les RFC deux mille quatre cent cinquante-neuf, lie une clé publique à une identité grâce à la signature d'une autorité de certification.
+      La signature électronique est obtenue en chiffrant l'empreinte d'un message avec la clé privée de l'émetteur. Elle garantit l'identification, l'intégrité et la non-répudiation, car la vérification se fait avec la clé publique correspondante. Le certificat numérique, régi par la norme X509 et la RFC cinq mille deux cent quatre-vingts, qui a remplacé la RFC deux mille quatre cent cinquante-neuf, lie une clé publique à une identité grâce à la signature d'une autorité de certification.
 
       L'infrastructure de gestion de clés, ou PKI, organise le cycle de vie des certificats via des acteurs spécialisés. L'autorité d'enregistrement contrôle l'identité des demandeurs, tandis que l'autorité de certification signe les certificats et l'opérateur de certification gère leur distribution. Les certificats révoqués sont listés dans des CRL au format X509 version deux et publiés via des annuaires LDAP.
 

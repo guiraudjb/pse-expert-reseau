@@ -104,7 +104,7 @@ LEXIQUE COMPLET.
 
       Autorité racine : autorité de certification institutionnelle capable de cautionner au niveau national des autorités subalternes.
 
-      X509 : norme UIT-T définissant le format des certificats et des listes de révocation, associée aux RFC deux mille quatre cent cinquante-neuf.
+      X509 : norme UIT-T définissant le format des certificats et des listes de révocation, associée à la RFC cinq mille deux cent quatre-vingts, qui a remplacé la RFC deux mille quatre cent cinquante-neuf.
 
       LDAP : Lightweight Directory Access Protocol, protocole d'annuaire servant à publier les certificats et donc les clés publiques.
 
@@ -204,7 +204,7 @@ IV. HACHAGE, SIGNATURE ET CERTIFICATS.
 
       L'asymétrique, la signature et le hachage lèvent la confidentialité et l'intégrité mais laissent entière l'authentification forte, résolue par la certification. La certification des clés publiques est la parade à l'attaque par interception et à l'authentification des clés publiques et donc, indirectement, des entités. Le certificat est un document électronique fixant les relations entre une clé publique, son propriétaire, personne, application ou site, et l'application pour laquelle il est émis. Pour une personne, il vaut carte d'identité numérique attestant l'adéquation entre une entité et sa clé publique, sa valeur dépendant de l'autorité de certification qui l'a validé et de conditions temporelles et spatiales. Pour une application, il garantit qu'elle n'a pas été détournée de ses fonctions ; pour un site, il garantit que l'on est bien sur le site voulu. Cette garantie est fournie par un tiers de confiance, l'autorité de certification, qui signe le certificat. Un certificat a une durée de vie limitée, peut être renouvelé et peut être révoqué avant la fin de sa validité.
 
-      Le certificat s'appuie sur la norme X509, standard UIT-T associé aux RFC deux mille quatre cent cinquante-neuf, qui associe à la clé des informations spécifiques à l'entité. La publication des certificats, et donc des clés publiques, utilise des annuaires de type LDAP. Les certificats révoqués sont regroupés dans des listes CRL, structures de données signées au format X509 version deux. La structure d'un certificat X509 comprend la version, le numéro de série, l'algorithme de signature, l'émetteur identifié par son nom distinctif, les dates de début et de fin de validité, l'objet identifiant le détenteur de la clé publique par son nom distinctif, la clé publique, les contraintes de base, l'utilisation de la clé, l'algorithme d'empreinte et l'empreinte, signature numérique de l'autorité de certification sur l'ensemble des champs précédents.
+      Le certificat s'appuie sur la norme X509, standard UIT-T associé à la RFC cinq mille deux cent quatre-vingts, qui a remplacé la RFC deux mille quatre cent cinquante-neuf, qui associe à la clé des informations spécifiques à l'entité. La publication des certificats, et donc des clés publiques, utilise des annuaires de type LDAP. Les certificats révoqués sont regroupés dans des listes CRL, structures de données signées au format X509 version deux. La structure d'un certificat X509 comprend la version, le numéro de série, l'algorithme de signature, l'émetteur identifié par son nom distinctif, les dates de début et de fin de validité, l'objet identifiant le détenteur de la clé publique par son nom distinctif, la clé publique, les contraintes de base, l'utilisation de la clé, l'algorithme d'empreinte et l'empreinte, signature numérique de l'autorité de certification sur l'ensemble des champs précédents.
 
 V. INFRASTRUCTURE DE GESTION DE CLÉS - IGC ET PKI.
 
@@ -300,7 +300,7 @@ EXEMPLES CITES.
 
       Les attaques d'août deux mille quatre réduisant le panel des fonctions de hachage sûres, MD5 définitivement cassé et SHA-1 retiré du référentiel.
 
-      La norme X509 associée aux RFC deux mille quatre cent cinquante-neuf, les annuaires LDAP et les listes de révocation CRL au format X509 version deux.
+      La norme X509 associée à la RFC cinq mille deux cent quatre-vingts, qui a remplacé la RFC deux mille quatre cent cinquante-neuf, les annuaires LDAP et les listes de révocation CRL au format X509 version deux.
 
       Les trois cycles de vie de clé illustratifs : application cliente avec séquestre de clé, système de paiement bancaire avec personnalisation centralisée de la carte, et sécurisation locale d'un poste par chiffrement du disque dur.
 
