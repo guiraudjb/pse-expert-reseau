@@ -1,32 +1,32 @@
 # Inventaire des modules et des médias — pse-expert-reseau
 
-Généré le 07/10/2026 à 22:19 par `scripts/inventaire_medias.py` (59 modules). ✅ présent, ❌ absent ; pour QCM, flashcards et TP, nombre d'éléments (0 = absent).
+Généré le 19/10/2026 à 07:27 par `scripts/inventaire_medias.py` (60 modules). ✅ présent, ❌ absent ; pour QCM, flashcards et TP, nombre d'éléments (0 = absent).
 
 ## Synthèse
 
 | Contenu | Présents | Absents | Couverture |
 |---|---:|---:|---:|
-| Fiche | 59 | 0 | 100 % |
-| QCM | 59 | 0 | 100 % |
-| Flash | 59 | 0 | 100 % |
-| TP | 6 | 53 | 10 % |
-| Icône | 59 | 0 | 100 % |
-| Infographie locale | 59 | 0 | 100 % |
-| Infographie NotebookLM | 58 | 1 | 98 % |
-| Paroles | 59 | 0 | 100 % |
-| Chanson | 59 | 0 | 100 % |
-| Podcast local | 59 | 0 | 100 % |
-| Podcast NotebookLM | 58 | 1 | 98 % |
-| Micro-chronique | 1 | 58 | 1 % |
-| Narration fiche | 59 | 0 | 100 % |
-| Audio QCM/flash | 59 | 0 | 100 % |
+| Fiche | 60 | 0 | 100 % |
+| QCM | 60 | 0 | 100 % |
+| Flash | 60 | 0 | 100 % |
+| TP | 6 | 54 | 10 % |
+| Icône | 60 | 0 | 100 % |
+| Infographie locale | 60 | 0 | 100 % |
+| Infographie NotebookLM | 60 | 0 | 100 % |
+| Paroles | 60 | 0 | 100 % |
+| Chanson | 60 | 0 | 100 % |
+| Podcast local | 60 | 0 | 100 % |
+| Podcast NotebookLM | 60 | 0 | 100 % |
+| Micro-chronique | 1 | 59 | 1 % |
+| Narration fiche | 60 | 0 | 100 % |
+| Audio QCM/flash | 60 | 0 | 100 % |
 
 ## Par série
 
 | Série | Modules | Fiche | QCM | Flash | TP | Icône | Infographie locale | Infographie NotebookLM | Paroles | Chanson | Podcast local | Podcast NotebookLM | Micro-chronique | Narration fiche | Audio QCM/flash |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 00 À la une | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
-| 09 Fascicules PSE Expert Réseau | 58 | 58 | 58 | 58 | 5 | 58 | 58 | 57 | 58 | 58 | 58 | 57 | 0 | 58 | 58 |
+| 09 Fascicules PSE Expert Réseau | 59 | 59 | 59 | 59 | 5 | 59 | 59 | 59 | 59 | 59 | 59 | 59 | 0 | 59 | 59 |
 
 ## Détail par module
 
@@ -90,4 +90,5 @@ Généré le 07/10/2026 à 22:19 par `scripts/inventaire_medias.py` (59 modules)
 | 09-550 PSE-ER F6-5 Aspects juridiques de l'informatique | ✅ | 55 | 53 | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | 09-560 PSE-ER F6-6 Les marchés publics | ✅ | 35 | 34 | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
 | 09-570 PSE-ER F6-7 ToIP et convergence téléphonie-informatique | ✅ | 46 | 49 | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
-| 09-580 PSE-ER Synthèse globale - Mégaquiz des 57 modules | ✅ | 1728 | 2021 | 80 | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| 09-580 PSE-ER Synthèse globale - Mégaquiz des 57 modules | ✅ | 1728 | 2021 | 80 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| 09-590 Évolution des architectures réseau d'entreprise - de l'ARPANET au Zero Trust | ✅ | 57 | 64 | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
