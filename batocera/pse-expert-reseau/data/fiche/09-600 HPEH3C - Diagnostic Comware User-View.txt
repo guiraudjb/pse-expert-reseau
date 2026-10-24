@@ -1,0 +1,305 @@
+GUIDE DE RÉVISION POUR LE DIAGNOSTIC RÉSEAU EN MODE UTILISATEUR SOUS COMWARE V5, V7 ET V9.
+
+LEXIQUE COMPLET.
+
+      Le sigle LACP désigne le protocole permettant l'agrégation dynamique de liens Ethernet pour former des groupes d'agrégation.
+
+      Le terme User-View désigne le mode de commande identifiable par une invite entourée de chevrons qui garantit une séparation entre l'observation et la modification de la configuration.
+
+      Le sigle RBAC désigne le modèle Role-Based Access Control qui remplace la hiérarchie numérique de privilèges sous Comware v7 et Comware v9.
+
+      Le sigle LLDP désigne le protocole de découverte de voisinage utilisé pour identifier les équipements interconnectés.
+
+      Le terme MSTP désigne le mode de Spanning Tree qui permet de gérer des instances d'arbre recouvrant par une table de correspondance VLAN-vers-MSTI.
+
+      Le sigle PVST désigne le mode Per-VLAN Spanning Tree introduit sous Comware v7 qui permet un calcul du protocole par VLAN.
+
+      Le sigle IRF désigne l'Intelligent Resilient Framework qui permet de virtualiser plusieurs commutateurs physiques en une fabrique logique unique.
+
+      Le terme MAD désigne le mécanisme Multi-Active Detection utilisé pour détecter une scission de pile IRF via LACP, BFD, ARP ou ND.
+
+      Le sigle BGP désigne le protocole de routage dont la structure des familles d'adresses est devenue hiérarchique sous Comware v7 et Comware v9.
+
+      Le sigle BFD désigne le protocole utilisé par le mécanisme MAD pour assurer la détection rapide de scission de pile.
+
+      Le terme AAA désigne le cadre de sécurité gérant l'authentification, l'autorisation et l'audit des utilisateurs et des profils.
+
+      Le sigle NTP désigne le protocole de synchronisation temporelle utilisant des strates de un à seize pour définir la précision de l'horloge.
+
+COURS DÉTAILLÉ.
+
+I. ÉVOLUTION ARCHITECTURALE ET GESTION DES ACCÈS.
+
+   A. Différences structurelles entre Comware v5, v7 et v9.
+
+      L'architecture de Comware v5 repose sur un modèle logiciel monolithique utilisé par les équipements historiques comme les commutateurs SuperStack quatre ou les séries H3C S5130. Il existe une barrière stricte entre ces générations car la plupart des plateformes v5 ne supportent pas la migration vers les versions suivantes, sauf exceptions comme les gammes cinq mille neuf cents, dix mille cinq cents ou S12500.
+
+      L'introduction de Comware v7 marque une rupture technologique majeure avec l'adoption d'un noyau Linux modulaire. Chaque protocole et fonction système s'exécute sous forme de processus indépendant ou de thread noyau, ce qui permet des mises à niveau logicielles sans perte de paquets via l'ISSU.
+
+      Comware v9 prolonge cette architecture Linux native en ouvrant le système à la conteneurisation grâce aux namespaces et aux cgroups. Cette génération intègre également le démon Docker et l'agent Kubernetes tout en enrichissant le plan de contrôle.
+
+      Du point de vue de l'opérateur, la grammaire CLI et le modèle de rôles restent intégralement conservés entre Comware v7 et Comware v9. Cette continuité permet d'utiliser les mêmes commandes de diagnostic tout en bénéficiant des avancées technologiques du noyau.
+
+   B. Modèles de contrôle d'accès : hiérarchie numérique vs RBAC.
+
+      Sous Comware v5, les droits d'accès sont régis par une hiérarchie numérique allant de zéro à trois via la commande authorization-attribute level. Un utilisateur de niveau zéro ou un ne peut pas inspecter le système de fichiers (dir) ni lire la configuration courante (display current-configuration) sans utiliser la commande super.
+
+      Pour garantir un diagnostic complet ou une collecte automatisée sans mot de passe d'élévation, le compte doit être configuré au niveau deux ou trois. Cette structure impose une gestion rigide des privilèges pour accéder aux commandes display essentielles.
+
+      Comware v7 et Comware v9 remplacent cette hiérarchie par le modèle RBAC qui utilise des rôles prédéfinis. Le rôle network-operator offre un accès en lecture seule à la quasi-totalité des commandes de diagnostic, tandis que le rôle network-admin accorde tous les droits.
+
+      Certaines opérations critiques en User-View exigent des privilèges élevés ou des règles RBAC personnalisées. La lecture de la configuration courante, la capture de paquets ou la désactivation de la pagination via screen-length disable nécessitent souvent le rôle network-admin.
+
+   C. Ergonomie et contraintes de navigation en User-View.
+
+      L'opérateur commence sa session en User-View, identifiable par l'invite de commande entourée de chevrons comme <Sysname>. Ce mode assure une séparation stricte entre l'observation de l'état du réseau et la modification de la configuration active.
+
+      Contrairement à d'autres systèmes, Comware permet d'exécuter les commandes display depuis n'importe quelle vue, bien que le User-View soit l'environnement exclusif pour les commandes d'exploitation comme ping, dir ou packet-capture stop. La commande quit en User-View déconnecte immédiatement la session.
+
+      La commande return ou la combinaison de touches Ctrl+Z pour redescendre vers le User-View n'est pas prise en charge si l'opérateur s'y trouve déjà. Cela constitue une subtilité de navigation importante lors de l'utilisation de la CLI.
+
+      L'automatisation par scripts comme Netmiko rencontre des comportements divergents selon les générations. L'exécution de commandes display volumineuses sous Comware v5 peut entraîner une perte de synchronisation du tampon SSH, nécessitant l'activation de la vérification d'écho.
+
+      La pile SSH de Comware v7 traite ces flux sans anomalie, facilitant ainsi l'automatisation. Cette différence de gestion des flux est un point de vigilance majeur pour les ingénieurs utilisant des outils de collecte de données.
+
+II. DIAGNOSTIC DES COUCHES PHYSIQUES ET DE LIAISON.
+
+   A. Inspection des interfaces, du PoE et de la télémétrie optique.
+
+      L'inspection des interfaces physiques nécessite de maîtriser les conventions de nommage qui évoluent selon la génération logicielle et la densité matérielle. Les ports dix Gigabit sont désignés par Ten-GigabitEthernet ou XGE selon les séries, tandis que les interfaces cent Gigabit utilisent le préfixe HGE.
+
+      Pour les liaisons en fibre optique, la commande display transceiver interface permet d'identifier les caractéristiques techniques de l'optique. Si un module tiers non certifié est inséré sur un FlexFabric cinq mille sept cents ou cinq mille neuf cent quarante, la valeur Unknown peut être renvoyée pour le type de transceiver.
+
+      Le diagnostic optique numérique s'effectue avec la commande display transceiver diagnosis interface pour mesurer la puissance reçue et émise en temps réel. En complément, la commande display transceiver alarm permet d'isoler des défauts physiques critiques tels que le Rx_Los ou le Tx_Fault.
+
+      La commande display transceiver manuinfo permet d'extraire les métadonnées du constructeur comme le numéro de série ou le Part Number. Sur les plateformes datacenter comme la série HPE cinq mille neuf cent trente, la commande display transceiver itu-channel est documentée pour les interfaces compatibles.
+
+      La gestion de l'alimentation se vérifie via la commande display poe interfaces pour l'état électrique des ports. L'état des alimentations et de la protection thermique du commutateur est contrôlé par la commande display poe powersupply ou temperature-protection.
+
+   B. Agrégation de liens LACP et dépannage des groupes.
+
+      L'agrégation de liens repose sur des interfaces logiques distinctes nommées Bridge-Aggregation pour la couche deux et Route-Aggregation pour la couche trois. Chaque port physique reçoit une clé opérationnelle calculée selon son débit et son mode duplex pour déterminer son appartenance au groupe.
+
+      Dans un groupe d'agrégation, seuls les ports à l'état Selected partagent la même clé opérationnelle et acheminent le trafic. Les ports présentant une divergence de configuration ou dépassant la limite de ports actifs sont automatiquement placés à l'état Unselected.
+
+      Le mode dynamique LACP utilise la priorité système pour déterminer les ports sélectionnés, tandis que la priorité de port sert de critère de départage pour les interfaces locales. La commande display link-aggregation summary permet d'identifier rapidement si les membres sont sélectionnés.
+
+      Pour un dépannage avancé, Comware v7 et v9 introduisent la commande display link-aggregation troubleshooting. Cet outil permet d'identifier directement pourquoi un port membre n'est pas sélectionné dans un groupe bridge-aggregation ou route-aggregation.
+
+      L'analyse détaillée des groupes, incluant le type de partage de charge comme le Loadsharing Type: Shar, est disponible via la commande display link-aggregation verbose. La commande display link-aggregation member-port fournit quant à elle le numéro de port des interfaces membres.
+
+   C. Protocoles de découverte de voisinage LLDP, CDP et NDP.
+
+      Le protocole LLDP est utilisé pour la découverte des équipements interconnectés et peut être complété par la compatibilité CDP via la commande lldp compliance cdp. Le protocole historique NDP est également disponible pour l'inspection du voisinage sur les équipements compatibles.
+
+      Une différence syntaxique majeure existe entre les générations de firmware concernant l'affichage des détails. Sous Comware v5, la commande display lldp neighbor-information affiche directement les informations détaillées de l'ensemble des voisins.
+
+      Sous Comware v7 et v9, l'utilisation du mot-clé verbose est devenue indispensable pour obtenir l'affichage détaillé complet avec la commande display lldp neighbor-information verbose. La commande display lldp neighbor list fournit une vue plus synthétique des voisins.
+
+      La configuration des paramètres locaux du protocole s'effectue par la commande display lldp local-information. L'état global des voisins découverts peut être consulté de manière simplifiée via la commande display lldp neighbor-information.
+
+      Le diagnostic des équipements tiers est facilité par la prise en charge de l'interconnexion avec les protocoles standards. L'administrateur peut utiliser la commande display ndp pour inspecter les informations de voisinage sur les systèmes supportant ce protocole.
+
+III. COMMUTATION DE COUCHE deux ET RÉSOLUTION D'ADRESSES.
+
+   A. Analyse de la table MAC et détection du MAC flapping.
+
+      La table d'adresses MAC est construite par le commutateur en apprenant l'adresse source des trames entrantes sur chaque interface avec l'identifiant du VLAN associé. Les adresses sont formatées sous la forme H-H-H et l'analyseur permet d'omettre les zéros initiaux lors de la saisie.
+
+      Les entrées peuvent être de type Static, Learned, Blackhole, Multiport ou OpenFlow selon la génération du firmware. Les entrées Multiport et OpenFlow sont des nouveautés intégrées dans les architectures Comware v7 et v9.
+
+      La colonne d'interface affiche le nom du port ou le Nickname hexadécimal du Routing Bridge de sortie. Pour les groupes d'agrégation, les entrées MAC dynamiques ne sont visibles que si au moins un port membre est à l'état Selected.
+
+      Le MAC flapping, ou basculement d'adresses MAC entre deux interfaces, est un symptôme de boucle de couche deux. La commande display mac-address mac-move permet d'identifier ces mouvements en exposant le port source, le port actuel et le compteur de basculements.
+
+      Cette commande de diagnostic génère un maximum de deux cents enregistrements par carte ou par équipement membre d'une pile IRF. Sur certaines versions de Comware v7 comme les séries cinq mille sept cents ou cinq mille neuf cent trente, ces données ne sont pas incluses dans la collecte display diagnostic-information.
+
+   B. Gestion de la table ARP et nettoyage des caches.
+
+      La table ARP assure la résolution entre les adresses IPv4 et les adresses MAC pour l'encapsulation des trames. Elle contient des entrées dynamiques mises à jour par les requêtes et des entrées statiques qui possèdent une priorité supérieure.
+
+      Une entrée ARP statique peut devenir inopérante si son adresse IP entre en conflit avec une adresse IP locale. Cela arrive également si aucune interface locale ne possède d'adresse IP dans le même sous-réseau.
+
+      L'opérateur peut purger les entrées sans affecter les liaisons statiques en utilisant la commande reset arp dynamic depuis le User-View. Il est aussi possible de cibler une interface ou une adresse spécifique avec cette commande.
+
+      Si une limite maximale d'apprentissage est configurée et abaissée, l'équipement ne supprime pas les entrées déjà présentes. Celles-ci ne disparaissent qu'à l'expiration de leur propre minuteur d'âge.
+
+   C. Sécurité DHCP Snooping et inspection des relais.
+
+      La fonction DHCP Snooping permet de sécuriser le réseau en gérant les ports de confiance nommés Trusted. L'état global et la liste de ces ports peuvent être vérifiés via la commande display dhcp-snooping trust.
+
+      L'inspection des relais DHCP s'effectue également en User-View pour auditer les serveurs configurés. Les commandes disponibles incluent display dhcp relay server-address et display dhcp relay information all.
+
+      Des statistiques détaillées par interface sont accessibles pour surveiller le comportement du relais DHCP. Ces outils permettent de valider la conformité des flux de configuration DHCP sur l'infrastructure.
+
+IV. TOPOLOGIE DE NIVEAU deux ET VIRTUALISATION.
+
+   A. Gestion des VLAN et modes Spanning Tree (MSTP, PVST).
+
+      La stabilité de la topologie commutée repose sur le découpage en VLAN et la maîtrise du protocole Spanning Tree. L'inspection des VLAN de données et de l'état du VLAN voix s'effectue via la commande display voice vlan state.
+
+      Une différence majeure sépare Comware v5 de Comware v7 concernant les modes Spanning Tree supportés. Comware v5 se limite aux modes STP, RSTP et MSTP, tandis que Comware v7 introduit la prise en charge native du mode PVST.
+
+      En mode MSTP, commun aux versions v5, v7 et v9, la topologie est évaluée par instance d'arbre recouvrant avec des identifiants allant de zéro à trente-deux. L'identifiant zéro représente le Common Internal Spanning Tree ou CIST.
+
+      Pour utiliser le mode MSTP, les commutateurs doivent partager les mêmes paramètres de région, incluant le nom de région, le niveau de révision et la table de correspondance VLAN-vers-MSTI. Ces paramètres se contrôlent avec display stp region-configuration.
+
+      Le mode PVST, propre à Comware v7 et v9, effectue le calcul par VLAN. L'opérateur doit utiliser le paramètre vlan suivi de l'identifiant pour filtrer l'affichage des résultats.
+
+   B. Diagnostic des protections et statistiques BPDU.
+
+      L'analyse de la sortie display stp brief permet de vérifier le rôle de chaque port, comme l'état ALTE, ainsi que son état de transfert. Les états possibles incluent FORWARDING, LEARNING ou DISCARDING.
+
+      Le mécanisme de protection actif peut être identifié comme BPDU/ROOT, LOOP ou NONE. Pour diagnostiquer les instabilités, l'administrateur peut utiliser display stp bpdu-statistics pour inspecter les compteurs de paquets BPDU par port.
+
+      D'autres commandes essentielles permettent de consulter l'historique des calculs de rôles de ports via display stp history. Les ports placés dans un état anormal ou désactivés par les protections sont identifiés par display stp abnormal-port ou display stp down-port.
+
+      L'utilisation de display stp instance permet de filtrer les résultats par identifiant d'instance dans les topologies MSTP. Les implémentations récentes de Comware v7 permettent également de spécifier une liste d'instances et un numéro de membre IRF via le paramètre slot.
+
+   C. Virtualisation IRF et détection de scission MAD.
+
+      La technologie IRF permet d'interconnecter plusieurs commutateurs physiques pour former une fabrique logique unique sans module d'empilement propriétaire. Une unité de supervision agit comme maître global tandis que les autres membres assurent la redondance.
+
+      Une défaillance des liens IRF peut provoquer une scission de la pile en deux fabriques distinctes avec des configurations de couche trois identiques. Ce phénomène de split-brain peut entraîner des conflits d'adresses critiques sur le réseau.
+
+      Pour détecter cette scission, Comware utilise le mécanisme MAD ou Multi-Active Detection basé sur LACP, BFD, ARP ou ND. L'administrateur vérifie l'état détaillé de cette détection en User-View avec la commande display mad verbose.
+
+      Une subtilité apparaît lors des mises à niveau de Comware v5 vers Comware v7 sur les équipements HPE cinq mille neuf cent quarante. La commande display bfd session peut alors afficher de manière anormale deux sessions BFD MAD simultanées, nécessitant une vérification attentive.
+
+V. ROUTAGE IP ET PROTOCOLES DYNAMIQUES.
+
+   A. Tests de connectivité active et analyse du routage PBR.
+
+      Les commandes ping et tracert sont accessibles nativement depuis le User-View pour qualifier la connectivité et la latence de bout en bout.
+
+      Lors de tests sur un équipement comme le HPE FlexFabric cinq mille neuf cent quarante-cinq, il est nécessaire de vérifier les interfaces de couche trois via display ip interface et les instances VRF avec display ip vpn-instance pour valider le plan d'adressage actif.
+
+      Si un flux ne suit pas le chemin attendu malgré une table de routage cohérente, l'architecte doit contrôler le routage basé sur les politiques avec les commandes display ip policy-based-route, display policy-based-route ou display ip policy-based-route setup.
+
+      Une vigilance particulière est requise sur certaines révisions comme la version R3507 sur HPE cinq mille cent trente-EI où une politique PBR d'interface peut être ignorée au profit de la route par défaut.
+
+      En cas de ralentissement avec une latence de ping dépassant deux cents millisecondes, l'exécution répétée de display ip statistics permet d'identifier une croissance anormale des compteurs de paquets IP fragmentés ou avec des options d'en-tête.
+
+      Une telle augmentation révèle un trafic de transit qui ne peut être commuté par l'ASIC matériel et qui remonte vers le processeur central.
+
+   B. Gestion des familles d'adresses BGP en v7/v9.
+
+      L'administration des protocoles de routage dynamique met en lumière une divergence syntaxique majeure entre Comware v5 et les versions v7 ou v9 concernant la logique des familles d'adresses BGP.
+
+      Sous Comware v5, la famille d'adresses IPv4 est implicite et l'opérateur utilise simplement la commande display bgp peer pour contrôler l'état des voisins.
+
+      À l'inverse, Comware v7 et Comware v9 introduisent une hiérarchie logique qui impose de spécifier la famille d'adresses comme ipv4, ipv6, vpnv4 ou vpnv6.
+
+      L'administrateur doit ainsi saisir display bgp peer ipv4 ou ses variantes pour vérifier que les sessions sont à l'état Established et lire le BGP local router ID.
+
+      Des commandes telles que display bgp peer vpn-instance verbose sont également reconnues pour la gestion des voisins en contexte VRF.
+
+      Enfin, les sous-options dampened et flap-info permettent d'afficher respectivement les routes BGP pénalisées et les statistiques de battement de routes.
+
+   C. Inspection des protocoles OSPF et RIP.
+
+      L'inspection des protocoles à état de liens s'effectue principalement via les commandes display ospf peer verbose et display ospf interface verbose.
+
+      Lors du diagnostic d'OSPF sur des châssis comme le H3C S12500, l'apparition d'une valeur non nulle pour le compteur LS ACK: BAD ack nécessite une analyse des retransmissions d'acquittements LSA.
+
+      Ce phénomène est particulièrement documenté lors des processus de migration entre les versions Comware v5 et Comware v7.
+
+      Pour les protocoles à vecteur de distance, le protocole RIP s'examine via les commandes display rip interfaces et display rip neighbors.
+
+      Ces commandes permettent d'inspecter les interfaces actives ainsi que les voisins RIP découverts sur l'équipement.
+
+VI. SURVEILLANCE SYSTÈME ET SYNCHRONISATION TEMPORELLE.
+
+   A. Inventaire matériel et gestion des processus Linux.
+
+      L'inspection de l'état matériel s'effectue via les commandes display version, display device manuinfo pour les numéros de série SN et display license device-id.
+
+      La gestion des fichiers de démarrage diffère selon les générations car Comware v7 et v9 utilisent des paquets modulaires .ipe et des images fonctionnelles additionnelles.
+
+      L'opérateur peut utiliser la commande display boot-loader pour vérifier les images installées ou display install active pour inspecter les modules logiciels actifs.
+
+      L'architecture Linux de Comware v7 et v9 permet l'utilisation de commandes d'inspection des processus et des threads noyau comme display process ou monitor thread.
+
+      Ces outils d'inspection sont totalement inexistants sur les équipements fonctionnant sous l'architecture monolithique de Comware v5.
+
+   B. Analyse de la charge CPU et détection des fuites mémoire.
+
+      La commande display process cpu permet d'identifier les processus consommant le plus de cycles sur les cinq dernières secondes, la dernière minute et les cinq dernières minutes.
+
+      Une charge élevée du thread pilote de transfert noyau [kdrvfwdd1] entre quarante-cinq virgule huit pour cent et quarante-huit virgule neuf pour cent indique que le trafic de transit est traité par le CPU au lieu de l'ASIC.
+
+      La commande display process liste les détails de chaque processus tels que le JID, le PID, le %CPU, le %MEM et la priorité.
+
+      Pour diagnostiquer une suspicion de fuite mémoire, l'administrateur utilise display process memory pour analyser l'occupation des blocs Text, Data, Stack et Dynamic.
+
+      La commande monitor process dumbtty permet également de suivre en temps réel la consommation CPU des processus sur le terminal.
+
+   C. Fonctionnement du protocole NTP et gestion de l'horloge.
+
+      Le protocole NTP utilise des strates de un à seize pour définir la précision, où une valeur inférieure indique une précision supérieure.
+
+      Les horloges de strates un à quinze sont considérées comme synchronisées tandis que la strate seize indique un état unsynchronized.
+
+      Sous Comware v7, l'état du client peut rester bloqué sur le statut INIT pendant une à deux minutes après l'activation avant d'émettre des requêtes.
+
+      Le service NTP travaille exclusivement en UTC et ignore les fuseaux horaires ainsi que les changements d'heure saisonniers.
+
+      L'administrateur doit configurer manuellement le clock timezone et le clock summer-time pour corriger l'affichage de l'heure locale.
+
+      Contrairement à certains démons UNIX, un commutateur Comware se synchronise automatiquement même s'il accuse plusieurs années de retard.
+
+VII. JOURNAUX, CAPTURE DE PAQUETS ET SUPPORT TECHNIQUE.
+
+   A. Gestion de l'Information Center et de la mémoire flash.
+
+      L'Information Center est activé par défaut sur Comware pour collecter les messages de journalisation système. L'administrateur utilise la commande display logbuffer en User-View pour inspecter les alertes récentes comme la consommation CPU excessive ou les événements d'interfaces.
+
+      La commande logfile save permet de sauvegarder le contenu du tampon mémoire vers un fichier journal situé dans flash:/logfile/logfile.log. Cette opération est essentielle avant d'exporter les données via FTP, TFTP ou USB.
+
+      La consultation des répertoires de fichiers journaux via la commande dir varie selon l'architecture matérielle. On utilise dir flash:/logfile/ pour la MPU active, dir slot1#flash:/logfile/ pour la MPU de secours en mode autonome ou la syntaxe dir chassis2#slot0#flash:/logfile/ pour un membre spécifique en mode IRF.
+
+      L'accès à la mémoire flash pour lister les fichiers et l'espace libre nécessite des privilèges spécifiques. Sous Comware v5, l'utilisateur doit posséder un niveau de privilège supérieur à un pour exécuter la commande dir.
+
+   B. Capture de paquets native et outils de débogage.
+
+      Comware v7 propose une fonctionnalité de capture de paquets locale ou distante contrôlable directement depuis le User-View. Ce mécanisme permet d'intercepter les paquets remontant au CPU pour les afficher sur la console ou les enregistrer dans un fichier local.
+
+      Pour arrêter une capture de paquets en cours, l'opérateur doit exécuter exclusivement la commande packet-capture stop en User-View. Sur les séries cinq mille cent trente-EI, cinq mille sept cents et cinq mille neuf cent trente, l'installation préalable d'une image fonctionnelle dédiée est indispensable pour la capture vers un fichier.
+
+      La commande display debugging permet de vérifier toutes les fonctionnalités de débogage actuellement activées pour un module ou pour l'ensemble du système. Il est crucial de s'assurer qu'aucun débogage intensif n'a été laissé actif par inadvertance.
+
+      L'analyse du trafic peut également s'appuyer sur la configuration des groupes de miroir de ports via display mirroring-group all. D'autres méthodes incluent l'échantillonnage de flux avec display sflow ou display sampler.
+
+   C. Collecte de données pour l'escalade au support technique.
+
+      La commande display diagnostic-information est l'outil principal pour collecter l'ensemble des informations de diagnostic lors d'une escalade au support H3C ou HPE. Elle permet de générer une archive complète du système.
+
+      Lors de l'exécution, il est vivement recommandé de répondre y à l'invite Save or display diagnostic information pour enregistrer la sortie dans une archive compressée flash:/diag.gz. Si l'affichage à l'écran est choisi avec l'option n, l'opérateur doit impérativement désactiver la pagination via screen-length disable.
+
+      L'administrateur doit être conscient que le processus de collecte est bloquant. Plus l'équipement possède de cartes ou de modules, plus la durée est longue et aucune autre commande ne peut être exécutée durant cette période.
+
+POINTS D'ATTENTION.
+
+      La confusion majeure réside dans la distinction entre le mode utilisateur User-View et le mode système system-view pour garantir la séparation entre l'observation et la modification.
+
+      Il faut éviter de confondre la hiérarchie numérique des niveaux zéro à trois de Comware v5 avec le modèle RBAC utilisant les rôles network-operator et network-admin de Comware v7 et v9.
+
+      Une erreur fréquente consiste à oublier l'ajout du mot-clé verbose pour obtenir les détails des voisins LLDP sous Comware v7 et v9 alors que cela est implicite sous Comware v5.
+
+      L'administrateur doit être vigilant sur la syntaxe BGP car Comware v7 et v9 imposent de spécifier la famille d'adresses comme ipv4 contrairement à la version v5.
+
+      Il est crucial de ne pas confondre le statut de synchronisation NTP qui peut rester en INIT durant une à deux minutes avec un véritable dysfonctionnement du service.
+
+      L'utilisation de la commande display mac-address mac-move est indispensable pour détecter les boucles mais elle peut être absente des fichiers diagnostic-information sur certaines versions de Comware v7.
+
+EXEMPLES CITÉS.
+
+      Lors d'une surcharge processeur sous Comware v7 ou v9, le thread kdrvfwdd1 peut bondir de valeurs proches de zéro virgule cinq pour cent à des taux compris entre quarante-cinq virgule huit pour cent et quarante-huit virgule neuf pour cent.
+
+      Pour identifier un trafic qui sature le CPU au lieu d'être commuté par l'ASIC, l'opérateur peut observer une latence de ping dépassant deux cents millisecondes.
+
+      Le mécanisme de détection de scission MAD peut afficher de manière anormale deux sessions BFD simultanées après une migration logicielle de Comware v5 vers Comware v7.
+
+      Dans un environnement IRF, la commande display mac-address mac-move peut générer un maximum de deux cents enregistrements par carte ou par équipement membre de la pile.
+
+      Un commutateur peut afficher un retard de deux heures en été ou d'une heure en hiver via display clock même si le statut NTP est synchronisé en raison de l'usage de l'UTC.

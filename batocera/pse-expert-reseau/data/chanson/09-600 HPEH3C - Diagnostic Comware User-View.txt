@@ -1,0 +1,53 @@
+TITRE : Comware Vibration Riddim
+
+[Intro]
+De Comware version cinq jusqu'à la version neuf,
+Écoute le rythme du réseau qui s'aligne.
+
+[Couplet 1]
+En User-View l'invite est entre chevrons,
+Pour observer le réseau sans changer les fonctions.
+Sous Comware version cinq l'architecture est monolithique,
+Mais la version sept sur FlexFabric est plus dynamique et logique.
+Le noyau Linux devient modulaire et très puissant,
+Avec la version neuf le monde Docker est maintenant présent.
+Pour le diagnostic l'ingénieur doit être attentif,
+Entre les privilèges et le modèle RBAC très actif.
+
+[Refrain]
+Comware, Comware, garde la configuration,
+En mode utilisateur, évite la complication.
+Display pour voir, mais pas pour modifier,
+Le diagnostic réseau est notre priorité.
+
+[Couplet 2]
+Si la fibre est DOWN regarde le transceiver,
+Display transceiver diagnosis pour voir la puissance.
+Pour le LACP si le port n'est pas sélectionné,
+Display link-aggregation troubleshooting va tout déceler.
+Si les adresses MAC font du mac-move sans arrêt,
+Display mac-address mac-move te dira le secret.
+Et pour le routage BGP sous la version sept ou la version neuf,
+Display bgp peer ipv4 est la règle qui nous maintient.
+
+[Refrain]
+Comware, Comware, garde la configuration,
+En mode utilisateur, évite la complication.
+Display pour voir, mais pas pour modifier,
+Le diagnostic réseau est notre priorité.
+
+[Pont]
+Si le CPU monte et que le ping est lent,
+Display process cpu montre le processus prenant.
+Le kdrvfwdd1 peut saturer le processeur,
+Quand le trafic de transit demande du bonheur.
+
+[Refrain final]
+Comware, Comware, garde la configuration,
+En mode utilisateur, évite la complication.
+Display pour voir, mais pas pour modifier,
+Le diagnostic réseau est notre priorité.
+
+[Outro]
+De HP à H3C, la maîtrise est totale,
+Comware dans le cœur, une force digitale.
