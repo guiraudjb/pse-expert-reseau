@@ -1,0 +1,323 @@
+TITRE DU COURS.
+SUPERVISION DE LA QUALITÉ DE SERVICE DU RÉSEAU WAN ET CONFORMITÉ NIS2.
+
+LEXIQUE COMPLET.
+      ANSSI désigne l'Agence Nationale de la Sécurité des Systèmes d'Information en charge de la cyberdéfense française.
+
+      AuthPriv correspond au niveau de sécurité SNMPv3 combinant l'authentification forte et le chiffrement du trafic.
+
+      Back-to-Back définit la stratégie de support hybride combinant une ESN locale et les contrats éditeurs directes.
+
+      C-states désignent les modes de gestion dynamique de l'énergie des processeurs pour réduire la consommation électrique.
+
+      CAPEX représente les dépenses d'investissement initiales en capital pour l'acquisition de matériels et de licences.
+
+      Comware est le système d'exploitation propriétaire des équipements réseau distribué par HPE et H3C.
+
+      Continuous Aggregates désignent les vues pré-matérialisées créées par TimescaleDB pour accélérer l'accès aux données.
+
+      DCS désigne un magasin clé-valeur distribué assurant la synchronisation du consensus au sein d'un cluster.
+
+      Drop_chunks est la fonction de purge automatisée de TimescaleDB permettant de supprimer des blocs complets de données.
+
+      ESN désigne une Entreprise de Services du Numérique chargée de l'intégration et de la maintenance informatique.
+
+      Etcd constitue un magasin distribué de clés-valeurs servant de socle pour l'établissement du quorum Raft.
+
+      Green IT rassemble les démarches d'éco-conception visant la sobriété numérique et la réduction de l'empreinte carbone.
+
+      GTI définit la Garantie de Temps d'Intervention imposée contractuellement à l'équipe de support.
+
+      GTR définit la Garantie de Temps de Rétablissement imposée pour la résolution complète d'un incident.
+
+      HAProxy est un répartiteur de charge orienté haute disponibilité gérant l'aiguillage des requêtes d'écriture.
+
+      HH3C-NQA-MIB désigne la base d'informations de gestion propriétaire Comware pour l'extraction des métriques NQA.
+
+      Hypertable représente l'abstraction de table virtuelle partitionnée automatiquement par intervalles temporels dans TimescaleDB.
+
+      IMC désigne la plateforme Intelligent Management Center distribuée par HPE pour la gestion des équipements.
+
+      Keepalived est l'outil réseau assurant la haute disponibilité de l'adresse IP virtuelle par basculement automatique.
+
+      LLD désigne la fonctionnalité Low Level Discovery dans Zabbix permettant la détection automatique des composants.
+
+      MCO désigne le Maintien en Condition Opérationnelle garantissant le fonctionnement continu de l'infrastructure.
+
+      MCS désigne le Maintien en Condition de Sécurité garantissant l'application systématique des correctifs de sécurité.
+
+      MFA correspond à l'Authentification Multifacteur exigée pour valider l'identité lors des accès aux interfaces.
+
+      MIB désigne la base d'informations de gestion structurée sous forme d'arbre pour le protocole SNMP.
+
+      NIS2 constitue la directive européenne établissant un niveau élevé commun de cybersécurité à l'échelle de l'Union.
+
+      NQA désigne le module Network Quality Analyzer intégré à Comware pour mesurer la latence, la gigue et les pertes.
+
+      NVPS mesure la vitesse d'ingestion de la base de données exprimée en nouvelles valeurs par seconde.
+
+      OPEX représente les dépenses d'exploitation récurrentes associées à la maintenance et à la gestion opérationnelle.
+
+      PAM désigne la solution de Gestion des Accès à Privilèges contrôlant et enregistrant les sessions d'administration.
+
+      Patroni est l'orchestrateur de haute disponibilité pour PostgreSQL pilotant le consensus via l'algorithme Raft.
+
+      PostgreSQL est le système de gestion de base de données relationnelle objet sous licence libre servant de socle.
+
+      PUE mesure l'efficacité énergétique d'un centre de données en comparant l'énergie totale consommée à l'énergie informatique.
+
+      QDevice désigne le nœud témoin externe participant uniquement aux votes de consensus sans stocker de données.
+
+      QoS désigne la Qualité de Service caractérisée par des indicateurs de latence, de gigue et de perte de paquets.
+
+      Raft est l'algorithme de consensus distribué exigeant une majorité absolue des nœuds pour autoriser l'écriture.
+
+      RBAC désigne le contrôle d'accès basé sur les rôles garantissant l'application du principe du moindre privilège.
+
+      ReCyF désigne le Référentiel Cyber France publié par l'ANSSI pour guider la mise en conformité à NIS2.
+
+      RTT mesure le temps d'aller-retour d'un paquet réseau entre une sonde source et un équipement cible.
+
+      SLA définit l'Accord de Niveau de Service fixant les engagements de performance et de qualité exigés.
+
+      SLO définit l'Objectif de Niveau de Service mesuré pour vérifier la conformité aux engagements SLA.
+
+      SNMPv3 constitue la version sécurisée du protocole de gestion réseau intégrant le chiffrement et l'authentification.
+
+      Split-brain caractérise la désynchronisation majeure survenant lorsque deux nœuds d'un cluster se déclarent primaires.
+
+      TCO représente le Coût Total de Possession calculé sur l'ensemble du cycle de vie de l'infrastructure.
+
+      Telegraf est un agent de collecte léger écrit en langage Go spécialisé dans l'acquisition de métriques.
+
+      TimescaleDB est une extension temporelle pour PostgreSQL optimisant le stockage de séries chronologiques.
+
+      TMA désigne la Tierce Maintenance Applicative confiée à un prestataire externe pour la gestion du logiciel.
+
+      VIP désigne l'adresse IP virtuelle flottante partagée entre plusieurs nœuds pour garantir l'accès ininterromptuel.
+
+      WAN désigne le réseau étendu interconnectant l'ensemble des sites distants de l'organisation.
+
+      Zabbix est une plateforme open-source intégrée de supervision couvrant la collecte, l'alerte et la visualisation.
+
+COURS DÉTAILLÉ.
+
+I. ÉTUDE DE FAISABILITÉ TECHNIQUE ET DIMENSIONNEMENT.
+
+   A. Architecture matérielle et prévention du phénomène de split-brain.
+
+      La supervision proactive des réseaux étendus repose sur la collecte granulaire de métriques de performance depuis six cents sites distants.
+
+      L'infrastructure doit s'insérer dans un cadre strict d'éco-conception Green IT limitant le déploiement à deux serveurs physiques.
+
+      L'hébergement du cluster PostgreSQL sous l'orchestrateur Patroni sur deux serveurs physiques expose le système au risque majeur de split-brain.
+
+      L'algorithme de consensus Raft requiert l'obtention d'une majorité absolue de voix pour autoriser l'élection d'un nœud primaire et valider les écritures.
+
+      La perte du lien réseau d'interconnexion entre deux nœuds uniques empêche mathématiquement la constitution d'un quorum de majorité.
+
+      L'architecture intègre un nœud témoin nommé QDevice ou Witness hébergé en dehors des deux serveurs principaux pour servir d'arbitre de consensus.
+
+      Ce troisième membre du cluster etcd peut être déployé sous forme de conteneur ultra-léger sur un commutateur cœur de réseau compatible.
+
+      En amont de la base de données, les composants HAProxy et Keepalived gèrent une adresse IP virtuelle hautement disponible pour router les flux.
+
+      HAProxy interroge l'API REST de Patroni afin d'orienter dynamiquement toutes les requêtes d'écriture vers le nœud PostgreSQL leader.
+
+   B. Métrologie NQA et modélisation de la charge d'ingestion.
+
+      Les routeurs d'infrastructure fonctionnent exclusivement sous le système d'exploitation Comware et intègrent des sondes natives NQA.
+
+      Les sondes NQA sont configurées en ligne de commande pour effectuer des tests de type ICMP-jitter ou UDP-jitter vers des cibles réseau.
+
+      Chaque opération NQA mesure la latence aller-retour, la gigue unidirectionnelle, le taux de perte de paquets et les erreurs de transaction.
+
+      La collecte s'effectue via le protocole SNMP en interrogeant la base d'informations de gestion propriétaire HH3C-NQA-MIB.
+
+      La modélisation pour six cents routeurs équipés de deux opérations NQA interrogées chaque minute génère douze mille métriques par minute.
+
+      Cette charge correspond à un débit d'ingestion constant de deux cents nouvelles valeurs par seconde au niveau du collecteur central.
+
+      Le volume brut annuel atteint environ six milliards de points de données à conserver pour la consultation de l'historique.
+
+   C. Optimisation du stockage temporel et agrégation continue.
+
+      L'utilisation de l'extension TimescaleDB transforme PostgreSQL en base temporelle grâce au partitionnement automatique en hypertables.
+
+      Le paramètre chunk_time_interval est dimensionné pour que chaque bloc de données non compressé occupe un quart de la mémoire vive allouée.
+
+      Les mécanismes de compression en colonnes de TimescaleDB réduisent l'empreinte disque des données historiques de zéro nonante à zéro nonante-cinq pour cent.
+
+      La fonctionnalité Continuous Aggregates pré-calcule en arrière-plan les vues horaires et journalières pour accélérer les requêtes.
+
+      Les deux cent cinquante agents accèdent instantanément aux tableaux de bord en interrogeant des synthèses pré-matérialisées.
+
+      La purge des données de haute résolution devenues obsolètes s'effectue sans surcharge processeur par l'exécution de la fonction drop_chunks.
+
+   D. Éco-conception Green IT et dimensionnement des ressources.
+
+      La densification de l'architecture sur deux serveurs hyperviseurs optimise le PUE du centre de données et réduit la consommation statique.
+
+      Les processeurs ajustent leur fréquence de fonctionnement grâce aux états de gestion dynamique d'énergie nommés C-states.
+
+      La compression des données sur disque diminue fortement les opérations d'entrée et sortie, prolongeant la durée de vie des disques SSD.
+
+      L'allocation matérielle attribue huit vCPU, trente-deux gigaoctets de mémoire vive et deux cent cinquante gigaoctets de stockage NVMe aux bases de données.
+
+      Les nœuds de collecte et les nœuds de présentation reçoivent chacun quatre vCPU, huit gigaoctets de mémoire vive et cinquante gigaoctets de stockage.
+
+      Le nœud témoin externe ne nécessite qu'un vCPU, un gigaoctet de mémoire vive et dix gigaoctets de disque pour assurer le quorum.
+
+      La fréquence de collecte SNMP doit être ajustée afin d'éviter la surconsommation du processeur des routeurs par le processus nqad.
+
+II. COMPARATIF ANALYTIQUE DES SOLUTIONS DE SUPERVISION.
+
+   A. Pile logicielle sur-mesure Telegraf, PostgreSQL, TimescaleDB et Grafana.
+
+      L'assemblage sur-mesure s'appuie sur l'agent léger Telegraf écrit en langage Go pour collecter les métriques avec une faible empreinte mémoire.
+
+      Le plugin SNMP de Telegraf est capable de requêter simultanément des milliers de points de terminaison réseau avec une efficacité maximale.
+
+      Grafana offre des capacités d'interactivité et de visualisation hautement personnalisables pour la consultation des tableaux de bord.
+
+      Cette approche exige un effort d'intégration très élevé car chaque identifiant d'objet Comware doit être configuré manuellement.
+
+      L'absence de moteur de découverte automatique et d'inventaire unifié complexifie la maintenance opérationnelle de la solution.
+
+   B. Solution open-source intégrée Zabbix avec TimescaleDB.
+
+      Zabbix constitue une solution intégrée prenant en charge nativement le moteur PostgreSQL optimisé par l'extension TimescaleDB.
+
+      Le système de modèles officiels intègre la découverte à bas niveau LLD pour cartographier automatiquement les composants Comware.
+
+      Le moteur d'alerte embarqué calcule la conformité aux objectifs de niveau de service SLA exigés pour le réseau étendu.
+
+      Zabbix intègre une gestion native de la haute disponibilité ainsi qu'un contrôle d'accès basé sur les rôles très granulaire.
+
+      L'interconnexion avec Grafana reste possible via un plugin officiel pour sublimer la présentation des tableaux de bord.
+
+   C. Solution spécialisée réseau LibreNMS.
+
+      LibreNMS excelle dans la découverte automatique de la topologie réseau via les protocoles LLDP et la gestion des protocoles de routage.
+
+      Il prend en charge nativement les sondes de performance NQA et génère des rapports de synthèse sans configuration manuelle laborieuse.
+
+      Son architecture s'appuie sur MySQL ou MariaDB, s'avérant nettement moins performante que TimescaleDB pour les séries temporelles.
+
+      La haute disponibilité de LibreNMS nécessite un cluster hétérogène combinant Galera, Memcached et Redis, augmentant la complexité.
+
+   D. Solution propriétaire HPE IMC avec module SLA Manager.
+
+      HPE IMC propose un niveau d'intégration matériel parfait pour configurer à distance les sondes NQA sur les équipements Comware.
+
+      Il permet de pousser des configurations complexes et d'effectuer le déploiement automatisé des mises à jour de firmware.
+
+      Son architecture monolithique basée sur Java s'avère extrêmement gourmande en ressources de calcul et contraire au Green IT.
+
+      Son coût total de possession est très élevé en raison d'un modèle de licences payantes au nœud et de son obsolescence programmée vers le cloud.
+
+   E. Synthèse analytique et choix de la plateforme.
+
+      Les solutions open-source présentent un coût d'acquisition de licence nul contrairement à la solution HPE IMC.
+
+      Zabbix associé à TimescaleDB offre le compromis optimal entre effort d'intégration modéré, excellente haute disponibilité et TCO maîtrisé.
+
+III. STRATÉGIES DE MAINTIEN EN CONDITION OPÉRATIONNELLE ET TCO.
+
+   A. Support entreprise direct auprès des éditeurs logiciels.
+
+      La souscription de contrats de support direct auprès des éditeurs évite le risque de Shadow IT sur une infrastructure critique.
+
+      EnterpriseDB propose le contrat EDB Postgres Enterprise couvrant PostgreSQL, TimescaleDB et Patroni avec un support continu vingt-quatre heures sur vingt-quatre.
+
+      Ce support offre un accès direct aux ingénieurs du noyau avec une garantie de temps d'intervention de quinze à trente minutes pour les incidents critiques.
+
+      Zabbix SIA commercialise des souscriptions Gold, Platinum et Enterprise offrant une assistance continue et des correctifs prioritaires.
+
+   B. Tierce maintenance applicative via une entreprise de services du numérique.
+
+      La contractualisation d'une TMA auprès d'une ESN offre un guichet unique capable d'analyser l'intégralité de la chaîne d'acquisition.
+
+      L'ESN prend en charge la résolution des dysfonctionnements entre le système d'exploitation Comware et l'affichage des graphiques.
+
+      L'ESN ne dispose pas d'accès au code source du noyau et reste dépendante de la publication des correctifs communautaires pour les bugs profonds.
+
+   C. Modèle de gouvernance hybride Back-to-Back.
+
+      Le modèle Back-to-Back associe une ESN locale pour les niveaux de support un et deux à des contrats éditeurs pour le niveau trois.
+
+      L'ESN gère l'exploitation quotidienne, l'ajout de nouvelles sondes NQA et l'adaptation des tableaux de bord en heures ouvrées.
+
+      Les contrats éditeurs EnterpriseDB et Zabbix Enterprise garantissent une escalade rapide en cas de défaillance majeure du cœur logiciel.
+
+IV. CONFORMITÉ À LA DIRECTIVE NIS2 ET AU RÉFÉRENTIEL RECYF.
+
+   A. Sécurisation des flux de métrologie et protection du plan de contrôle.
+
+      La directive NIS2 impose la sécurisation stricte des flux de gestion, interdisant l'usage de SNMPv1 et SNMPv2c transmis en clair.
+
+      La collecte s'effectue exclusivement via le protocole SNMPv3 configuré au niveau de sécurité maximal authPriv.
+
+      L'authentification s'appuie sur l'algorithme HMAC-SHA-256 et le chiffrement du trafic utilise l'algorithme AES-256.
+
+      Le plan de contrôle des routeurs est protégé par des listes de contrôle d'accès rejetant tout trafic SNMP non issu de l'IP virtuelle.
+
+   B. Maîtrise de l'administration et contrôle des accès selon l'objectif onze du ReCyF.
+
+      L'objectif onze du Référentiel Cyber France impose une gestion stricte des identités et des accès d'administration.
+
+      Un contrôle d'accès basé sur les rôles restreint la visibilité des deux cent cinquante agents à leur seul périmètre géographique.
+
+      L'authentification sur l'interface web s'interfère avec l'annuaire via SAML ou OpenID Connect en imposant l'authentification multifacteur.
+
+      Les opérations d'administration système doivent obligatoirement transiter par un réseau dédié équipé d'un bastion PAM.
+
+      Le bastion PAM assure la rotation automatique des secrets de service et l'enregistrement probatoire de toutes les sessions.
+
+   C. Sécurité de la chaîne d'approvisionnement logicielle et gestion des correctifs.
+
+      L'intégration de briques open-source multiples exige l'établissement de nomenclatures logicielles SBOM via des outils comme Syft ou CycloneDX.
+
+      L'inventaire cryptographique des dépendances permet de détecter proactivement les vulnérabilités publiques connues.
+
+      Les serveurs de supervision ne possèdent aucun accès direct à Internet et téléchargent leurs patchs sur un registre interne audité.
+
+   D. Journalisation, détection comportementale et notification des incidents.
+
+      Les événements d'administration et les modifications de configuration sont journalisés et transmis en temps réel au SIEM central.
+
+      Les variations anormales de charge processeur sur les routeurs sont analysées comme des indicateurs d'attaque par déni de service.
+
+      L'organisation doit émettre une alerte précoce à l'ANSSI dans les vingt-quatre heures suivant la détection d'une intrusion majeure.
+
+      Un rapport d'incident détaillé doit être transmis sous soixante-douze heures, suivi d'un rapport final au terme d'un mois.
+
+POINTS D'ATTENTION.
+      Il est mathématiquement impossible d'obtenir un quorum Raft sur deux nœuds physiques sans ajouter un nœud témoin externe.
+
+      Une mauvaise configuration des sondes NQA peut provoquer une saturation processeur sur le processus nqad des routeurs cibles.
+
+      Les versions SNMPv1 et SNMPv2c sont formellement proscrites par le Référentiel Cyber France en raison de la transmission en clair.
+
+      Toute administration système en accès direct depuis le réseau bureautique est interdite et doit passer par un bastion PAM.
+
+      L'absence d'accès direct à Internet impose la présence d'un miroir de dépôts de paquets interne pour l'application des correctifs.
+
+      Le non-respect du délai de notification de vingt-quatre heures à l'ANSSI constitue un défaut majeur de conformité à la directive NIS2.
+
+EXEMPLES CITES.
+      L'opération NQA de type udp-jitter mesure la gigue et la latence des flux UDP entre la sonde et l'équipement cible.
+
+      L'opération NQA de type icmp-jitter évalue les performances du réseau à travers l'envoi de paquets ICMP séquentiels.
+
+      La commande monitor cpu-usage threshold permet de fixer le seuil d'alerte de surconsommation processeur sur les routeurs Comware.
+
+      La commande macsec cipher-suite aes-256 active le chiffrement matériel fort du trafic sur les équipements réseau Comware.
+
+      L'identifiant OID 1.3.6.1.4.1.25506.8.3.1.1 correspond à la MIB propriétaire HH3C-NQA-MIB pour l'extraction des métriques.
+
+      L'indicateur OID ssCpuRawUser permet de surveiller la charge processeur brute consommée par les processus utilisateurs du système.
+
+      L'outil Syft génère la nomenclature logicielle SBOM pour répertorier l'ensemble des bibliothèques et dépendances applicatives.
+
+      L'outil CycloneDX produit un inventaire cryptographique standardisé des composants pour la recherche de vulnérabilités CVE.

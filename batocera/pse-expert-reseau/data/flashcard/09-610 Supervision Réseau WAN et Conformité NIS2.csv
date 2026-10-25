@@ -1,0 +1,51 @@
+Quel est l'objectif principal de la solution d'architecture de supervision présentée dans le document ?,"Superviser de manière centralisée les performances réseau (QoS/SLA) de 600 sites WAN distants en mesurant la latence, la gigue et la perte de paquets."
+Quel système d'exploitation équipe les 600 routeurs de l'infrastructure WAN ?,Le système d'exploitation Comware (édité par HPE et H3C).
+Quelles sondes natives du système Comware sont utilisées pour mesurer la performance réseau ?,Les sondes NQA (Network Quality Analyzer).
+Quelle MIB propriétaire est exploitée pour collecter les métriques NQA via SNMP ?,La MIB HH3C-NQA-MIB.
+Quelle contrainte matérielle forte d'éco-conception (Green IT) est imposée à l'infrastructure de supervision ?,L'infrastructure matérielle est strictement limitée à deux serveurs physiques configurés en haute disponibilité.
+Combien d'agents doivent pouvoir consulter les tableaux de bord de supervision et sur quelle période d'historique ?,250 agents sur un historique glissant d'une année entière sans latence perceptible.
+Quel référentiel de l'ANSSI doit être scrupuleusement respecté pour se conformer à la directive NIS2 ?,Le Référentiel Cyber France (ReCyF).
+Qu'est-ce que le phénomène de « split-brain » dans un cluster de base de données à deux serveurs ?,"Une situation de rupture de lien réseau où les deux nœuds s'érigent simultanément en nœud primaire, provoquant une divergence et une corruption logique irréversible des données."
+Pourquoi un cluster Patroni/etcd reposant sur Raft ne peut-il pas atteindre de quorum avec seulement deux nœuds ?,"L'algorithme Raft exige une majorité absolue de votes ; sur deux nœuds, la perte d'un membre laisse 1 vote sur 2, ce qui ne constitue pas une majorité (>50%)."
+Comment résout-on le problème de quorum dans une architecture Patroni/etcd limitée à deux serveurs physiques ?,En déployant un 3e membre etcd faisant office d'arbitre (nœud témoin / Witness / QDevice) en dehors des deux serveurs principaux.
+Quel est le rôle spécifique du nœud témoin (Witness) dans le cluster etcd ?,Il ne stocke aucune donnée relationnelle ou temporelle et participe uniquement aux votes de consensus.
+Où peut-on héberger le nœud témoin etcd si aucun serveur physique supplémentaire n'est disponible ?,Sous la forme d'un conteneur très léger sur un équipement réseau compatible (ex. un commutateur cœur de réseau) ou un équipement annexe.
+Quels deux composants gèrent l'Adresse IP Virtuelle (VIP) en amont du cluster de base de données ?,HAProxy et Keepalived.
+Comment HAProxy oriente-t-il les requêtes d'écriture (INSERT) vers le bon nœud PostgreSQL ?,En interrogeant dynamiquement l'API REST de Patroni pour identifier le nœud primaire (leader) du cluster.
+Quelle vitesse d'ingestion (en NVPS) génère le polling SNMP de 600 routeurs ayant 2 opérations NQA collectées chaque minute ?,"200 nouvelles valeurs par seconde (NVPS), correspondant à 12 000 valeurs par minute."
+Quel volume annuel brut de points de données est généré par la supervision du réseau ?,Environ 6 milliards de points de données.
+Qu'est-ce qu'une « hypertable » dans TimescaleDB ?,Une abstraction qui transforme une table PostgreSQL en une base optimisée pour les séries temporelles via un partitionnement automatique en sous-tables (chunks).
+Quel paramètre de TimescaleDB contrôle le dimensionnement temporel des partitions de données ?,Le paramètre chunk_time_interval.
+Quelle est la règle de dimensionnement optimale pour la taille d'un chunk non compressé dans TimescaleDB ?,Un chunk non compressé doit occuper environ 25 % (un quart) de la mémoire vive (RAM) allouée.
+De quel pourcentage la compression en colonnes de TimescaleDB réduit-elle l'empreinte de stockage ?,Entre 90 % et 95 % de réduction.
+Quelle fonctionnalité de TimescaleDB permet d'offrir des réponses instantanées lors des requêtes sur les tableaux de bord ?,"Les agrégations continues (Continuous Aggregates), qui pré-calculent les vues horaires et journalières en arrière-plan."
+Comment s'effectue la purge des données obsolètes à haute résolution dans TimescaleDB ?,Par la suppression économique de chunks complets via la commande drop_chunks.
+Quelles sont les ressources matérielles allouées à chaque nœud de base de données du cluster ?,"8 vCPU, 32 Go de RAM, et 250 Go de stockage SSD NVMe (> 5 000 IOPS)."
+En quoi l'utilisation de TimescaleDB participe-t-elle à la sobriété numérique (Green IT) ?,"La compression en colonnes diminue fortement les opérations d'E/S sur disque, ce qui réduit l'usure des SSD et allonge la durée de vie du matériel."
+Quel risque pèse sur le processeur des routeurs Comware en cas de sollicitation excessive des sondes NQA ?,Une consommation anormale du CPU (CPU spikes) au niveau du processus nqad du routeur.
+Quel plugin de Telegraf permet la collecte parallélisée sur un grand nombre d'équipements ?,Le plugin inputs.snmp.
+Quel est le principal inconvénient d'une pile logicielle sur-mesure (Telegraf / TimescaleDB / Grafana) ?,"L'absence de moteur d'auto-découverte et d'inventaire unifié, nécessitant de déclarer et coder manuellement chaque OID."
+"Quelle fonctionnalité de Zabbix permet de découvrir automatiquement les interfaces, capteurs et sondes des routeurs Comware ?",La découverte à bas niveau (LLD - Low Level Discovery).
+Pourquoi LibreNMS est-il considéré comme inadapté au stockage à très grande échelle pour ce projet ?,"Il s'appuie sur MySQL/MariaDB, un moteur relationnel classique nettement moins performant que TimescaleDB pour traiter des milliards de séries temporelles."
+Quels sont les deux désavantages majeurs de la solution HPE IMC identifiés dans l'étude comparative ?,"1. Une architecture monolithique gourmande en ressources (non Green IT).
+2. Un TCO très élevé associé à une obsolescence programmée au profit du cloud (Aruba Central)."
+Quelle combinaison logicielle est désignée comme le choix idéal pour la solution de supervision ?,Zabbix couplé à PostgreSQL / TimescaleDB.
+"Quel offre de support de l'éditeur EnterpriseDB (EDB) permet de couvrir PostgreSQL, TimescaleDB et Patroni ?",Le plan « EDB Postgres Enterprise » (Premium Support).
+Quel est le temps de réponse (GTI) garanti par la souscription Zabbix Enterprise en cas d'incident critique ?,"1,5 heure pour une sévérité critique en couverture 24/7/365."
+Quel est l'avantage principal de faire appel à une ESN pour une Tierce Maintenance Applicative (TMA) ?,Elle fournit un guichet unique assurant le support de bout-en-bout sur l'ensemble de la chaîne applicative (du réseau au tableau de bord).
+Quelle est la limite majeure d'une ESN en TMA en cas de bug au niveau du noyau logiciel open-source ?,Elle ne possède pas d'accès direct au code source de l'éditeur et doit attendre la publication d'un patch officiel par la communauté ou l'éditeur.
+En quoi consiste la stratégie de gouvernance de maintenance dite « Back-to-Back » ?,"Une ESN gère le MCO de niveau 1 et 2 au quotidien, tout en s'appuyant sur les contrats d'éditeurs (EDB, Zabbix) pour le support de niveau 3."
+Pourquoi les versions SNMPv1 et SNMPv2c sont-elles proscrites par les exigences de la directive NIS2 ?,Parce qu'elles transmettent les mots de passe et communautés en texte clair sur le réseau.
+Quel niveau de sécurité SNMPv3 est exigé pour la collecte des métriques ?,Le niveau maximal authPriv (Authentification et Confidentialité).
+Quels algorithmes sont préconisés sur les routeurs Comware pour assurer l'authentification et le chiffrement SNMPv3 ?,HMAC-SHA-256 pour l'authentification et AES-256 (ou suite MACsec) pour la confidentialité.
+Comment protège-t-on le plan de contrôle (Control Plane Policing) des routeurs contre les requêtes SNMP malveillantes ?,Par le déploiement d'ACL strictes rejetant tout trafic SNMP qui ne provient pas de l'IP virtuelle (VIP) du cluster de collecte.
+Quelle mesure de gouvernance des accès (ReCyF Obj. 11) s'impose pour les 250 agents consultant la plateforme ?,Un contrôle d'accès basé sur les rôles (RBAC) appliquant le principe du moindre privilège selon la zone géographique ou fonctionnelle.
+Quels mécanismes d'authentification doivent être mis en place pour accéder à l'interface d'administration web ?,Une interconnexion via SAML ou OpenID Connect imposant l'Authentification Multifacteur (MFA).
+"Comment doivent transiter les opérations d'administration système à haut privilège (SSH, Patroni) ?",Elles doivent obligatoirement passer par un réseau d'administration dédié et une solution PAM/Bastion (avec enregistrement des sessions).
+Qu'est-ce qu'un SBOM (Software Bill of Materials) et quel est son rôle vis-à-vis de NIS2 ?,Une nomenclature logicielle répertoriant les dépendances de composants afin d'identifier et de mitiger les risques de la chaîne d'approvisionnement (Supply Chain).
+Citez deux outils d'analyse recommandés pour générer la nomenclature SBOM des dépendances.,Syft ou CycloneDX.
+Comment les serveurs de la zone de supervision téléchargent-ils leurs mises à jour de sécurité ?,Ils n'ont aucun accès direct à Internet et utilisent un registre/dépôt de paquets interne certifié.
+Quel est le délai légal d'émission d'une alerte précoce à l'ANSSI en cas d'incident de sécurité selon NIS2 ?,Dans les 24 heures suivant la détection de l'incident.
+Quels sont les délais respectifs pour transmettre le rapport détaillé et le rapport final d'incident sous NIS2 ?,72 heures pour le rapport détaillé et 1 mois pour le rapport final.
+Où l'infrastructure de supervision doit-elle exporter ses journaux d'événements en temps réel ?,Vers le système central de corrélation des événements de sécurité de l'organisation (SIEM / SOC).
+Comment l'outil de métrologie réseau peut-il agir lui-même comme une sonde de détection d'attaque ?,Une hausse inexpliquée du CPU sur de multiples routeurs peut signaler une attaque DDoS ou une tentative d'exploitation massive du réseau.
