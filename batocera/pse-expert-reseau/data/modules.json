@@ -60,6 +60,8 @@
     "09-580 PSE-ER Synthèse globale - Mégaquiz des 57 modules.csv",
     "09-590 Évolution des architectures réseau d'entreprise - de l'ARPANET au Zero Trust.csv",
     "09-600 HPEH3C - Diagnostic Comware User-View.csv",
-    "09-610 Supervision Réseau WAN et Conformité NIS2.csv"
-    
+    "09-610 Supervision Réseau WAN et Conformité NIS2.csv",
+    "09-620 OSPF sous Comware - mise en œuvre et dépannage du routage à état de liens sur HPE-H3C.csv",
+    "09-630 Conception d'un réseau métropolitain MAN - topologies, redondance et haute disponibilité avec des équipements Comware.csv",
+    "09-640 Étude de cas - déployer un réseau métropolitain MAN Comware avec routage OSPF.csv"
 ]

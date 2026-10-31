@@ -1,0 +1,245 @@
+ÉTUDE DE CAS - DÉPLOIEMENT D'UN RÉSEAU MÉTROPOLITAIN MAN SUR ÉQUIPEMENTS COMWARE AVEC ROUTAGE OSPF.
+
+LEXIQUE COMPLET.
+
+      Le terme étude de cas désigne la mise en situation complète qui applique à un scénario concret les principes de conception, d'adressage et de configuration vus séparément.
+
+      Le terme cahier des charges désigne l'ensemble des exigences fonctionnelles et de disponibilité qui encadrent la conception du réseau métropolitain.
+
+      Le terme site de cœur désigne le site central qui héberge la fabrique fédératrice et porte l'aire OSPF zéro du domaine.
+
+      Le terme site de distribution désigne un site périphérique dont les commutateurs assurent le routage local et la bordure de zone vers le cœur.
+
+      Le terme anneau fédérateur désigne la boucle de fibre qui relie le cœur et les sites de distribution, support physique de l'aire OSPF zéro.
+
+      Le terme plan d'adressage désigne l'attribution raisonnée des blocs d'adresses aux sites, aux liens et aux interfaces de bouclage.
+
+      Le terme interface de bouclage désigne une interface logique LoopBack toujours active, utilisée pour fixer le router-id et administrer l'équipement.
+
+      Le terme liaison de transit désigne un lien point à point entre deux équipements de routage, déclaré en type de réseau p2p sous OSPF.
+
+      Le sigle ABR désigne l'Area Border Router, le commutateur de distribution d'un site qui appartient à la fois à l'aire zéro et à la zone de son site.
+
+      Le terme résumé de zone désigne l'agrégation, sur un ABR, des préfixes internes d'une zone en un préfixe unique annoncé vers le cœur.
+
+      Le sigle IRF désigne la virtualisation de deux commutateurs en une fabrique logique unique, utilisée au cœur et sur chaque site de distribution.
+
+      Le sigle VRRP désigne le protocole de passerelle virtuelle redondante qui protège le premier saut des hôtes de chaque VLAN.
+
+      Le sigle BFD désigne la détection bidirectionnelle de panne, associée à OSPF sur l'anneau fédérateur pour accélérer la convergence.
+
+      Le terme recette désigne la séquence de vérifications qui valide le bon fonctionnement du réseau après son déploiement.
+
+      Le sigle MTU désigne la taille maximale d'unité de transmission, dont l'incohérence entre deux interfaces bloque l'adjacence OSPF à l'état Exchange.
+
+COURS DÉTAILLÉ.
+
+I. PRÉSENTATION DU SCÉNARIO ET DU CAHIER DES CHARGES.
+
+   A. Contexte et sites à raccorder.
+
+      La collectivité fictive de ce cas doit interconnecter quatre sites d'une même agglomération : l'hôtel de ville, qui héberge le centre de données et joue le rôle de site de cœur, la médiathèque, le centre technique municipal et une annexe administrative. Les trois derniers sont des sites de distribution raccordés au cœur.
+
+      Chaque site accueille des postes de travail, des téléphones sur IP et des équipements techniques, répartis dans des VLAN distincts. Le réseau doit porter la téléphonie, l'accès aux applications métier hébergées au centre de données et l'accès à Internet mutualisé par le cœur.
+
+      Les quatre sites sont reliés par une boucle de fibre optique municipale, qui forme l'anneau fédérateur du réseau. Cette boucle offre deux chemins physiques entre le cœur et chaque site, condition d'une disponibilité élevée.
+
+      Le cahier des charges fixe trois exigences majeures : aucune panne d'un équipement ou d'un lien ne doit interrompre un site, la téléphonie doit être priorisée, et le réseau doit être supervisé en continu conformément aux attentes de la directive NIS2.
+
+   B. Choix d'architecture retenus.
+
+      Le cœur et chaque site de distribution sont construits autour d'une paire de commutateurs réunis en pile IRF, ce qui élimine le point unique de défaillance au niveau des équipements. Chaque paire se présente comme une entité logique unique aux protocoles de routage.
+
+      Le routage interne du réseau métropolitain est confié à OSPF, dont l'aire fédératrice est portée par l'anneau et le cœur. Chaque site de distribution constitue une zone OSPF distincte, raccordée au cœur par ses liaisons d'anneau.
+
+      La passerelle des hôtes de chaque VLAN est rendue redondante par VRRP sur la paire de distribution du site. Les liens de l'anneau fédérateur sont des liaisons de transit point à point protégées par BFD pour une convergence rapide.
+
+      Ce schéma combine quatre niveaux de résilience cohérents : IRF pour le matériel, l'anneau pour les liens, VRRP pour la passerelle et OSPF pour le routage. Il sert de fil conducteur à l'ensemble de la configuration qui suit.
+
+II. PLAN D'ADRESSAGE ET DÉCOUPAGE EN ZONES.
+
+   A. Attribution des blocs par site.
+
+      Le plan d'adressage attribue à chaque site un bloc contigu agrégeable, condition d'un résumé de zone efficace. Le cœur et le domaine utilisent le réseau privé 10.0.0.0/8, découpé par usage et par site.
+
+      La médiathèque reçoit le bloc 10.1.0.0/16 et constitue la zone OSPF 1, le centre technique reçoit 10.2.0.0/16 en zone 2, et l'annexe reçoit 10.3.0.0/16 en zone 3. Cette correspondance stricte entre un site, un bloc d'adresses et une zone simplifie l'exploitation et rend chaque zone résumable en un seul préfixe de seize bits.
+
+      À l'intérieur de chaque site, les VLAN suivent une convention commune : le troisième octet code l'usage. Par exemple, pour la médiathèque, 10.1.10.0/24 porte les utilisateurs, 10.1.20.0/24 la téléphonie et 10.1.99.0/24 la gestion des équipements.
+
+      Cette régularité du plan d'adressage facilite la lecture des configurations et des tables de routage. Un administrateur déduit immédiatement le site, l'usage et la zone d'une adresse donnée.
+
+   B. Adressage des liaisons de transit et des bouclages.
+
+      Les liaisons de l'anneau fédérateur sont des liens point à point adressés en trente bits, pris dans le bloc 10.0.0.0/24 réservé au transit. Le lien entre le cœur et la médiathèque utilise 10.0.0.0/30, celui entre la médiathèque et le centre technique 10.0.0.4/30, et ainsi de suite le long de l'anneau.
+
+      Chaque fabrique reçoit une interface de bouclage dédiée au router-id, prise dans le bloc 10.255.0.0/24. Le cœur porte 10.255.0.1, la médiathèque 10.255.0.2, le centre technique 10.255.0.3 et l'annexe 10.255.0.4.
+
+      Fixer le router-id sur cette adresse de bouclage garantit sa stabilité, car le bouclage reste actif tant que l'équipement fonctionne. Les router-id ainsi choisis sont lisibles et ordonnés, ce qui facilite l'identification des équipements dans la base OSPF.
+
+      Toutes les liaisons de transit sont déclarées dans l'aire zéro et en type de réseau p2p. Ce choix supprime l'élection d'un routeur désigné sur l'anneau et accélère l'établissement des adjacences entre fabriques.
+
+   C. Correspondance entre topologie physique et plan de routage.
+
+      La hiérarchie de routage s'aligne sur la hiérarchie physique : l'anneau et le cœur portent l'aire zéro, chaque site porte sa propre zone. Les commutateurs de distribution sont des ABR, à la frontière entre l'aire zéro de l'anneau et la zone de leur site.
+
+      Chaque ABR résume le bloc de seize bits de son site vers le cœur, de sorte que la table de routage du cœur ne contient qu'un préfixe par site au lieu de tous les sous-réseaux. Cette agrégation amortit l'effet des instabilités internes à un site sur le reste du domaine.
+
+      Le centre de données de l'hôtel de ville et l'accès Internet sont rattachés au cœur, dans l'aire zéro. Les routes correspondantes sont diffusées vers les sites, qui y accèdent par l'anneau.
+
+      Cette correspondance claire entre le plan physique, le plan d'adressage et le plan de routage est la marque d'une conception maîtrisée. Elle rend le réseau prévisible, résumable et facile à diagnostiquer.
+
+III. CONFIGURATION DU CŒUR ET DE L'ANNEAU FÉDÉRATEUR.
+
+   A. Fabrique IRF du cœur et interface de bouclage.
+
+      Les deux commutateurs du cœur sont d'abord réunis en pile IRF, chacun recevant un numéro de membre et des ports d'interconnexion dédiés à la fabrique. La détection de scission est activée pour prévenir tout fonctionnement à double maître en cas de rupture des liens IRF.
+
+      La fabrique reçoit ensuite son interface de bouclage d'administration, support du router-id. La séquence est la suivante : interface LoopBack0, puis ip address 10.255.0.1 255.255.255.255.
+
+      Cette adresse de bouclage servira d'identifiant OSPF stable pour l'ensemble du cœur. Le fait que la fabrique IRF ne présente qu'un seul plan de contrôle garantit un router-id unique vu de l'anneau.
+
+      Le cœur héberge également les interfaces de VLAN du centre de données et la sortie Internet mutualisée. Ces réseaux seront annoncés dans l'aire zéro pour être joignables depuis tous les sites.
+
+   B. Activation d'OSPF et des liaisons de transit.
+
+      Le processus OSPF est activé avec un router-id explicite et l'aire zéro est déclarée : ospf 1 router-id 10.255.0.1, puis area 0. Les réseaux de transit de l'anneau et les réseaux du centre de données sont déclarés dans cette aire avec la commande network et un masque générique inversé.
+
+      Par exemple, la liaison vers la médiathèque est intégrée par network 10.0.0.0 0.0.0.3 dans la vue de l'aire zéro. Le réseau du centre de données en vingt-quatre bits est intégré par network 10.0.100.0 0.0.0.255.
+
+      Chaque interface de l'anneau est ensuite forcée en type point à point au niveau de l'interface par ospf network-type p2p. Ce réglage évite une élection inutile de routeur désigné sur des liens strictement bilatéraux.
+
+      La protection par BFD est activée sur ces mêmes interfaces de transit par ospf bfd enable. Dès qu'une session BFD tombe, OSPF est prévenu immédiatement et recalcule les chemins sans attendre l'expiration du temporisateur Dead.
+
+   C. Sécurisation des échanges du cœur.
+
+      Les échanges OSPF de l'anneau sont authentifiés pour empêcher l'injection de fausses annonces par un équipement illégitime raccordé à la fibre. L'authentification par condensé est déclarée au niveau des interfaces de transit avec une clé propre à l'anneau.
+
+      La cohérence de l'authentification est vérifiée de proche en proche, car une divergence de clé empêche l'adjacence de se former. Le déploiement de l'authentification se planifie donc segment par segment le long de l'anneau.
+
+      Le plan de contrôle du cœur est en outre protégé en filtrant les paquets de routage reçus d'interfaces non prévues. Cette défense en profondeur limite la surface d'exposition du routage métropolitain.
+
+      La journalisation des changements d'état des voisins OSPF du cœur est activée pour tracer toute instabilité. Ces journaux alimentent la supervision continue exigée par le cahier des charges.
+
+IV. CONFIGURATION D'UN SITE DE DISTRIBUTION TYPE.
+
+   A. Fabrique IRF et interfaces de VLAN du site.
+
+      Le site de la médiathèque est construit autour d'une paire de commutateurs en pile IRF, raccordée à l'anneau par deux liaisons vers ses voisins. La fabrique reçoit son interface de bouclage LoopBack0 en 10.255.0.2, support de son router-id.
+
+      Les VLAN du site sont créés et dotés de leurs interfaces de niveau trois : interface Vlan-interface10 pour les utilisateurs, avec une adresse dans 10.1.10.0/24, interface Vlan-interface20 pour la téléphonie dans 10.1.20.0/24, et interface Vlan-interface99 pour la gestion dans 10.1.99.0/24.
+
+      Les commutateurs d'accès du site remontent vers cette paire de distribution par des liaisons agrégées en LACP, réparties sur les deux membres IRF. Le trafic des postes est ainsi segmenté à l'accès et agrégé à la distribution.
+
+      Les interfaces de VLAN desservant uniquement des hôtes sont rendues passives pour OSPF afin d'annoncer leur réseau sans émettre de Hello inutiles. La commande silent-interface est appliquée à ces interfaces de VLAN utilisateurs et téléphonie.
+
+   B. Redondance de passerelle VRRP.
+
+      La passerelle de chaque VLAN du site est rendue redondante par VRRP sur la paire de distribution. Comme les deux commutateurs sont réunis en IRF, la passerelle est déjà matériellement redondante ; VRRP s'emploie ici lorsque deux fabriques distinctes assurent la distribution, ou pour partager la passerelle avec un équipement de secours.
+
+      Dans la variante à deux fabriques, chaque VLAN reçoit un groupe VRRP et une adresse virtuelle que les postes utilisent comme passerelle par défaut. Le commutateur maître porte l'adresse virtuelle tandis que le second reste en secours prêt à la reprendre.
+
+      Le suivi d'interface abaisse la priorité du maître lorsque sa liaison d'anneau tombe, afin que la passerelle active suive le chemin OSPF disponible. Cette cohérence évite qu'un flux ne traverse inutilement le lien entre les deux passerelles.
+
+      Les postes de travail ignorent toute cette mécanique : ils ne connaissent que l'adresse virtuelle de leur VLAN. La redondance de passerelle leur est entièrement transparente.
+
+   C. Bordure de zone OSPF et résumé.
+
+      Le commutateur de distribution est un ABR : il appartient à l'aire zéro par ses liaisons d'anneau et à la zone 1 par les réseaux internes du site. Le processus OSPF déclare donc deux aires, area 0 pour les liens de transit et area 1 pour les VLAN du site.
+
+      Les réseaux de VLAN du site sont intégrés dans la zone 1 avec leurs commandes network, par exemple network 10.1.10.0 0.0.0.255 pour les utilisateurs. Les liaisons d'anneau sont intégrées dans l'aire zéro et forcées en type p2p avec BFD, comme au cœur.
+
+      L'ABR résume ensuite l'ensemble du site vers le cœur avec abr-summary 10.1.0.0 255.255.0.0 dans la vue de la zone 1. Le cœur ne voit alors qu'un unique préfixe de seize bits pour toute la médiathèque.
+
+      Lorsque le site n'a pas besoin de connaître le détail des routes externes, sa zone peut être déclarée en stub pour n'y recevoir qu'une route par défaut. Ce choix allège encore la base des équipements de distribution.
+
+V. RÉSILIENCE, CONVERGENCE ET SCÉNARIOS DE PANNE.
+
+   A. Comportement sur rupture d'un segment d'anneau.
+
+      En fonctionnement nominal, chaque site est joignable par un sens de l'anneau, le second sens servant de chemin de secours calculé par OSPF. La base OSPF contient les deux chemins, mais seul le plus court est installé dans la table de routage.
+
+      Lorsqu'un segment de fibre est rompu, la session BFD associée tombe en quelques dizaines de millisecondes et prévient OSPF sans attendre le temporisateur Dead. OSPF recalcule aussitôt l'arbre des plus courts chemins et bascule le trafic sur le sens opposé de l'anneau.
+
+      Aucun site n'est isolé par la rupture d'un segment unique, car la topologie en anneau garantit toujours un second chemin. La convergence est de l'ordre de la fraction de seconde, imperceptible pour la plupart des applications.
+
+      Le résumé de zone limite la portée de l'événement : un changement interne à un site ne provoque aucun recalcul dans les autres zones ni dans le cœur. Le cloisonnement des zones protège l'ensemble du domaine des instabilités locales.
+
+   B. Comportement sur défaillance d'un équipement.
+
+      La défaillance d'un membre physique d'une fabrique IRF, au cœur ou sur un site, n'interrompt pas le service tant que la fabrique logique survit. Le second membre continue d'assurer la commutation et le routage sans reconvergence OSPF, car le router-id et la base restent inchangés.
+
+      La défaillance simultanée des deux membres d'un site, événement bien plus rare, isole ce site mais n'affecte pas les autres grâce au cloisonnement des zones. Le cahier des charges est respecté puisqu'aucune panne unique ne provoque d'interruption.
+
+      La passerelle des hôtes reste disponible grâce à VRRP ou à la fabrique IRF, selon la variante retenue pour la distribution. Les postes conservent leur passerelle par défaut sans aucune reconfiguration.
+
+      La combinaison d'IRF, de l'anneau, de VRRP et d'OSPF couvre ainsi l'ensemble des pannes uniques prévues par le cahier des charges. Chaque mécanisme protège un niveau différent de l'architecture.
+
+   C. Qualité de service et supervision.
+
+      Les flux de téléphonie, marqués dès la couche d'accès, reçoivent une priorité stricte dans les files d'attente de chaque équipement le long de l'anneau. Le marquage est respecté de bout en bout, du poste jusqu'au centre de données.
+
+      Le cœur applique la priorisation sans reclasser les flux, conformément à sa vocation de commutation rapide. Les frontières contrôlent toutefois la confiance accordée au marquage reçu pour éviter les abus.
+
+      La supervision collecte en continu l'état des voisins OSPF, des sessions BFD, des fabriques IRF et des liens optiques. Ces indicateurs alimentent les tableaux de bord et répondent aux attentes de surveillance de la directive NIS2.
+
+      La disponibilité réelle du réseau se mesure par cette supervision, qui signale les dérives avant qu'elles ne deviennent des pannes. Un réseau métropolitain conforme est un réseau observé en permanence.
+
+VI. RECETTE ET VALIDATION DU DÉPLOIEMENT.
+
+   A. Vérification du routage et des adjacences.
+
+      La recette commence par le contrôle des adjacences OSPF avec display ospf peer sur le cœur et sur chaque site. Toutes les adjacences de l'anneau doivent atteindre l'état Full, signe d'une synchronisation complète des bases.
+
+      La commande display ospf interface verbose confirme que chaque liaison de transit est bien en aire zéro, en type p2p, avec BFD actif et les temporisateurs attendus. Toute divergence de masque ou de temporisateur se détecte en comparant les deux extrémités d'un lien.
+
+      La base topologique se contrôle avec display ospf lsdb, qui doit être cohérente entre les routeurs d'une même zone. La présence des préfixes résumés se vérifie sur le cœur, où chaque site ne doit apparaître que par son préfixe de seize bits.
+
+      La table de routage effective se lit avec display ip routing-table, où l'origine OSPF des routes et les préfixes résumés doivent apparaître comme prévu. Cette confrontation entre base, routes calculées et table installée valide le plan de routage.
+
+   B. Tests de connectivité et de bascule.
+
+      La connectivité de bout en bout se teste par des commandes ping entre un poste d'un site et le centre de données, ainsi qu'entre sites. Ces tests valident à la fois l'adressage, le routage et la redondance de passerelle.
+
+      La bascule se teste en coupant volontairement un segment d'anneau et en vérifiant que le trafic reste acheminé par le sens opposé. La durée d'interruption observée doit rester de l'ordre de la fraction de seconde grâce à BFD.
+
+      La résilience matérielle se teste en retirant un membre d'une fabrique IRF et en vérifiant la continuité du service. Aucune reconvergence OSPF ne doit être observée, puisque la fabrique conserve son router-id et sa base.
+
+      Chaque test est documenté avec son résultat attendu et son résultat observé. Cette traçabilité constitue la preuve de conformité du déploiement au cahier des charges.
+
+   C. Clôture et documentation finale.
+
+      La recette se clôt par la constitution d'un dossier associant la topologie, le plan d'adressage, le plan de routage et les résultats des tests. Ce dossier devient le référentiel d'exploitation et le point de départ des évolutions futures.
+
+      Les procédures de maintenance interruptive, comme la mise à niveau d'un membre IRF ou le reset ospf process, sont consignées avec leurs précautions. Une maintenance préparée préserve la disponibilité lors des évolutions.
+
+      La supervision est vérifiée comme opérationnelle avant la mise en service définitive, afin que le réseau soit observé dès le premier jour. Un déploiement n'est réputé achevé que lorsque sa surveillance est active.
+
+      Ce cas complet montre comment les principes d'OSPF et de conception d'un réseau métropolitain se combinent en une infrastructure Comware résiliente, résumable et supervisée, conforme à un cahier des charges exigeant.
+
+POINTS D'ATTENTION.
+
+      La correspondance stricte entre un site, un bloc d'adresses de seize bits et une zone OSPF est la clé d'un résumé efficace ; un adressage non contigu ruine l'agrégation.
+
+      Le router-id de chaque fabrique doit être fixé sur son interface de bouclage, et tout changement n'est pris en compte qu'après reset ospf process.
+
+      Les liaisons d'anneau sont à déclarer en aire zéro, en type p2p et avec BFD : oublier le type p2p provoque une élection inutile, oublier BFD ralentit la convergence.
+
+      Une incohérence de MTU ou d'authentification sur un segment d'anneau bloque l'adjacence sans message explicite ; la vérification croisée des deux extrémités est indispensable.
+
+      Le résumé abr-summary se déclare dans la vue de la zone du site sur l'ABR, afin que le cœur ne voie qu'un préfixe par site.
+
+      Il faut distinguer les rôles : IRF protège le matériel, l'anneau protège les liens, VRRP protège la passerelle des hôtes et OSPF assure la convergence du routage.
+
+EXEMPLES CITÉS.
+
+      La médiathèque reçoit le bloc 10.1.0.0/16 et forme la zone OSPF 1, résumée vers le cœur par abr-summary 10.1.0.0 255.255.0.0.
+
+      Le cœur active OSPF par ospf 1 router-id 10.255.0.1, puis déclare l'aire zéro et intègre la liaison vers la médiathèque par network 10.0.0.0 0.0.0.3.
+
+      Chaque liaison d'anneau est forcée en ospf network-type p2p et protégée par ospf bfd enable pour une convergence de l'ordre de la fraction de seconde.
+
+      La rupture d'un segment de fibre fait tomber la session BFD en quelques dizaines de millisecondes et bascule le trafic sur le sens opposé de l'anneau sans isoler aucun site.
+
+      Le retrait d'un membre d'une fabrique IRF ne provoque aucune reconvergence OSPF, car la fabrique conserve son router-id et sa base de données.
+
+      La recette confronte la base OSPF, les routes calculées par display ospf routing et la table installée par display ip routing-table pour valider le plan de routage.

@@ -1,0 +1,261 @@
+GUIDE DE CONCEPTION D'UN RÉSEAU MÉTROPOLITAIN MAN - TOPOLOGIES, REDONDANCE ET HAUTE DISPONIBILITÉ AVEC DES ÉQUIPEMENTS COMWARE.
+
+LEXIQUE COMPLET.
+
+      Le sigle MAN désigne un Metropolitan Area Network, un réseau de portée métropolitaine qui interconnecte plusieurs sites d'une même agglomération à haut débit, entre l'échelle locale du LAN et l'échelle étendue du WAN.
+
+      Le terme couche d'accès désigne le niveau de raccordement des postes, bornes et équipements terminaux, où se font la segmentation en VLAN et les premières règles de sécurité de port.
+
+      Le terme couche de distribution désigne le niveau d'agrégation des accès d'un site, qui assure le routage inter-VLAN et la frontière de politique entre l'accès et le cœur.
+
+      Le terme couche de cœur désigne le niveau fédérateur à très haut débit qui interconnecte les sites et commute le trafic d'un bout à l'autre du réseau métropolitain avec un minimum de latence.
+
+      Le terme topologie en anneau désigne une interconnexion où chaque nœud est relié à deux voisins pour former une boucle, offrant deux chemins physiques entre deux points.
+
+      Le terme topologie en étoile désigne une interconnexion où les sites périphériques se raccordent tous à un site central, simple mais dépendante de ce point unique.
+
+      Le terme maillage partiel désigne une interconnexion où les nœuds les plus critiques sont reliés par plusieurs liens directs, augmentant la résilience au prix du nombre de liaisons.
+
+      Le sigle IRF désigne l'Intelligent Resilient Framework, la virtualisation de plusieurs commutateurs physiques Comware en une entité logique unique.
+
+      Le sigle MSTP désigne le Multiple Spanning Tree Protocol, qui prévient les boucles de couche deux en associant des groupes de VLAN à des instances d'arbre recouvrant.
+
+      Le sigle RRPP désigne le Rapid Ring Protection Protocol, un protocole d'anneau propre à Comware qui protège une topologie en boucle avec une convergence de l'ordre de la dizaine de millisecondes.
+
+      Le sigle ERPS désigne l'Ethernet Ring Protection Switching normalisé sous la référence G.8032, équivalent standard d'un protocole d'anneau Ethernet.
+
+      Le terme Smart Link désigne un mécanisme Comware de redondance actif-passif entre deux liaisons montantes, à bascule rapide, destiné aux topologies à double rattachement.
+
+      Le sigle VRRP désigne le Virtual Router Redundancy Protocol, qui fournit aux hôtes une passerelle virtuelle redondante partagée par deux équipements.
+
+      Le sigle LACP désigne le protocole d'agrégation dynamique de liens Ethernet qui réunit plusieurs liens physiques en un lien logique unique.
+
+      Le sigle DWDM désigne le multiplexage dense en longueur d'onde, qui transporte de nombreux canaux optiques sur une même fibre pour maximiser la capacité d'un lien métropolitain.
+
+      Le sigle QoS désigne la qualité de service, l'ensemble des mécanismes de classification et de priorisation qui garantissent le traitement des flux sensibles comme la voix et la vidéo.
+
+      Le sigle SPOF désigne un Single Point Of Failure, un élément dont la défaillance unique suffit à interrompre le service, que la conception vise à éliminer.
+
+      Le sigle NIS2 désigne la directive européenne sur la sécurité des réseaux et des systèmes d'information, qui impose des exigences de supervision et de résilience aux entités essentielles et importantes.
+
+COURS DÉTAILLÉ.
+
+I. NATURE ET PÉRIMÈTRE D'UN RÉSEAU MÉTROPOLITAIN.
+
+   A. Position du MAN entre le LAN et le WAN.
+
+      Un réseau métropolitain occupe une position intermédiaire entre le réseau local, limité à un bâtiment ou un campus, et le réseau étendu, qui couvre des distances régionales ou nationales. Il interconnecte à haut débit plusieurs sites répartis dans une même agglomération, typiquement les bâtiments d'une collectivité, d'une université ou d'une administration.
+
+      La portée métropolitaine se mesure en quelques kilomètres à quelques dizaines de kilomètres, distances compatibles avec un transport sur fibre optique maîtrisé de bout en bout. Contrairement au WAN, le MAN s'appuie le plus souvent sur une infrastructure physique propre ou louée en fibre noire, et non sur des services opérateur.
+
+      Cette maîtrise de la couche physique autorise des débits élevés et une latence faible et constante, propices au transport de la voix, de la vidéo et des applications sensibles. Elle impose en contrepartie la responsabilité de la conception, de la redondance et de la supervision de l'ensemble du réseau.
+
+      Le MAN est donc un objet d'ingénierie à part entière, où la qualité de la conception conditionne directement la disponibilité du service. Sa construction suit une démarche structurée qui part des exigences métier pour aboutir à une topologie résiliente et supervisable.
+
+   B. Exigences fondatrices d'un MAN.
+
+      La première exigence est la disponibilité, car un réseau métropolitain porte souvent des services essentiels dont l'interruption a un impact direct sur les usagers. La conception vise à éliminer les points uniques de défaillance par la redondance des liens, des équipements et des alimentations.
+
+      La deuxième exigence est la capacité, car un MAN agrège le trafic de nombreux sites vers des ressources centrales et des accès mutualisés. Le dimensionnement anticipe la croissance pour éviter une saturation prématurée du cœur et des liens d'interconnexion.
+
+      La troisième exigence est la qualité de service, car les flux temps réel cohabitent avec le trafic de masse sur les mêmes liens. Une politique de classification et de priorisation protège les applications sensibles des congestions ponctuelles.
+
+      La quatrième exigence est la sécurité et la conformité, renforcée par la directive NIS2 pour les entités essentielles et importantes. La segmentation, le contrôle des accès et la supervision continue deviennent des obligations de conception autant que de bonnes pratiques.
+
+   C. Rôle des équipements Comware dans un MAN.
+
+      Les gammes de commutateurs Comware couvrent l'ensemble des couches d'un réseau métropolitain, de l'accès au cœur de forte capacité. Un même système d'exploitation et une même grammaire de commandes assurent la cohérence de la configuration et du diagnostic sur toute l'infrastructure.
+
+      Comware apporte les briques de haute disponibilité nécessaires à un MAN : virtualisation IRF des équipements, protocoles d'anneau RRPP et ERPS, redondance de passerelle VRRP et agrégation de liens LACP. Ces mécanismes se combinent pour construire une infrastructure sans point unique de défaillance.
+
+      La prise en charge du routage dynamique, notamment OSPF, permet au cœur Comware d'assurer la convergence du plan de niveau trois entre les sites. La conception articule alors les mécanismes de niveau deux à la périphérie et le routage de niveau trois dans le cœur.
+
+      Enfin, les fonctions de supervision, de journalisation et de télémétrie de Comware répondent aux exigences de surveillance imposées par NIS2. Elles alimentent les outils de supervision qui veillent à la disponibilité du réseau métropolitain.
+
+II. LE MODÈLE HIÉRARCHIQUE EN COUCHES.
+
+   A. La couche d'accès.
+
+      La couche d'accès raccorde les équipements terminaux : postes de travail, téléphones, bornes et objets connectés. Elle réalise la segmentation en VLAN, applique les premières règles de sécurité de port et alimente éventuellement les terminaux par l'alimentation sur Ethernet.
+
+      Les commutateurs d'accès sont nombreux et répartis au plus près des usagers, ce qui impose un coût unitaire maîtrisé et une administration homogène. Ils remontent le trafic vers la couche de distribution par une ou deux liaisons montantes selon le niveau de redondance recherché.
+
+      La sécurité de la couche d'accès repose sur des mécanismes de protection de port contre les usurpations et les boucles accidentelles. Le filtrage des annonces de configuration et la limitation de l'apprentissage d'adresses protègent le réseau des erreurs de raccordement.
+
+      Cette couche est le lieu naturel d'application des politiques d'admission, car c'est là que les équipements entrent sur le réseau. Elle constitue la première ligne de défense d'une architecture métropolitaine.
+
+   B. La couche de distribution.
+
+      La couche de distribution agrège les liaisons de la couche d'accès d'un même site et assure le routage entre les VLAN. Elle constitue la frontière de politique entre l'accès, où le trafic est segmenté, et le cœur, où il est acheminé à grande vitesse.
+
+      C'est à ce niveau que se concentrent les décisions de routage local, l'application des listes de contrôle d'accès et la redondance de passerelle par VRRP. Deux commutateurs de distribution, souvent réunis en pile IRF, offrent une redondance sans complexité de configuration supplémentaire.
+
+      La couche de distribution est le point d'injection naturel du routage dynamique vers le cœur, où elle participe à OSPF en tant que routeur de bordure de son site. Elle résume les préfixes du site pour alléger la table du cœur.
+
+      Son dimensionnement doit anticiper l'agrégation de l'ensemble des accès du site et la croissance des usages. Un sous-dimensionnement à ce niveau crée un goulet d'étranglement entre le site et le reste du réseau.
+
+   C. La couche de cœur.
+
+      La couche de cœur interconnecte les sites et commute le trafic d'un bout à l'autre du réseau métropolitain avec la plus faible latence possible. Elle privilégie la simplicité et la vitesse, en déléguant à la distribution les fonctions de politique et de filtrage.
+
+      Le cœur repose sur des équipements de forte capacité, interconnectés en topologie redondante et souvent virtualisés en IRF pour présenter un plan de contrôle unique. Sa conception vise une convergence rapide et une absence totale de point unique de défaillance.
+
+      Le trafic inter-sites transite par le cœur, qui porte naturellement l'aire fédératrice du domaine OSPF. La hiérarchie de routage s'aligne ainsi sur la hiérarchie physique, le cœur étant à la fois le centre de commutation et le centre de l'architecture de routage.
+
+      La sobriété fonctionnelle du cœur est une règle de conception : plus il est simple, plus il est rapide et stable. Les fonctions complexes y sont évitées au profit d'un acheminement efficace et prévisible.
+
+III. TOPOLOGIES PHYSIQUES ET SUPPORT OPTIQUE.
+
+   A. Comparaison des topologies métropolitaines.
+
+      La topologie en étoile raccorde tous les sites à un point central unique, ce qui simplifie la conception mais fait de ce central un point unique de défaillance majeur. Elle ne convient qu'à des contextes où le site central est lui-même fortement redondé et où le budget de liaisons est contraint.
+
+      La topologie en anneau relie les sites en boucle, de sorte que chaque nœud dispose de deux chemins vers le reste du réseau. La rupture d'un segment n'isole aucun site, car le trafic emprunte le sens opposé de l'anneau, ce qui en fait une topologie privilégiée des réseaux métropolitains.
+
+      Le double anneau et le maillage partiel renforcent encore la résilience en multipliant les chemins entre les nœuds critiques. Ils augmentent le nombre de liaisons et donc le coût, et se réservent aux cœurs et aux interconnexions de sites majeurs.
+
+      Le choix de la topologie résulte d'un compromis entre le niveau de disponibilité requis et le budget de fibres disponible. Un réseau métropolitain combine fréquemment un cœur en anneau ou maillé et des accès de site en étoile redondée.
+
+   B. Support optique et dimensionnement des liens.
+
+      Le réseau métropolitain s'appuie sur la fibre optique, monomode pour les longues distances d'interconnexion et multimode pour les liaisons courtes internes à un site. Le choix des transceivers doit être cohérent avec la distance, le débit et le budget optique de chaque liaison.
+
+      Lorsque le nombre de fibres disponibles est limité, le multiplexage en longueur d'onde permet de transporter plusieurs canaux sur une même fibre. Le multiplexage dense accroît fortement la capacité d'un lien d'interconnexion sans génie civil supplémentaire.
+
+      Le dimensionnement d'un lien intègre une marge de croissance et une réserve pour les flux de redondance qui s'activent en cas de panne. Un lien saturé en fonctionnement nominal n'offre aucune capacité pour absorber le report de trafic d'un lien tombé.
+
+      La surveillance de la qualité optique, par la lecture des puissances reçues et émises, prévient les dégradations avant la panne. Un lien métropolitain se supervise au niveau physique autant qu'au niveau logique.
+
+   C. Agrégation de liens et liaisons montantes.
+
+      L'agrégation de liens réunit plusieurs liaisons physiques en un lien logique unique, augmentant à la fois la capacité et la résilience. La perte d'un membre d'un faisceau agrégé réduit la bande passante sans interrompre le lien logique.
+
+      Sous Comware, l'agrégation dynamique par LACP est préférée au mode statique, car elle vérifie la cohérence des deux extrémités avant d'activer un membre. Les liaisons montantes entre couches sont des candidates naturelles à l'agrégation.
+
+      L'agrégation se combine avec la virtualisation IRF pour répartir les membres d'un faisceau sur deux châssis physiques distincts. Un tel faisceau survit à la perte complète d'un châssis, ce qui supprime un point unique de défaillance sur la liaison montante.
+
+      Cette combinaison d'IRF et d'agrégation constitue un motif de conception récurrent du réseau métropolitain, qui offre une redondance à la fois des liens et des équipements de manière transparente pour les protocoles supérieurs.
+
+IV. MÉCANISMES DE RÉSILIENCE SUR ÉQUIPEMENTS COMWARE.
+
+   A. Virtualisation IRF et suppression des points uniques.
+
+      La technologie IRF réunit plusieurs commutateurs physiques en une entité logique unique partageant une configuration et un plan de contrôle. Vue de l'extérieur, cette fabrique se comporte comme un seul équipement, ce qui simplifie radicalement la conception des couches de distribution et de cœur.
+
+      En réunissant deux châssis en une pile IRF, on obtient une redondance matérielle transparente pour les protocoles de niveau deux et trois. La défaillance d'un membre physique n'interrompt pas le service tant que la fabrique logique survit, et aucune reconvergence de protocole n'est nécessaire.
+
+      La robustesse de cette conception dépend de la détection fiable d'une scission de pile par le mécanisme de détection multi-active. Une scission non détectée ferait apparaître deux fabriques portant la même configuration, source de conflits d'adresses sévères.
+
+      IRF réduit aussi le nombre de nœuds logiques à administrer et à faire participer aux protocoles, ce qui diminue la complexité globale. Cette simplification est un bénéfice de conception autant qu'un gain de disponibilité.
+
+   B. Protection des boucles et des anneaux.
+
+      Dans une topologie commutée comportant des chemins redondants, un protocole de prévention des boucles est indispensable pour éviter les tempêtes de diffusion. Le protocole MSTP associe des groupes de VLAN à des instances d'arbre recouvrant, ce qui permet de répartir le trafic sur plusieurs chemins plutôt que d'en bloquer un seul.
+
+      Sur une topologie en anneau, un protocole d'anneau dédié offre une convergence bien plus rapide que l'arbre recouvrant classique. Comware propose le protocole propriétaire RRPP et le protocole normalisé ERPS, qui ramènent la bascule à l'ordre de la dizaine de millisecondes après une rupture de segment.
+
+      Pour un site à double rattachement vers deux équipements amont, le mécanisme Smart Link fournit une redondance active-passive à bascule rapide, plus simple qu'un arbre recouvrant. Il convient aux topologies de collecte où un accès remonte vers deux points de distribution.
+
+      Le choix du mécanisme dépend de la topologie : arbre recouvrant pour les maillages de niveau deux, protocole d'anneau pour les boucles, Smart Link pour les doubles rattachements. Un réseau métropolitain combine ces outils selon la nature de chaque segment.
+
+   C. Redondance de passerelle et articulation avec le routage.
+
+      La redondance de passerelle par VRRP garantit la continuité du premier saut pour les hôtes, en partageant une adresse virtuelle entre deux équipements de distribution. Si l'équipement maître tombe, le secours reprend l'adresse virtuelle sans reconfiguration des postes.
+
+      VRRP opère indépendamment du routage dynamique, qu'il complète sans le remplacer. Le suivi d'interface permet d'abaisser la priorité du maître lorsque son lien amont tombe, afin d'aligner la passerelle active sur le chemin de routage effectivement disponible.
+
+      La conception veille à faire coïncider le maître VRRP avec le chemin OSPF préféré, pour éviter qu'un flux ne traverse inutilement le lien entre les deux passerelles. Cette cohérence entre niveau deux et niveau trois est un gage d'efficacité.
+
+      L'ensemble forme une chaîne de résilience : IRF pour le matériel, protocoles d'anneau et agrégation pour les liens, VRRP pour la passerelle et OSPF pour la convergence du routage. La haute disponibilité d'un MAN résulte de leur combinaison cohérente, non d'un mécanisme isolé.
+
+V. ADRESSAGE, SEGMENTATION, QUALITÉ DE SERVICE ET SÉCURITÉ.
+
+   A. Plan d'adressage et segmentation.
+
+      Un plan d'adressage structuré attribue à chaque site un bloc d'adresses contigu, condition d'un résumé de routes efficace entre la distribution et le cœur. La cohérence entre le découpage géographique, le découpage en VLAN et le découpage en zones de routage simplifie l'exploitation.
+
+      La segmentation en VLAN isole les usages et contient la portée des incidents de niveau deux. Elle sépare par exemple les flux de gestion, les flux utilisateurs, la voix et les équipements techniques, chacun recevant une politique de sécurité adaptée.
+
+      Le réseau de gestion des équipements est maintenu distinct des réseaux de production, afin que l'administration reste possible même en cas d'incident sur les flux utilisateurs. Cette séparation est un principe de conception essentiel d'un réseau supervisé.
+
+      La planification de l'adressage anticipe la croissance en réservant des plages par site et par usage. Un plan d'adressage pensé dès la conception évite des renumérotations coûteuses et préserve la capacité de résumé.
+
+   B. Qualité de service pour les flux sensibles.
+
+      La qualité de service classe les flux à l'entrée du réseau et leur applique un traitement différencié dans les files d'attente des équipements. Les flux temps réel comme la voix reçoivent une priorité stricte, tandis que le trafic de masse se contente d'un acheminement au mieux.
+
+      La classification s'effectue de préférence au plus près de la source, à la couche d'accès, où le marquage est ensuite respecté par les couches supérieures. Un marquage cohérent de bout en bout est la condition d'une qualité de service efficace sur le réseau métropolitain.
+
+      Le cœur applique la priorisation sans reclasser les flux, conformément à sa vocation de commutation rapide et sobre. La confiance accordée au marquage reçu doit toutefois être contrôlée aux frontières pour éviter les abus.
+
+      Le dimensionnement des liens reste le premier garant de la qualité de service, car aucune priorisation ne compense durablement une sous-capacité chronique. La qualité de service gère les congestions ponctuelles, pas une saturation structurelle.
+
+   C. Sécurité et conformité NIS2.
+
+      La directive NIS2 impose aux entités essentielles et importantes des mesures de gestion des risques et de supervision continue de leurs réseaux. La conception d'un réseau métropolitain intègre donc dès l'origine la segmentation, le contrôle des accès et la journalisation.
+
+      La protection du plan de contrôle des équipements limite l'exposition des protocoles de routage et de gestion aux seuls interlocuteurs légitimes. L'authentification des échanges de routage et le filtrage des accès d'administration en constituent le socle.
+
+      La supervision continue, par la collecte des journaux et de la télémétrie, permet de détecter les incidents et de prouver le suivi exigé par la réglementation. Un réseau métropolitain conforme est un réseau observable en permanence.
+
+      La conformité n'est pas une surcouche ajoutée après coup, mais une propriété de conception. Un MAN pensé pour la résilience et l'observabilité répond naturellement à l'essentiel des exigences de NIS2.
+
+VI. DÉMARCHE DE CONCEPTION ET DIMENSIONNEMENT.
+
+   A. Du recueil des exigences à l'architecture cible.
+
+      La conception part du recueil des exigences métier : sites à raccorder, services portés, niveaux de disponibilité attendus et contraintes budgétaires. Ces exigences se traduisent en objectifs mesurables de capacité, de latence et de taux de disponibilité.
+
+      L'architecture cible découle de ces objectifs par choix successifs : modèle en couches, topologie physique, mécanismes de redondance et plan d'adressage. Chaque choix se justifie par une exigence, ce qui garantit la cohérence d'ensemble et facilite les arbitrages.
+
+      La conception élimine systématiquement les points uniques de défaillance en dédoublant les éléments critiques. Un schéma de principe identifie chaque composant dont la panne isolée interromprait le service, et lui associe une parade.
+
+      Le résultat est une architecture documentée, où topologie physique, plan d'adressage et plan de routage se correspondent. Cette documentation est le référentiel de l'exploitation et des évolutions futures.
+
+   B. Dimensionnement et marges de croissance.
+
+      Le dimensionnement des liens et des équipements intègre le trafic nominal, le report de trafic en cas de panne et une marge de croissance. Un réseau dimensionné au plus juste ne survit pas à la première panne ni à la première extension.
+
+      La capacité du cœur doit absorber l'agrégation de tous les sites et le report des flux lors d'une bascule de redondance. Le dimensionnement des liaisons montantes suit la même logique, en tenant compte des faisceaux agrégés et de la perte possible d'un membre.
+
+      La conception anticipe l'ajout de sites et la montée en débit des usages existants. Réserver de la capacité et des plages d'adressage dès l'origine évite des refontes coûteuses à chaque évolution.
+
+      Un dimensionnement rigoureux est la contrepartie de la simplicité du cœur : c'est parce que le cœur est largement dimensionné qu'il peut rester fonctionnellement sobre et rapide.
+
+   C. Supervision, exploitation et documentation.
+
+      Un réseau métropolitain se conçoit pour être supervisé en permanence, condition de sa disponibilité réelle et de sa conformité réglementaire. La collecte des états, des journaux et des métriques alimente les tableaux de bord d'exploitation.
+
+      L'exploitation s'appuie sur une documentation à jour qui décrit la topologie, l'adressage, les mécanismes de redondance et les procédures de bascule. Sans documentation fiable, le diagnostic s'allonge et les interventions deviennent risquées.
+
+      Les procédures de maintenance planifient les opérations interruptives, comme la mise à niveau d'un membre IRF ou la réinitialisation d'un processus de routage. Une maintenance préparée préserve la disponibilité pendant les évolutions.
+
+      La supervision ferme la boucle de conception : elle mesure si l'architecture tient ses objectifs et signale les dérives avant qu'elles ne deviennent des pannes. Un MAN bien conçu est un MAN que l'on observe, documente et fait évoluer avec méthode.
+
+POINTS D'ATTENTION.
+
+      Le modèle en couches accès, distribution et cœur n'est pas une formalité : confondre les rôles, par exemple en chargeant le cœur de fonctions de filtrage, dégrade la performance et la stabilité.
+
+      La topologie en étoile crée un point unique de défaillance au central ; une topologie en anneau ou maillée est préférable dès que la disponibilité est critique.
+
+      Un lien saturé en fonctionnement nominal n'a aucune réserve pour absorber le report de trafic d'un lien tombé : le dimensionnement doit prévoir la panne.
+
+      Le choix du mécanisme de niveau deux dépend de la topologie : arbre recouvrant pour les maillages, protocole d'anneau RRPP ou ERPS pour les boucles, Smart Link pour les doubles rattachements.
+
+      Un plan d'adressage non contigu par site interdit le résumé de routes et alourdit inutilement la table du cœur.
+
+      La conformité NIS2 se pense dès la conception, par la segmentation, la protection du plan de contrôle et la supervision continue, et non comme une surcouche ajoutée après coup.
+
+EXEMPLES CITÉS.
+
+      Un réseau métropolitain combine fréquemment un cœur en anneau ou maillé et des accès de site raccordés en étoile redondée vers deux commutateurs de distribution.
+
+      Deux commutateurs de distribution réunis en pile IRF offrent une redondance transparente et portent la passerelle VRRP du site.
+
+      Un faisceau agrégé par LACP réparti sur deux châssis IRF survit à la perte complète d'un châssis sans interrompre la liaison montante.
+
+      Sur un cœur en anneau, le protocole RRPP ou ERPS ramène la bascule après rupture de segment à l'ordre de la dizaine de millisecondes.
+
+      Un plan d'adressage attribuant un bloc contigu par site permet à chaque routeur de distribution de résumer ses préfixes vers le cœur.
+
+      La séparation d'un VLAN de gestion distinct des VLAN de production maintient l'administration possible même pendant un incident sur les flux utilisateurs.

@@ -1,0 +1,263 @@
+GUIDE DE MISE EN ŒUVRE ET DE DÉPANNAGE DU ROUTAGE OSPF SUR COMMUTATEURS ET ROUTEURS COMWARE V7 ET V9 (HPE ET H3C).
+
+LEXIQUE COMPLET.
+
+      Le sigle OSPF désigne Open Shortest Path First, un protocole de routage intérieur à état de liens qui calcule les plus courts chemins à l'aide de l'algorithme de Dijkstra.
+
+      Le terme protocole à état de liens désigne une famille de protocoles où chaque routeur décrit ses liens et inonde cette description dans la zone, de sorte que tous les routeurs partagent une base topologique identique.
+
+      Le sigle LSA désigne un Link State Advertisement, l'unité d'information par laquelle un routeur annonce un lien, un réseau ou une route externe dans la base de données OSPF.
+
+      Le sigle LSDB désigne la Link State Database, la base de données topologique synchronisée que tous les routeurs d'une même zone doivent posséder à l'identique.
+
+      Le terme zone désigne une subdivision logique d'un domaine OSPF qui limite l'inondation des LSA et le recalcul de l'arbre des plus courts chemins.
+
+      Le terme aire fédératrice désigne la zone zéro, ou backbone, par laquelle transite obligatoirement tout le trafic inter-zones.
+
+      Le sigle ABR désigne un Area Border Router, un routeur raccordé simultanément à la zone zéro et à au moins une autre zone, qui résume les routes entre elles.
+
+      Le sigle ASBR désigne un Autonomous System Boundary Router, un routeur qui injecte dans OSPF des routes apprises par un autre protocole ou par redistribution.
+
+      Le sigle DR désigne le Designated Router, le routeur élu sur un réseau à accès multiple pour centraliser la synchronisation des bases et réduire le nombre d'adjacences.
+
+      Le sigle BDR désigne le Backup Designated Router, le routeur de secours qui remplace le DR en cas de défaillance.
+
+      Le terme router-id désigne l'identifiant unique d'un routeur OSPF, exprimé au format d'une adresse IP, qui sert à l'élection et à l'identification dans la base.
+
+      Le terme coût désigne la métrique OSPF d'une interface, inversement proportionnelle à sa bande passante, dont la somme le long d'un chemin détermine la route retenue.
+
+      Le terme adjacence désigne une relation de voisinage pleinement synchronisée entre deux routeurs OSPF ayant échangé et accordé leurs bases de données.
+
+      Le sigle SPF désigne le calcul Shortest Path First, l'exécution de l'algorithme de Dijkstra qui construit l'arbre des plus courts chemins à partir de la base topologique.
+
+      Le terme zone stub désigne une zone qui n'accepte pas les routes externes de type cinq et reçoit à la place une route par défaut depuis son ABR.
+
+      Le sigle NSSA désigne une Not-So-Stubby Area, une zone stub capable d'importer un nombre limité de routes externes au moyen de LSA de type sept.
+
+      Le sigle IRF désigne l'Intelligent Resilient Framework, la virtualisation de plusieurs commutateurs physiques Comware en une entité logique unique partageant un seul plan de contrôle OSPF.
+
+      Le sigle VRRP désigne le Virtual Router Redundancy Protocol, un mécanisme de passerelle virtuelle redondante qui opère indépendamment d'OSPF au niveau de la passerelle des hôtes.
+
+      Le sigle BFD désigne Bidirectional Forwarding Detection, un protocole de détection de panne en quelques millisecondes qui accélère la convergence d'OSPF.
+
+COURS DÉTAILLÉ.
+
+I. PRINCIPES DU PROTOCOLE OSPF ET SPÉCIFICITÉS COMWARE.
+
+   A. Nature et fonctionnement général du protocole.
+
+      OSPF est un protocole de routage intérieur à état de liens normalisé par l'IETF, dont la version deux est utilisée pour IPv4 et la version trois pour IPv6. Chaque routeur décrit ses liens actifs sous forme de LSA, qu'il inonde dans sa zone jusqu'à ce que tous les routeurs disposent d'une base de données identique.
+
+      À partir de cette base topologique commune, chaque routeur exécute localement l'algorithme de Dijkstra pour construire son propre arbre des plus courts chemins. Ce fonctionnement distribué garantit une vision cohérente du réseau et une convergence rapide après un changement de topologie.
+
+      OSPF se distingue des protocoles à vecteur de distance comme RIP par sa capacité à passer à l'échelle, par son absence de comptage à l'infini et par sa métrique fondée sur la bande passante plutôt que sur le nombre de sauts. Ces propriétés en font le protocole de routage interne privilégié d'un réseau métropolitain.
+
+      La notion de zone est centrale, car elle cloisonne l'inondation des LSA et le recalcul SPF. Un domaine OSPF bien conçu limite ainsi la propagation des instabilités à la seule zone concernée, sans perturber l'ensemble de l'infrastructure.
+
+   B. Le modèle de configuration hiérarchique sous Comware.
+
+      Sous Comware v7 et v9, OSPF se configure selon une hiérarchie de vues strictement imbriquées. L'opérateur active d'abord un processus avec la commande ospf suivie éventuellement d'un numéro de processus et du mot-clé router-id, ce qui le place dans la vue du processus OSPF.
+
+      Depuis cette vue de processus, la commande area suivie d'un identifiant de zone fait descendre dans la vue de zone. L'identifiant de zone s'exprime soit sous forme décimale, soit sous forme d'adresse IP, la zone zéro et la zone 0.0.0.0 désignant la même aire fédératrice.
+
+      C'est à l'intérieur de la vue de zone que l'opérateur déclare les réseaux participants avec la commande network, suivie d'une adresse et d'un masque générique inversé. Cette logique diffère de l'approche d'autres constructeurs où l'activation se fait directement sous l'interface.
+
+      Le masque générique de la commande network s'écrit en bits inversés, de sorte que 0.0.0.255 sélectionne un réseau en vingt-quatre bits. Toute interface dont l'adresse correspond à un réseau déclaré est automatiquement activée dans la zone indiquée.
+
+   C. Choix et stabilité du router-id.
+
+      Le router-id identifie le routeur de façon unique dans tout le domaine OSPF et conditionne l'élection du DR ainsi que la lisibilité de la base. Comware le choisit automatiquement en retenant la plus haute adresse d'une interface de bouclage, à défaut la plus haute adresse d'interface physique active.
+
+      Cette sélection automatique est une source d'instabilité, car la disparition de l'interface ayant fourni le router-id peut déclencher sa renégociation et un recalcul général. La bonne pratique consiste donc à fixer explicitement le router-id, de préférence sur une adresse de bouclage toujours active.
+
+      Sous Comware, le router-id se fixe soit globalement au niveau du processus avec router-id, soit en configurant une interface LoopBack portant une adresse dédiée à l'administration. Une adresse de bouclage présente l'avantage de ne jamais tomber tant que l'équipement fonctionne.
+
+      Il faut retenir qu'un changement de router-id sur un processus actif n'est pris en compte qu'après réinitialisation du processus par la commande reset ospf process. Cette réinitialisation est interruptive et doit être planifiée hors des périodes sensibles.
+
+II. ÉTABLISSEMENT DES VOISINAGES ET DES ADJACENCES.
+
+   A. Conditions d'un voisinage valide.
+
+      Deux routeurs ne forment un voisinage que si plusieurs paramètres concordent strictement. Ils doivent appartenir à la même zone, partager le même masque de sous-réseau sur le segment, et s'accorder sur les temporisateurs Hello et Dead ainsi que sur le type d'authentification.
+
+      Le protocole échange des paquets Hello périodiques pour découvrir les voisins et entretenir la relation. Si aucun Hello n'est reçu pendant l'intervalle Dead, par défaut quatre fois l'intervalle Hello, le voisin est déclaré inaccessible et la topologie est recalculée.
+
+      Une erreur fréquente provient d'un masque de sous-réseau divergent entre deux interfaces du même segment, qui empêche le voisinage de se former malgré une connectivité physique correcte. Le contrôle des masques est donc un réflexe de diagnostic prioritaire.
+
+      Une incohérence d'authentification produit le même symptôme sans message explicite sur certaines versions. La vérification de la cohérence du mode et de la clé d'authentification entre voisins est indispensable.
+
+   B. Rôle du DR et du BDR sur les réseaux à accès multiple.
+
+      Sur un segment Ethernet à accès multiple, faire adjacence entre tous les routeurs produirait un nombre d'échanges proportionnel au carré du nombre de participants. OSPF élit donc un DR et un BDR avec lesquels tous les autres routeurs se synchronisent, ce qui réduit fortement le nombre d'adjacences.
+
+      L'élection repose d'abord sur la priorité d'interface, puis, à priorité égale, sur le router-id le plus élevé. Un routeur configuré avec une priorité de zéro par la commande ospf dr-priority ne participe jamais à l'élection, ce qui permet d'écarter un équipement non central.
+
+      L'élection n'est pas préemptive : un routeur arrivant avec une meilleure priorité ne détrône pas le DR en place tant que celui-ci reste actif. Ce comportement évite des bascules inutiles mais impose de maîtriser l'ordre de mise en service.
+
+      Sur une liaison strictement point à point, par exemple entre deux cœurs de réseau, il n'y a ni DR ni BDR. Il est alors recommandé de déclarer le type de réseau en point à point pour accélérer l'établissement de l'adjacence et simplifier la base.
+
+   C. Types de réseaux OSPF et paramétrage d'interface sous Comware.
+
+      Comware reconnaît plusieurs types de réseaux OSPF qui conditionnent l'élection du DR et le mode d'échange. Le type broadcast est la valeur par défaut sur une interface Ethernet, tandis que le type p2p convient à une liaison point à point et supprime l'élection.
+
+      Le type de réseau se force au niveau de l'interface avec la commande ospf network-type, suivie de la valeur broadcast, p2p, nbma ou p2mp. Forcer le type p2p sur un lien de transit entre deux équipements accélère la convergence et évite une élection superflue.
+
+      Les temporisateurs se règlent également sous l'interface avec ospf timer hello et ospf timer dead, à condition que les deux extrémités partagent les mêmes valeurs. Des temporisateurs plus courts accélèrent la détection de panne au prix d'un trafic de contrôle accru.
+
+      Le coût d'une interface se fixe directement avec ospf cost, ou se laisse déduire de la bande passante de référence. Enfin, une interface qui dessert uniquement des hôtes se déclare en interface passive avec silent-interface, afin d'annoncer son réseau sans émettre de Hello inutiles ni exposer d'adjacence.
+
+III. CONCEPTION DES ZONES POUR UN RÉSEAU MÉTROPOLITAIN.
+
+   A. Hiérarchie des zones et rôle de l'aire fédératrice.
+
+      La conception d'un domaine OSPF repose sur une hiérarchie à deux niveaux articulée autour de la zone zéro. Toutes les autres zones doivent être connectées à cette aire fédératrice, car le trafic inter-zones transite obligatoirement par elle.
+
+      Dans un réseau métropolitain, la zone zéro est naturellement portée par le cœur et les liaisons d'interconnexion entre sites principaux. Chaque site ou quartier périphérique constitue alors une zone distincte raccordée au cœur par un ou deux routeurs de bordure.
+
+      Ce cloisonnement limite la taille de chaque base de données et confine les recalculs SPF à la zone où survient un changement. Une panne d'accès dans un quartier n'entraîne ainsi aucun recalcul dans les autres quartiers ni dans le cœur.
+
+      Le respect de la contiguïté de la zone zéro est impératif. Lorsqu'une zone ne peut être raccordée physiquement au cœur, un lien virtuel peut rétablir la continuité, mais cette solution de contournement doit rester exceptionnelle dans une architecture bien pensée.
+
+   B. Rôle des ABR et résumé de routes.
+
+      Un ABR appartient simultanément à la zone zéro et à une ou plusieurs zones périphériques, dont il relaie les routes sous forme de LSA de résumé. Il constitue le point de contrôle naturel de l'agrégation des préfixes entre un quartier et le cœur.
+
+      Le résumé de routes se configure sur l'ABR avec la commande abr-summary dans la vue de la zone concernée, en déclarant un préfixe agrégé qui masque les sous-réseaux internes. Cette agrégation réduit la taille des bases dans le cœur et amortit l'effet des instabilités locales.
+
+      Un plan d'adressage pensé par zone, avec des blocs contigus attribués à chaque quartier, est la condition d'un résumé efficace. Sans contiguïté des adresses, l'agrégation devient impossible et la table de routage du cœur se charge inutilement.
+
+      Le dimensionnement d'une zone dépend de la puissance des équipements et de la stabilité des liens. Une zone trop vaste alourdit les calculs et prolonge la convergence, tandis qu'un découpage trop fin multiplie les ABR et les LSA de résumé.
+
+   C. Zones stub et NSSA pour alléger la périphérie.
+
+      Lorsqu'un quartier n'a besoin que d'atteindre le reste du réseau sans connaître le détail des routes externes, il est judicieux de le déclarer en zone stub. L'ABR y injecte alors une simple route par défaut à la place des nombreuses routes externes de type cinq.
+
+      La déclaration s'effectue avec la commande stub dans la vue de zone, et doit être appliquée sur tous les routeurs de la zone pour rester cohérente. Le mot-clé no-summary transforme la zone en totally stub et bloque aussi les résumés inter-zones, ne laissant qu'une route par défaut.
+
+      Lorsqu'un site stub doit néanmoins injecter quelques routes externes, par exemple celles d'un petit réseau raccordé localement, on emploie une zone NSSA déclarée avec la commande nssa. Ces routes voyagent en LSA de type sept, converties en type cinq par l'ABR à l'entrée du cœur.
+
+      Ces mécanismes réduisent la taille des bases et la charge des routeurs de périphérie, souvent moins puissants que le cœur. Ils constituent un levier d'optimisation majeur sur un réseau métropolitain comportant de nombreux sites secondaires.
+
+IV. INTÉGRATION AVEC L'INFRASTRUCTURE COMMUTÉE COMWARE.
+
+   A. Interfaces VLAN et routage inter-VLAN.
+
+      Sur un commutateur de niveau trois Comware, OSPF s'appuie le plus souvent sur des interfaces virtuelles de VLAN plutôt que sur des ports physiques. Chaque interface Vlan-interface porte l'adresse de passerelle d'un VLAN et devient le point d'activation d'OSPF pour ce sous-réseau.
+
+      L'opérateur crée l'interface avec interface Vlan-interface suivi de l'identifiant, lui attribue une adresse, puis la rend éligible à OSPF via la commande network correspondante dans la vue de zone. Le routage inter-VLAN et le routage OSPF se trouvent ainsi portés par le même équipement.
+
+      Les sous-réseaux desservant uniquement des postes de travail doivent être annoncés sans former d'adjacence inutile. La commande silent-interface appliquée à l'interface de VLAN concernée annonce le réseau tout en supprimant l'émission de Hello côté utilisateurs.
+
+      Cette organisation fait du commutateur de distribution le pivot entre la commutation locale et le routage métropolitain. Sa configuration OSPF doit donc être traitée avec la même rigueur qu'un routeur dédié.
+
+   B. OSPF et virtualisation IRF.
+
+      Lorsque deux commutateurs de cœur sont réunis en une pile IRF, ils ne forment qu'une seule entité logique dotée d'un unique plan de contrôle OSPF. La fabrique IRF présente donc un seul router-id et une seule base de données aux voisins, ce qui simplifie la topologie vue par le reste du domaine.
+
+      Cette unification supprime le besoin d'adjacence interne entre les deux châssis et offre une redondance matérielle transparente pour OSPF. La défaillance d'un membre physique n'entraîne pas de renégociation OSPF tant que la fabrique logique survit.
+
+      La robustesse de cette conception dépend de la détection de scission de pile assurée par le mécanisme MAD. Une scission non détectée ferait apparaître deux entités portant le même router-id et la même configuration de niveau trois, provoquant des conflits sévères.
+
+      L'association d'IRF au niveau du cœur et d'OSPF au niveau du routage constitue le socle de haute disponibilité d'un réseau métropolitain Comware. Elle combine redondance matérielle locale et convergence dynamique du routage.
+
+   C. Articulation avec VRRP à la périphérie.
+
+      VRRP opère à un autre niveau qu'OSPF, en fournissant aux hôtes une passerelle virtuelle redondante indépendante du routage dynamique. Les postes utilisateurs pointent vers l'adresse virtuelle VRRP, tandis qu'OSPF gère la convergence entre les routeurs eux-mêmes.
+
+      Dans un site raccordé par deux commutateurs de distribution, VRRP assure la continuité de la passerelle des hôtes pendant qu'OSPF recalcule les chemins en cas de panne de lien amont. Les deux mécanismes se complètent sans se substituer l'un à l'autre.
+
+      Il convient d'aligner le routeur VRRP maître avec le chemin OSPF préféré, afin d'éviter qu'un flux ne traverse inutilement le lien entre les deux passerelles. Le suivi d'interface de VRRP peut abaisser la priorité du maître lorsque son lien amont tombe, favorisant une bascule cohérente avec le routage.
+
+      Confondre les rôles de VRRP et d'OSPF est une erreur conceptuelle fréquente. VRRP sécurise le premier saut des hôtes, OSPF sécurise l'acheminement de bout en bout entre les routeurs.
+
+V. SÉCURISATION ET OPTIMISATION DE LA CONVERGENCE.
+
+   A. Authentification des échanges OSPF.
+
+      Un domaine OSPF non authentifié est exposé à l'injection de fausses annonces par un équipement illégitime. Comware permet d'authentifier les échanges au niveau de la zone avec authentication-mode, ou au niveau de l'interface pour un réglage plus fin.
+
+      Les modes disponibles vont de l'authentification simple par mot de passe en clair, déconseillée, à des modes cryptographiques fondés sur un condensé. Le choix d'un mode à condensé robuste et d'une clé propre à chaque segment est la pratique recommandée sur un réseau métropolitain.
+
+      L'authentification doit être cohérente sur l'ensemble des routeurs d'un même segment, faute de quoi le voisinage ne s'établit pas. Son déploiement se planifie segment par segment pour éviter une rupture de voisinage en cours de migration.
+
+      La protection du plan de contrôle complète utilement l'authentification, en filtrant sur chaque équipement les paquets OSPF reçus d'interfaces non prévues. Cette défense en profondeur limite la surface d'attaque du routage.
+
+   B. Accélération de la convergence avec BFD.
+
+      Les temporisateurs natifs d'OSPF détectent une panne en plusieurs secondes, ce qui reste trop lent pour un cœur métropolitain transportant de la voix ou de la vidéo. L'association de BFD à OSPF ramène la détection à quelques dizaines de millisecondes.
+
+      Sous Comware, BFD s'active pour OSPF avec la commande ospf bfd enable au niveau de l'interface de transit. Dès lors, une rupture de session BFD informe immédiatement OSPF, qui déclenche le recalcul sans attendre l'expiration du temporisateur Dead.
+
+      BFD doit être réservé aux liens critiques du cœur et de l'interconnexion de sites, où la rapidité de bascule est déterminante. Son usage généralisé sur des liens d'accès peu sollicités augmenterait inutilement la charge des équipements.
+
+      La combinaison d'IRF pour la redondance matérielle, de BFD pour la détection rapide et d'un découpage en zones pour confiner les recalculs constitue la recette d'une convergence maîtrisée sur un réseau métropolitain.
+
+   C. Réglage des temporisateurs SPF et stabilité.
+
+      Un réseau soumis à des instabilités répétées peut enchaîner les calculs SPF et saturer le processeur des routeurs. Comware propose un réglage de l'intervalle entre deux calculs par la commande spf-schedule-interval, qui espace les recalculs lors d'événements rapprochés.
+
+      Un temporisateur trop agressif réagit vite mais multiplie les calculs sous instabilité, tandis qu'un temporisateur trop long ralentit la convergence. Le réglage recherche un équilibre adapté à la stabilité réelle de l'infrastructure.
+
+      Des mécanismes d'amortissement limitent l'effet d'une interface qui bat en absorbant ses changements d'état successifs. Ils protègent le domaine OSPF des oscillations provoquées par un lien physique défaillant.
+
+      La stabilité d'un domaine OSPF tient autant à la qualité des liens physiques qu'au réglage des temporisateurs. Un diagnostic de convergence doit toujours vérifier d'abord l'état et la propreté des interfaces sous-jacentes.
+
+VI. MÉTHODOLOGIE DE DIAGNOSTIC OSPF SOUS COMWARE.
+
+   A. Vérification des voisinages et des interfaces.
+
+      Le diagnostic commence par la commande display ospf peer, qui liste les voisins et leur état. Un voisinage sain doit atteindre l'état Full sur une liaison point à point, ou Full avec le DR et le BDR sur un segment à accès multiple.
+
+      Un voisin bloqué à l'état Init révèle un Hello reçu mais non réciproque, souvent dû à un filtrage ou à une authentification divergente. Un voisin bloqué à l'état ExStart ou Exchange signale fréquemment une incohérence de MTU entre les deux interfaces.
+
+      La commande display ospf interface verbose confirme la zone, le type de réseau, le coût et les temporisateurs effectifs de chaque interface. Elle permet de vérifier qu'une interface participe bien à la zone attendue avec les paramètres prévus.
+
+      La cohérence du masque et des temporisateurs entre deux voisins se contrôle en comparant les sorties de part et d'autre du lien. Cette comparaison croisée est la méthode la plus sûre pour isoler un paramètre divergent.
+
+   B. Analyse de la base de données et des routes.
+
+      La commande display ospf lsdb donne une vue de la base topologique et des différents types de LSA présents dans chaque zone. Une base incohérente entre deux routeurs d'une même zone trahit un problème de synchronisation ou d'inondation.
+
+      La commande display ospf routing présente les routes calculées par OSPF avant leur éventuelle sélection dans la table de routage globale. Elle distingue les routes internes à une zone, inter-zones et externes, ce qui aide à localiser un défaut d'annonce.
+
+      La table de routage effective se consulte avec display ip routing-table, où l'origine OSPF des routes apparaît explicitement. La confrontation entre la base OSPF, les routes OSPF calculées et la table installée permet de cerner à quel étage se situe une anomalie.
+
+      Lorsqu'une route attendue est absente, il faut remonter la chaîne : présence du LSA dans la base, calcul de la route par OSPF, puis installation dans la table. Chaque étape manquante désigne une cause différente, de l'annonce au filtrage.
+
+   C. Réinitialisation maîtrisée et validation finale.
+
+      Certaines modifications, comme le changement de router-id ou une correction majeure de zone, ne prennent effet qu'après un reset ospf process. Cette commande est interruptive et doit être exécutée en connaissance de cause, de préférence sur une fenêtre de maintenance.
+
+      Après toute intervention, la validation suit une séquence stable : rétablissement des voisinages à l'état Full, cohérence de la base, présence des routes attendues et test de connectivité de bout en bout. Cette discipline évite de déclarer une panne résolue sur la seule base d'un symptôme disparu.
+
+      La journalisation des changements d'état des voisins OSPF, consultable dans le tampon de journalisation, aide à corréler une instabilité avec un événement physique ou une intervention. Elle complète utilement les commandes d'affichage instantané.
+
+      Un dossier de diagnostic complet associe les sorties d'état des voisins, des interfaces, de la base et des routes. Il constitue la pièce maîtresse d'une escalade vers le support ou d'une revue d'architecture.
+
+POINTS D'ATTENTION.
+
+      Il ne faut jamais laisser Comware choisir seul le router-id sur un équipement de production : une adresse de bouclage dédiée et un router-id fixe évitent des recalculs intempestifs.
+
+      Un changement de router-id ou de certains paramètres de zone n'est effectif qu'après reset ospf process, une commande interruptive à planifier.
+
+      Le masque générique de la commande network s'écrit en bits inversés, et toute erreur de masque empêche l'activation ou le voisinage sans message explicite.
+
+      Un voisin bloqué en ExStart ou Exchange oriente en priorité vers une incohérence de MTU, tandis qu'un blocage en Init oriente vers un filtrage ou une authentification divergente.
+
+      Il faut distinguer clairement les rôles : IRF assure la redondance matérielle du cœur, VRRP la passerelle des hôtes, et OSPF la convergence du routage entre routeurs.
+
+      Toute zone autre que la zone zéro doit lui être raccordée ; le recours à un lien virtuel pour rétablir la contiguïté est un contournement exceptionnel, pas une solution d'architecture.
+
+EXEMPLES CITÉS.
+
+      Dans un réseau métropolitain, la zone zéro est portée par le cœur et les liaisons d'interconnexion, chaque quartier formant une zone distincte raccordée par ses ABR.
+
+      Deux commutateurs de cœur réunis en pile IRF présentent un router-id unique et une base OSPF unique, offrant une redondance matérielle transparente pour le routage.
+
+      Sur un lien de transit point à point entre deux cœurs, forcer le type de réseau en p2p supprime l'élection du DR et accélère l'établissement de l'adjacence.
+
+      L'activation de BFD sur les liens critiques ramène la détection d'une panne de plusieurs secondes à quelques dizaines de millisecondes.
+
+      Un site stub reçoit une simple route par défaut de son ABR au lieu de toutes les routes externes, allégeant la base d'un équipement de périphérie peu puissant.
+
+      Un voisin OSPF bloqué à l'état Full attendu mais resté en ExStart révèle le plus souvent une différence de MTU entre les deux interfaces du lien.
