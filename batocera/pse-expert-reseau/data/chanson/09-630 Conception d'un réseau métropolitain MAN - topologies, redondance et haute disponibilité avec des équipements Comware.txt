@@ -1,0 +1,53 @@
+TITRE : Le Rythme du MAN Riddim
+
+[Intro]
+Écoute la vibration de la fibre optique,
+Le réseau métropolitain, une architecture magique.
+
+[Couplet 1]
+Entre le LAN et le WAN, le MAN prend sa place,
+Dans la même agglomération, il garde la cadence et la trace.
+L'accès segmente en VLAN et sécurise les ports,
+La distribution agrège et fait le routage des efforts.
+Le cœur est le fédérateur, à très haut débit,
+Avec une latence minimale, pour que le trafic soit conduit.
+On élimine le SPOF, le point de défaillance unique,
+Pour une disponibilité totale, une structure magnifique.
+
+[Refrain]
+Redondance et haute disponibilité,
+C'est la règle d'or de notre connectivité.
+Du cœur à l'accès, on bâtit la résilience,
+Avec Comware, on assure la performance.
+
+[Couplet 2]
+L'anneau offre deux chemins, le maillage est partiel,
+L'étoile est simple mais son point central est mortel.
+L'IRF virtualise les commutateurs en une entité,
+Pendant que le LACP agrège les liens en toute liberté.
+Le RRPP ou l'ERPS protègent l'anneau en un clin d'œil,
+Dix millisecondes pour la bascule, sans aucun recueil.
+Le VRRP assure la passerelle virtuelle redondante,
+Pour que la continuité du service soit toujours constante.
+
+[Refrain]
+Redondance et haute disponibilité,
+C'est la règle d'or de notre connectivité.
+Du cœur à l'accès, on bâtit la résilience,
+Avec Comware, on assure la performance.
+
+[Pont]
+La QoS priorise la voix et la vidéo,
+Le DWDM multiplie les canaux sur la fibre en réseau.
+NIS2 impose la supervision et la sécurité,
+Pour les entités essentielles, c'est une obligation de réalité.
+
+[Refrain final]
+Redondance et haute disponibilité,
+C'est la règle d'or de notre connectivité.
+Du cœur à l'accès, on bâtit la résilience,
+Avec Comware, on assure la performance.
+
+[Outro]
+Dimensionne tes liens, anticipe la croissance,
+Le MAN est un art, une pure excellence.

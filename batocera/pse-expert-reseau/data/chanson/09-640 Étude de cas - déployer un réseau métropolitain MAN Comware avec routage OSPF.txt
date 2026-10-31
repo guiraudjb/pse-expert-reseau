@@ -1,0 +1,53 @@
+TITRE : Réseau Métropolitain Riddim
+
+[Intro]
+Écoute le rythme du MAN et du routage
+Comware en vibration pour ton apprentissage
+
+[Couplet 1]
+L'hôtel de ville est le site de cœur
+Le centre de données bat dans le moteur
+Médiathèque et centre technique municipal
+L'annexe administrative est un site de distribution local
+Quatre sites reliés par un anneau de fibre
+Pour que la disponibilité ne puisse jamais s'enfuir
+L'aire zéro porte la boucle fédératrice
+Une architecture robuste et très efficace
+
+[Refrain]
+IRF pour le matériel, l'anneau pour les liens
+VRRP pour la passerelle, OSPF pour le chemin
+La résilience est la clé de notre réseau
+On révise les protocoles avec le tempo
+
+[Couplet 2]
+Le bloc dix point un point zéro point zéro sur seize
+Pour la médiathèque en zone un c'est le succès
+Le centre technique est en zone deux avec le dix point deux
+L'annexe en zone trois avec le dix point trois
+Chaque site est un ABR qui fait le résumé
+Un seul préfixe pour le cœur, tout est optimisé
+Les liaisons de transit sont en type point à point
+Avec BFD la convergence est un vrai point
+
+[Refrain]
+IRF pour le matériel, l'anneau pour les liens
+VRRP pour la passerelle, OSPF pour le chemin
+La résilience est la clé de notre réseau
+On révise les protocoles avec le tempo
+
+[Pont]
+Si la fibre se rompt, BFD est activé
+En quelques millisecondes le trafic est basculé
+Si un membre IRF tombe, la fabrique reste en vie
+Le router-id est stable, le service est garanti
+
+[Refrain final]
+IRF pour le matériel, l'anneau pour les liens
+VRRP pour la passerelle, OSPF pour le chemin
+La résilience est la clé de notre réseau
+On révise les protocoles avec le tempo
+
+[Outro]
+Vérifie la recette avec le display ospf peer
+Le réseau est déployé, tout est clair

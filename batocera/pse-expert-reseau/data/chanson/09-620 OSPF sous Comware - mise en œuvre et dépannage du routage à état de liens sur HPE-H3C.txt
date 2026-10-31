@@ -1,0 +1,53 @@
+TITRE : OSPF Dub Riddim
+
+[Intro]
+Écoute le rythme de la topologie,
+L'algorithme de Dijkstra en pleine symphonie.
+
+[Couplet 1]
+Open Shortest Path First est le nom du protocole,
+Un état de liens qui garde le contrôle.
+Chaque routeur envoie ses LSA dans la zone,
+Pour que la base LSDB soit la même et résonne.
+L'aire fédératrice est la zone zéro,
+Par elle passe le trafic, c'est la règle du réseau.
+L'ABR résume les routes entre les secteurs,
+Et l'ASBR injecte les mondes extérieurs.
+
+[Refrain]
+OSPF, pour la convergence et la paix,
+Calculer le plus court chemin sans aucun regret.
+De l'aire fédératrice aux zones stub,
+Le routage est fluide, il n'y a pas de trouble.
+
+[Couplet 2]
+Fixe ton router-id sur une LoopBack dédiée,
+Pour éviter que l'instabilité ne soit constatée.
+Sur l'Ethernet, le DR et le BDR sont élus,
+Mais en point à point, l'élection est abolie, c'est vu.
+Si le voisinage reste bloqué en ExStart,
+Vérifie le MTU, c'est là que le problème part.
+Utilise BFD pour une détection très rapide,
+En quelques millisecondes, la panne est évidente et limpide.
+
+[Refrain]
+OSPF, pour la convergence et la paix,
+Calculer le plus court chemin sans aucun regret.
+De l'aire fédératrice aux zones stub,
+Le routage est fluide, il n'y a pas de trouble.
+
+[Pont]
+L'IRF virtualise le cœur en une entité,
+VRRP sécurise la passerelle de l'hôte en toute liberté.
+Le coût est l'inverse de la bande passante,
+Une métrique précise, une route intelligente.
+
+[Refrain final]
+OSPF, pour la convergence et la paix,
+Calculer le plus court chemin sans aucun regret.
+De l'aire fédératrice aux zones stub,
+Le routage est fluide, il n'y a pas de trouble.
+
+[Outro]
+Display ospf peer pour voir les voisins,
+Le routage Comware est entre de bonnes mains.

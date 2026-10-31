@@ -1,0 +1,53 @@
+TITRE : Supervision WAN Riddim
+
+[Intro]
+Écoute le rythme de la conformité,
+Pour le réseau WAN et la sécurité.
+
+[Couplet 1]
+Six cents sites distants dans le grand WAN,
+Avec Comware et les sondes NQA en avant.
+Douze mille métriques chaque minute à collecter,
+Deux cents nouvelles valeurs par seconde à ingérer.
+Six milliards de points de données par an à stocker,
+Dans TimescaleDB pour ne jamais s'égarer.
+Avec Patroni et Raft pour le consensus vital,
+On évite le split-brain, c'est le signal.
+
+[Refrain]
+Zabbix et TimescaleDB, le choix de l'équilibre,
+Pour un TCO maîtrisé et une vie sans péril.
+Respecte NIS2 et le ReCyF avec passion,
+Pour une supervision en toute perfection.
+
+[Couplet 2]
+Un QDevice externe pour le quorum de majorité,
+HAProxy et Keepalived assurent la disponibilité.
+SNMPv3 en authPriv pour la protection,
+AES deux cent cinquante pour la transmission.
+Le bastion PAM contrôle chaque accès privilégié,
+Le RBAC applique le moindre privilège constaté.
+L'ANSSI doit être prévenue en vingt-quatre heures,
+Si une intrusion majeure fait trembler les processeurs.
+
+[Refrain]
+Zabbix et TimescaleDB, le choix de l'équilibre,
+Pour un TCO maîtrisé et une vie sans péril.
+Respecte NIS2 et le ReCyF avec passion,
+Pour une supervision en toute perfection.
+
+[Pont]
+Green IT et C-states pour la sobriété,
+Réduire l'empreinte carbone avec agilité.
+Le modèle Back-to-Back entre ESN et éditeur,
+Garantit le MCO et la fin de la peur.
+
+[Refrain final]
+Zabbix et TimescaleDB, le choix de l'équilibre,
+Pour un TCO maîtrisé et une vie sans péril.
+Respecte NIS2 et le ReCyF avec passion,
+Pour une supervision en toute perfection.
+
+[Outro]
+De l'ingestion au rapport final,
+Le réseau est stable, le système est royal.
